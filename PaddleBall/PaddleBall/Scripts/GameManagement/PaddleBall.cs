@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 using System.Text;
 
 namespace PaddleBall {
@@ -24,7 +25,7 @@ namespace PaddleBall {
         /// </summary>
         protected override void Initialize() {
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
-            graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.Y;
+            graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
 
             base.Initialize();
@@ -38,6 +39,7 @@ namespace PaddleBall {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Cannon.Instance.LoadContent(Content);
             ScreenManager.Instance.LoadContent(Content);
         }
 
@@ -61,6 +63,7 @@ namespace PaddleBall {
 
             ScreenManager.Instance.Update(gameTime);
             InputManager.Instance.Update(gameTime);
+            Cannon.Instance.Update(gameTime);
             
 
             // TODO: Add your update logic here
@@ -77,6 +80,7 @@ namespace PaddleBall {
 
             spriteBatch.Begin();
             ScreenManager.Instance.Draw(spriteBatch);
+            Cannon.Instance.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

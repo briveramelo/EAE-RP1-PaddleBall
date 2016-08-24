@@ -25,17 +25,17 @@ namespace PaddleBall {
             KeyboardState state = Keyboard.GetState();
 
             // Print to debug console currently pressed keys
-            System.Text.StringBuilder sb = new StringBuilder();
-            foreach (var key in state.GetPressedKeys()) {
-                sb.Append("Key: ").Append(key).Append(" pressed ");
-            }
+            //System.Text.StringBuilder sb = new StringBuilder();
+            //foreach (var key in state.GetPressedKeys()) {
+            //    sb.Append("Key: ").Append(key).Append(" pressed ");
+            //}
 
-            if (sb.Length > 0) {
-                System.Diagnostics.Debug.WriteLine(sb.ToString());
-            }
-            else {
-                System.Diagnostics.Debug.WriteLine("No Keys pressed");
-            }
+            //if (sb.Length > 0) {
+            //    System.Diagnostics.Debug.WriteLine(sb.ToString());
+            //}
+            //else {
+            //    System.Diagnostics.Debug.WriteLine("No Keys pressed");
+            //}
 
             //// Move our sprite based on arrow keys being pressed:
             //if (state.IsKeyDown(Keys.Right))

@@ -10,11 +10,12 @@ using Microsoft.Xna.Framework.Graphics;
 namespace PaddleBall {
     class ScreenManager {
 
-        private static ScreenManager instance;
         public Vector2 Dimensions { private set; get; }
         public ContentManager Content { private set; get; }
 
         GameScreen currentScreen;
+
+        private static ScreenManager instance;
         public static ScreenManager Instance {
             get {
                 if (instance == null) {
