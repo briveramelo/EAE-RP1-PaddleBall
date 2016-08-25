@@ -62,7 +62,6 @@ namespace PaddleBall {
             }
 
             ScreenManager.Instance.Update(gameTime);
-            InputManager.Instance.Update(gameTime);
             Cannon.Instance.Update(gameTime);
             
 

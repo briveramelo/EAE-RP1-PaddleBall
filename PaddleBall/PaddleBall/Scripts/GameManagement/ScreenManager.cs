@@ -44,7 +44,7 @@ namespace PaddleBall {
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            currentScreen.Draw(spriteBatch);
+            //currentScreen.Draw(spriteBatch);
         }
     }
 }

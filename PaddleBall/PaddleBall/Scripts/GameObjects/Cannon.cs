@@ -4,17 +4,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace PaddleBall {
-    public class Cannon {
+
+    public class Cannon : GameObject {
 
         bool isClockWise = true;
-        Texture2D image;
+        float degPerSec = 1f;
+        float radPerSec;
         ContentManager content;
+        Vector2 screenCenter = new Vector2(ScreenManager.Instance.Dimensions.X, ScreenManager.Instance.Dimensions.Y) / 2f;
 
         private static Cannon instance;
         public static Cannon Instance {
@@ -29,24 +27,28 @@ namespace PaddleBall {
         public void LoadContent(ContentManager Content) {
             content = Content;
             string path = "Images/Cannon";
-            image = content.Load<Texture2D>(path);
+            texture = content.Load<Texture2D>(path);
+            radPerSec = degPerSec * (float)Math.PI * 2f / 360f;
+            SetLayerDepth(0f);
+            SetOriginInPixels(texture.Width/ 2, texture.Height / 2);
+            position = screenCenter;
         }
 
         void SwitchDirection() {
             isClockWise = !isClockWise;
+            radPerSec = -radPerSec;
             Debug.WriteLine("SwitchedDirections!!!");
         }
 
-        public void Update(GameTime gameTime) {
+        public override void Update(GameTime gameTime) {
             KeyboardState state = Keyboard.GetState();
             //rotate clockwise by default
             if ((state.IsKeyDown(Keys.Right) && isClockWise) || (state.IsKeyDown(Keys.Left) && !isClockWise)) {
                 SwitchDirection();
             }
-        }
-
-        public void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(image, Vector2.Zero, Color.White);
+            rotation += radPerSec;
+            Debug.WriteLine(rotation);
+            SetRotation(rotation);
         }
     }
 }
