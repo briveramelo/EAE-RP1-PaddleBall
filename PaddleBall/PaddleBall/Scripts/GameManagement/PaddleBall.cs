@@ -9,6 +9,7 @@ namespace PaddleBall {
     /// This is the main type for your game.
     /// </summary>
     public class PaddleBall : Game {
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -36,19 +37,16 @@ namespace PaddleBall {
         /// all of your content.
         /// </summary>
         protected override void LoadContent() {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Cannon.Instance.LoadContent(Content);
+            GameObject.allGameObjects.Add(Cannon.Instance);
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScreenManager.Instance.LoadContent(Content);
-        }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent() {
-            ScreenManager.Instance.UnloadContent();
+
+            //Post Load
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
+
         }
 
         /// <summary>
@@ -62,11 +60,12 @@ namespace PaddleBall {
             }
 
             ScreenManager.Instance.Update(gameTime);
-            Cannon.Instance.Update(gameTime);
+            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) { 
+                GameObject.allGameObjects[i].Update(gameTime);
+            }
+            //GameObject.allGameObjects.ForEach(gameobject=>gameobject.Update(gameTime));
+
             
-
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -79,10 +78,20 @@ namespace PaddleBall {
 
             spriteBatch.Begin();
             ScreenManager.Instance.Draw(spriteBatch);
-            Cannon.Instance.Draw(spriteBatch);
+            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
+                GameObject.allGameObjects[i].Draw(spriteBatch);
+            }            
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        /// <summary>
+        /// UnloadContent will be called once per game and is the place to unload
+        /// game-specific content.
+        /// </summary>
+        protected override void UnloadContent() {
+            ScreenManager.Instance.UnloadContent();
         }
     }
 }

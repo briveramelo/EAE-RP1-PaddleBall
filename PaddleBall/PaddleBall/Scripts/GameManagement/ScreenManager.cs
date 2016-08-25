@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
-    class ScreenManager {
+    public class ScreenManager {
 
         public Vector2 Dimensions { private set; get; }
         public ContentManager Content { private set; get; }
