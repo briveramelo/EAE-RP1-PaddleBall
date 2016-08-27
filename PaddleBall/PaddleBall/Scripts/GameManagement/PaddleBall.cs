@@ -45,7 +45,9 @@ namespace PaddleBall {
 
 
             //Post Load
-            GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
+            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
+                GameObject.allGameObjects[i].PostLoad();
+            }
 
         }
 
@@ -63,7 +65,6 @@ namespace PaddleBall {
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) { 
                 GameObject.allGameObjects[i].Update(gameTime);
             }
-            //GameObject.allGameObjects.ForEach(gameobject=>gameobject.Update(gameTime));
 
             
             base.Update(gameTime);

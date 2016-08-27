@@ -3,11 +3,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 namespace PaddleBall {
 
     public class GameObject {
 
+        private readonly List<IEnumerator> coroutines = new List<IEnumerator>();
         public static List<GameObject> allGameObjects = new List<GameObject>();
 
         public Vector2 position;
@@ -39,6 +41,11 @@ namespace PaddleBall {
         }
         //3
         public virtual void Update(GameTime gameTime) {
+            for (int i = coroutines.Count - 1; i >= 0; i--) {
+                if (!coroutines[i].MoveNext()) {
+                    coroutines.RemoveAt(i);
+                }
+            }
         }
         //4
         public virtual void Draw(SpriteBatch spriteBatch) {
@@ -92,6 +99,10 @@ namespace PaddleBall {
         public virtual void Destroy() {
             UnloadContent();
             allGameObjects.Remove(this);
+        }
+
+        protected void StartCoroutine(IEnumerator coroutine) {
+            coroutines.Add(coroutine);
         }
         #endregion
     }
