@@ -38,5 +38,31 @@ namespace PaddleBall
             }
         }
 
+        /*
+        void EnemyCreate()
+        {
+            Enemy newEnemy = new Enemy();
+            int x = GetRandomNumber(0, 2500);
+            int y = GetRandomNumber(0, 1030);
+            newEnemy.SetPosition(x,y);
+            newEnemy .LoadContent(content);
+            newEnemy.PostLoad();
+            GameObject.allGameObjects.Add(newEnemy);
+            Vector2 pos = (screenCenter - new Vector2(x, y));
+            pos.Normalize();
+            newEnemy.SetVelocity(pos);
+        }
+
+        private static readonly Random getrandom = new Random();
+        private static readonly object syncLock = new object();
+        public static int GetRandomNumber(int min, int max)
+        {
+            lock (syncLock)
+            { // synchronize
+                return getrandom.Next(min, max);
+            }
+        }
+
+*/
     }
 }

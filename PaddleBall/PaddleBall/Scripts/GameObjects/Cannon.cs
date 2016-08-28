@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
+using System.Collections.Generic;
 using System;
 namespace PaddleBall {
 
@@ -15,10 +16,10 @@ namespace PaddleBall {
 
 
         float forwardOffsetRotation = (float)Math.PI / 2f;
-        public override Vector2 forward
-        {
-            get
-            {
+        List<CannonBall> cannonBalls = new List<CannonBall>();
+
+        public override Vector2 forward {
+            get {
                 float endRotation = rotation + forwardOffsetRotation;
                 return new Vector2((float)Math.Cos(endRotation), (float)Math.Sin(endRotation));
             }
@@ -46,6 +47,15 @@ namespace PaddleBall {
             base.LoadContent(Content);
         }
 
+        public override void PostLoad() {
+            CannonBall newBall = new CannonBall();
+            newBall.LoadContent(content);
+            newBall.PostLoad();
+            GameObject.allGameObjects.Add(newBall);
+            cannonBalls.Add(newBall);
+            base.PostLoad();
+        }
+
         KeyboardState lastState;
         public override void Update(GameTime gameTime)
         {
@@ -61,11 +71,11 @@ namespace PaddleBall {
             if (state.IsKeyDown(Keys.Space) && lastState != state)
             {
                 Fire();
-                EnemyCreate();
             }
 
 
             lastState = state;
+            base.Update(gameTime);
         }
 
         void SwitchDirection()
@@ -73,41 +83,17 @@ namespace PaddleBall {
             isClockWise = !isClockWise;
             radPerSec = -radPerSec;
         }
-
-        float fireSpeed = 20f;
-        void Fire()
-        {
-            CannonBall newBall = new CannonBall();
-            newBall.LoadContent(content);
-            newBall.PostLoad();
-            GameObject.allGameObjects.Add(newBall);
-            newBall.SetVelocity(forward * fireSpeed);
-        }
-
-        void EnemyCreate()
-        {
-            Enemy newEnemy = new Enemy();
-            int x = GetRandomNumber(0, 2500);
-            int y = GetRandomNumber(0, 1030);
-            newEnemy.SetPosition(x,y);
-            newEnemy .LoadContent(content);
-            newEnemy.PostLoad();
-            GameObject.allGameObjects.Add(newEnemy);
-            Vector2 pos = (screenCenter - new Vector2(x, y));
-            pos.Normalize();
-            newEnemy.SetVelocity(pos);
-        }
-
-        private static readonly Random getrandom = new Random();
-        private static readonly object syncLock = new object();
-        public static int GetRandomNumber(int min, int max)
-        {
-            lock (syncLock)
-            { // synchronize
-                return getrandom.Next(min, max);
+       
+        float fireSpeed = 50f;
+        void Fire() {
+            for (int i = cannonBalls.Count-1; i >=0; i--) {
+                if (cannonBalls[i].isAttached) {
+                    cannonBalls[i].Launch(forward * fireSpeed);
+                    return;
+                }
             }
-        }
 
+        }
 
 
 
