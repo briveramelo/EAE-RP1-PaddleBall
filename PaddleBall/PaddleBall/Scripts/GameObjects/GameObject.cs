@@ -30,6 +30,7 @@ namespace PaddleBall {
         public string texturePath;
 
         #region Game Loop Functions
+        //Calling order
         //1
         public virtual void LoadContent(ContentManager Content) {
             content = Content;
