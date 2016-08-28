@@ -63,7 +63,6 @@
     <Compile Include="Scripts\GameManagement\Program.cs" />
     <Compile Include="Scripts\GameManagement\ScreenManager.cs" />
     <Compile Include="Scripts\GameObjects\CannonBall.cs" />
-    <Compile Include="Scripts\GameObjects\Enemy.cs" />
     <Compile Include="Scripts\GameObjects\GameObject.cs" />
     <Compile Include="Scripts\Screens\GameScreen.cs" />
     <Compile Include="Scripts\Screens\SplashScreen.cs" />
