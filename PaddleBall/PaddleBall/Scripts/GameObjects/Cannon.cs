@@ -88,6 +88,7 @@ namespace PaddleBall {
         void Fire() {
             for (int i = cannonBalls.Count-1; i >=0; i--) {
                 if (cannonBalls[i].isAttached) {
+                    AudioManager.Instance.PlaySound(SoundFX.Launch);
                     cannonBalls[i].Launch(forward * fireSpeed);
                     return;
                 }

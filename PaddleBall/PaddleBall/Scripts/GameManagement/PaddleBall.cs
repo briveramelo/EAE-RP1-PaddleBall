@@ -42,6 +42,7 @@ namespace PaddleBall {
             GameObject.allGameObjects.Add(Cannon.Instance);
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScreenManager.Instance.LoadContent(Content);
+            AudioManager.Instance.LoadContent(Content);
 
 
             //Post Load

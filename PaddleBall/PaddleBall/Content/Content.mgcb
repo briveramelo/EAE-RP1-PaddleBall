@@ -73,3 +73,27 @@
 /processorParam:TextureFormat=Color
 /build:Images/Enemy_one.png
 
+#begin SoundFX/Launch.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Launch.wav
+
+#begin SoundFX/ReAttach.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/ReAttach.wav
+
+#begin SoundFX/SpectreLead_JForceEdit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/SpectreLead_JForceEdit.wav
+
+#begin SoundFX/SpectreLead_JForceEdit_01.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/SpectreLead_JForceEdit_01.mp3
+

@@ -53,12 +53,12 @@ namespace PaddleBall {
         }
 
         float distanceToDestroy = 2000;
-        KeyboardState lastState;
         public override void Update(GameTime gameTime) {
             if (!isAttached) {
                 FloatOut();
                 if (Vector2.Distance(position, screenCenter) < distanceOffset && !isPausedForLaunch) {
                     isAttached = true;
+                    AudioManager.Instance.PlaySound(SoundFX.ReAttach);
                 }
             }
             else {
@@ -69,7 +69,6 @@ namespace PaddleBall {
             if (Vector2.Distance(position, screenCenter) > distanceToDestroy) {
                 Destroy();
             }
-            
             base.Update(gameTime);
         }
 
