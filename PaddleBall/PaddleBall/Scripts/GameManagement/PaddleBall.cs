@@ -43,7 +43,7 @@ namespace PaddleBall {
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScreenManager.Instance.LoadContent(Content);
             AudioManager.Instance.LoadContent(Content);
-
+            ScoreBoard.Instance.LoadContent(Content);
 
             //Post Load
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
@@ -80,6 +80,7 @@ namespace PaddleBall {
 
             spriteBatch.Begin();
             ScreenManager.Instance.Draw(spriteBatch);
+            ScoreBoard.Instance.Draw(spriteBatch);
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].Draw(spriteBatch);
             }            

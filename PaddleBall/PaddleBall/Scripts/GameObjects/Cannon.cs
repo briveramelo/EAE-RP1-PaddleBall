@@ -14,7 +14,7 @@ namespace PaddleBall {
         float degPerSec = 1f;
         float radPerSec;
 
-
+        CircleCollider myCollider;
         float forwardOffsetRotation = (float)Math.PI / 2f;
         List<CannonBall> cannonBalls = new List<CannonBall>();
 
@@ -44,6 +44,7 @@ namespace PaddleBall {
             radPerSec = degPerSec * (float)Math.PI / 180f;
             SetLayerDepth(0f);
             position = screenCenter;
+            myCollider = new CircleCollider(Layer.Cannon, this, 10);
             base.LoadContent(Content);
         }
 
@@ -73,6 +74,14 @@ namespace PaddleBall {
                 Fire();
             }
 
+            CircleCollider enemyCollider = myCollider.IsOverlapping();
+            if (enemyCollider != null) {
+                if (enemyCollider.layer == Layer.Enemy) {
+                    Debug.WriteLine("Got Hit!");
+                    //TODO DIE
+                    //EndGame();
+                }
+            }
 
             lastState = state;
             base.Update(gameTime);
@@ -84,12 +93,12 @@ namespace PaddleBall {
             radPerSec = -radPerSec;
         }
        
-        float fireSpeed = 50f;
+        float fireSpeed = 65f;
         void Fire() {
             for (int i = cannonBalls.Count-1; i >=0; i--) {
                 if (cannonBalls[i].isAttached) {
                     AudioManager.Instance.PlaySound(SoundFX.Launch);
-                    cannonBalls[i].Launch(forward * fireSpeed);
+                    cannonBalls[i].Launch(forward * fireSpeed, isClockWise);
                     return;
                 }
             }

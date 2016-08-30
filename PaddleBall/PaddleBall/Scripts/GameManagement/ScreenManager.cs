@@ -13,7 +13,7 @@ namespace PaddleBall {
         public Vector2 Dimensions { private set; get; }
         public ContentManager Content { private set; get; }
 
-        GameScreen currentScreen;
+        GameScreen currentScreen = new GameScreen();
 
         private static ScreenManager instance;
         public static ScreenManager Instance {
@@ -27,12 +27,11 @@ namespace PaddleBall {
 
         public ScreenManager() {
             Dimensions = new Vector2(1920, 1080);
-            currentScreen = new SplashScreen();
         }
 
         public void LoadContent(ContentManager Content) {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
-            currentScreen.LoadContent();
+            currentScreen.LoadContent("Images/Background");
         }
 
         public void UnloadContent() {
@@ -44,7 +43,7 @@ namespace PaddleBall {
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            //currentScreen.Draw(spriteBatch);
+            currentScreen.Draw(spriteBatch);
         }
     }
 }

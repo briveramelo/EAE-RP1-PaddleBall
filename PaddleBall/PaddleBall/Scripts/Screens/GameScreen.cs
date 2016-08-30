@@ -9,10 +9,12 @@ using System.Text;
 namespace PaddleBall {
     public class GameScreen {
 
+        Texture2D image;
         protected ContentManager content;
 
-        public virtual void LoadContent() {
+        public virtual void LoadContent(string imagePath) {
             content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
+            image = content.Load<Texture2D>(imagePath);
         }
 
         public virtual void UnloadContent() {
@@ -24,7 +26,7 @@ namespace PaddleBall {
         }
 
         public virtual void Draw(SpriteBatch spriteBatch) {
-
+            spriteBatch.Draw(image, Vector2.Zero, Color.White);
         }
     }
 }

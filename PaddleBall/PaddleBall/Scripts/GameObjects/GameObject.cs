@@ -9,7 +9,7 @@ namespace PaddleBall {
 
     public class GameObject {
 
-        private readonly List<IEnumerator> coroutines = new List<IEnumerator>();
+        private List<IEnumerator> coroutines = new List<IEnumerator>();
         public static List<GameObject> allGameObjects = new List<GameObject>();
 
         public Vector2 position;
@@ -104,6 +104,9 @@ namespace PaddleBall {
 
         protected void StartCoroutine(IEnumerator coroutine) {
             coroutines.Add(coroutine);
+        }
+        protected void StopAllCoroutines() {
+            coroutines = new List<IEnumerator>();
         }
         #endregion
     }
