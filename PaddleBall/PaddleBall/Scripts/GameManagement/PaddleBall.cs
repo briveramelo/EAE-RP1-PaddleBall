@@ -3,11 +3,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace PaddleBall {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    /// 
+
     public class PaddleBall : Game {
 
         GraphicsDeviceManager graphics;
@@ -16,6 +21,7 @@ namespace PaddleBall {
         public PaddleBall() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+           
         }
 
         /// <summary>
@@ -28,7 +34,7 @@ namespace PaddleBall {
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
-
+           
             base.Initialize();
         }
 
@@ -40,6 +46,8 @@ namespace PaddleBall {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             GameObject.allGameObjects.Add(Cannon.Instance);
+            GameObject.allGameObjects.Add(Enemy.Instance);
+
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScreenManager.Instance.LoadContent(Content);
             AudioManager.Instance.LoadContent(Content);
@@ -63,11 +71,11 @@ namespace PaddleBall {
             }
 
             ScreenManager.Instance.Update(gameTime);
-            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) { 
+            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].Update(gameTime);
             }
 
-            
+
             base.Update(gameTime);
         }
 
@@ -82,7 +90,7 @@ namespace PaddleBall {
             ScreenManager.Instance.Draw(spriteBatch);
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].Draw(spriteBatch);
-            }            
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -95,5 +103,7 @@ namespace PaddleBall {
         protected override void UnloadContent() {
             ScreenManager.Instance.UnloadContent();
         }
+
+       
     }
 }
