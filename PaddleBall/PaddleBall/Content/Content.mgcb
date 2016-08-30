@@ -61,3 +61,51 @@
 /processorParam:TextureFormat=Color
 /build:Images/Paddle.png
 
+#begin Images/Enemy_one.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/Enemy_one.png
+
+#begin SoundFX/Launch.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Launch.wav
+
+#begin SoundFX/ReAttach.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/ReAttach.wav
+
+#begin SoundFX/SpectreLead_JForceEdit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/SpectreLead_JForceEdit.wav
+
+#begin SoundFX/SpectreLead_JForceEdit_01.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/SpectreLead_JForceEdit_01.mp3
+
+#begin Images/testimg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/testimg.png
+

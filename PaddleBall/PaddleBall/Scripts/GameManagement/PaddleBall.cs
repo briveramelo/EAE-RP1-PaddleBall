@@ -12,7 +12,8 @@ namespace PaddleBall {
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        
+        //Vector2 testEnemyLoc = new Vector2(8, 8);
         public PaddleBall() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -38,14 +39,17 @@ namespace PaddleBall {
         /// </summary>
         protected override void LoadContent() {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             GameObject.allGameObjects.Add(Cannon.Instance);
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScreenManager.Instance.LoadContent(Content);
+            AudioManager.Instance.LoadContent(Content);
 
 
             //Post Load
-            GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
+            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
+                GameObject.allGameObjects[i].PostLoad();
+            }
 
         }
 
@@ -63,7 +67,6 @@ namespace PaddleBall {
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) { 
                 GameObject.allGameObjects[i].Update(gameTime);
             }
-            //GameObject.allGameObjects.ForEach(gameobject=>gameobject.Update(gameTime));
 
             
             base.Update(gameTime);
@@ -80,7 +83,9 @@ namespace PaddleBall {
             ScreenManager.Instance.Draw(spriteBatch);
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].Draw(spriteBatch);
-            }            
+
+            }
+            
             spriteBatch.End();
 
             base.Draw(gameTime);
