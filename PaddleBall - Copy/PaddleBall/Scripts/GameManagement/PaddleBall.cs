@@ -3,26 +3,19 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using System.Text;
-using System;
-using System.Collections.Generic;
-using System.Collections;
 
 namespace PaddleBall {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    /// 
-
     public class PaddleBall : Game {
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
-        //Vector2 testEnemyLoc = new Vector2(8, 8);
+
         public PaddleBall() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-           
         }
 
         /// <summary>
@@ -35,7 +28,7 @@ namespace PaddleBall {
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
-           
+
             base.Initialize();
         }
 
@@ -45,19 +38,14 @@ namespace PaddleBall {
         /// </summary>
         protected override void LoadContent() {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            GameObject.allGameObjects.Add(Cannon.Instance);
-            GameObject.allGameObjects.Add(Enemy.Instance);
 
+            GameObject.allGameObjects.Add(Cannon.Instance);
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScreenManager.Instance.LoadContent(Content);
-            AudioManager.Instance.LoadContent(Content);
 
 
             //Post Load
-            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
-                GameObject.allGameObjects[i].PostLoad();
-            }
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
 
         }
 
@@ -72,11 +60,12 @@ namespace PaddleBall {
             }
 
             ScreenManager.Instance.Update(gameTime);
-            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
+            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) { 
                 GameObject.allGameObjects[i].Update(gameTime);
             }
+            //GameObject.allGameObjects.ForEach(gameobject=>gameobject.Update(gameTime));
 
-
+            
             base.Update(gameTime);
         }
 
@@ -91,9 +80,7 @@ namespace PaddleBall {
             ScreenManager.Instance.Draw(spriteBatch);
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].Draw(spriteBatch);
-                    
-            }
-
+            }            
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -106,7 +93,5 @@ namespace PaddleBall {
         protected override void UnloadContent() {
             ScreenManager.Instance.UnloadContent();
         }
-
-       
     }
 }

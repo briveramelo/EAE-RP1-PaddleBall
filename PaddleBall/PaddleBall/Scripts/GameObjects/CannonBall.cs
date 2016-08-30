@@ -19,6 +19,7 @@ namespace PaddleBall {
         public bool isAttached = true;
         bool isPausedForLaunch = false;
         Rectangle ballRec = new Rectangle(0, 0, 300, 300);
+
         public CannonBall() : base() { }
 
 
@@ -96,19 +97,12 @@ namespace PaddleBall {
             position += initialVelocity + gravitationalVelocity;
             gravitationalVelocity += (screenCenter - position) * gravConst;
         }
+        
 
         float distanceOffset = 100;
         void StayAttachedToPaddle() {
             position = Cannon.Instance.forward * distanceOffset + screenCenter;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// 
-      //  public override void Draw(SpriteBatch spriteBatch) {
-            //spriteBatch.Draw(texture, position, ballRec , Color.White);
-            
-        //}
 
     }
 }
