@@ -60,6 +60,7 @@ namespace PaddleBall {
             content = Content;
             texture = content.Load<Texture2D>(texturePath);
             Globalvars.test = content.Load<Texture2D>("Images/testimg");
+            //new words
             
         }
         //2
