@@ -46,6 +46,12 @@ namespace PaddleBall{
                     content.Load<SoundEffect>("SoundFX/Hits/Hit_02"),
                     content.Load<SoundEffect>("SoundFX/Hits/Hit_03")
                 } },
+                {SoundFX.Hit, new List<SoundEffect>() {
+                    content.Load<SoundEffect>("SoundFX/Hits/Hit_00"),
+                    content.Load<SoundEffect>("SoundFX/Hits/Hit_01"),
+                    content.Load<SoundEffect>("SoundFX/Hits/Hit_02"),
+                    content.Load<SoundEffect>("SoundFX/Hits/Hit_03")
+                } },
                 {SoundFX.Explode, new List<SoundEffect>() {
                     content.Load<SoundEffect>("SoundFX/Explosions/Explosion_00"),
                     content.Load<SoundEffect>("SoundFX/Explosions/Explosion_01"),
@@ -83,6 +89,7 @@ namespace PaddleBall{
         Dictionary<SoundFX, int> soundFXCount = new Dictionary<SoundFX, int>() {
             { SoundFX.Launch, 0},
             { SoundFX.ReAttach, 0},
+            { SoundFX.Hit, 0},
             { SoundFX.Explode, 0}
         };
 
