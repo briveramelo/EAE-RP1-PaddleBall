@@ -6,8 +6,32 @@ using System;
 using System.Collections;
 
 namespace PaddleBall {
-
+    public static class Globalvars
+    {
+        public static Texture2D test;
+        public static Rectangle testrec = new Rectangle(0, 0, 100, 100);
+        public static Vector2 testloc = new Vector2(235, 235);
+    }
     public class GameObject {
+        public int Width
+        {
+            get { return texture.Width; }
+        }
+        public int Height
+        {
+            get { return texture.Height; }
+        }
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle((int)position.X, (int)position.Y, Width, Height);
+
+            }
+
+        }
+        
+        
 
         private List<IEnumerator> coroutines = new List<IEnumerator>();
         public static List<GameObject> allGameObjects = new List<GameObject>();
@@ -34,7 +58,10 @@ namespace PaddleBall {
         //1
         public virtual void LoadContent(ContentManager Content) {
             content = Content;
-            texture = content.Load<Texture2D>(texturePath);           
+            texture = content.Load<Texture2D>(texturePath);
+            Globalvars.test = content.Load<Texture2D>("Images/testimg");
+            //new words
+            
         }
         //2
         public virtual void PostLoad() {
@@ -51,6 +78,8 @@ namespace PaddleBall {
         //4
         public virtual void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(texture, position, null, color, rotation, originInPixels, scale, flip, layerDepth);
+            spriteBatch.Draw(Globalvars.test, Globalvars.testloc, Globalvars.testrec, Color.White);
+
         }
         //5
         public virtual void UnloadContent() {

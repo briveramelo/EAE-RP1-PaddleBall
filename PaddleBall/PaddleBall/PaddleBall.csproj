@@ -68,6 +68,7 @@
     <Compile Include="Scripts\GameObjects\CannonBall.cs" />
     <Compile Include="Scripts\GameObjects\Enemy.cs" />
     <Compile Include="Scripts\GameObjects\GameObject.cs" />
+    <Compile Include="Scripts\GameObjects\EnemySpawner.cs" />
     <Compile Include="Scripts\Screens\GameScreen.cs" />
   </ItemGroup>
   <ItemGroup>

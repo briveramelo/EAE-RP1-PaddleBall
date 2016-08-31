@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
 
@@ -34,8 +35,11 @@ namespace PaddleBall {
         float distanceOffset = 100;
         public bool isAttached = true;
         bool isPausedForLaunch = false;
+        Rectangle ballRec = new Rectangle(0, 0, 300, 300);
 
         public CannonBall() : base() { }
+
+
 
         public override void LoadContent(ContentManager Content) {
             texturePath = "Images/TempBall";
@@ -152,12 +156,12 @@ namespace PaddleBall {
             float dist = Vector2.Distance(screenCenter, position);
             gravitationalVelocity += Vector2.Normalize(screenCenter - position) * (dist * dist) * gravConst;
         }
+        
 
         
         void StayAttachedToPaddle() {
             position = (onFront ? frontSpot : backSpot);
         }
-        
 
     }
 }
