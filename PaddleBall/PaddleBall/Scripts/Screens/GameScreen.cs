@@ -21,10 +21,6 @@ namespace PaddleBall {
             content.Unload();
         }
 
-        public virtual void Update(GameTime gameTime) {
-
-        }
-
         public virtual void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(image, Vector2.Zero, Color.White);
         }

@@ -38,10 +38,6 @@ namespace PaddleBall {
             currentScreen.UnloadContent();
         }
 
-        public void Update(GameTime gameTime) {
-            currentScreen.Update(gameTime);
-        }
-
         public void Draw(SpriteBatch spriteBatch) {
             currentScreen.Draw(spriteBatch);
         }

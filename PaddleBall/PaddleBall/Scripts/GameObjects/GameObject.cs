@@ -30,10 +30,10 @@ namespace PaddleBall {
             }
 
         }
-        
-        
 
-        private List<IEnumerator> coroutines = new List<IEnumerator>();
+        protected Coroutiner myCoroutiner = new Coroutiner();
+
+        
         public static List<GameObject> allGameObjects = new List<GameObject>();
 
         public Vector2 position;
@@ -58,10 +58,7 @@ namespace PaddleBall {
         //1
         public virtual void LoadContent(ContentManager Content) {
             content = Content;
-            texture = content.Load<Texture2D>(texturePath);
-            Globalvars.test = content.Load<Texture2D>("Images/testimg");
-            //new words
-            
+            texture = content.Load<Texture2D>(texturePath);            
         }
         //2
         public virtual void PostLoad() {
@@ -69,17 +66,11 @@ namespace PaddleBall {
         }
         //3
         public virtual void Update(GameTime gameTime) {
-            for (int i = coroutines.Count - 1; i >= 0; i--) {
-                if (!coroutines[i].MoveNext()) {
-                    coroutines.RemoveAt(i);
-                }
-            }
+            myCoroutiner.Update();
         }
         //4
         public virtual void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(texture, position, null, color, rotation, originInPixels, scale, flip, layerDepth);
-            spriteBatch.Draw(Globalvars.test, Globalvars.testloc, Globalvars.testrec, Color.White);
-
         }
         //5
         public virtual void UnloadContent() {
@@ -129,13 +120,6 @@ namespace PaddleBall {
         public virtual void Destroy() {
             UnloadContent();
             allGameObjects.Remove(this);
-        }
-
-        protected void StartCoroutine(IEnumerator coroutine) {
-            coroutines.Add(coroutine);
-        }
-        protected void StopAllCoroutines() {
-            coroutines = new List<IEnumerator>();
         }
         #endregion
     }

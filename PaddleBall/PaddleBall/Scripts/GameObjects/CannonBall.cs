@@ -44,8 +44,7 @@ namespace PaddleBall {
         public override void LoadContent(ContentManager Content) {
             texturePath = "Images/TempBall";
             SetLayerDepth(0f);
-            position = screenCenter;
-            myCollider = new CircleCollider(Layer.CannonBall, this, 10f);
+            myCollider = new CircleCollider(Layer.CannonBall, this, 50);
             base.LoadContent(Content);
         }
 
@@ -59,8 +58,9 @@ namespace PaddleBall {
             curveVelocity = Vector2.Zero;
             this.linearVelocity = (onFront ? 1:-1) * velocity;
             isPausedForLaunch = true;
-            StopAllCoroutines();
-            StartCoroutine(PauseAttachment());
+            hitEnemy = false;
+            myCoroutiner.StopAllCoroutines();
+            myCoroutiner.StartCoroutine(PauseAttachment());
             //StartCoroutine(CurveTheBall(isClockwise));
         }
 
@@ -72,10 +72,7 @@ namespace PaddleBall {
             Vector3 initialVelocity3 = new Vector3(linearVelocity.X, linearVelocity.Y, 0f);
             Vector3 curvDir3 = Vector3.Cross(initialVelocity3, (isClockwise ? -1 : 1)*Vector3.UnitZ);
             Vector2 curvDir2 = new Vector2(curvDir3.X, curvDir3.Y);
-            while (true) {
-                if (stopwatch.ElapsedMilliseconds >= timeToCurve * 1000) {
-                    break;
-                }
+            while (stopwatch.ElapsedMilliseconds < timeToCurve * 1000) {
                 curveVelocity += curvDir2 * curveFactor;
                 yield return null;
             }
@@ -85,24 +82,22 @@ namespace PaddleBall {
             float timeToPause = .1f;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            
-            while (true) {
-                if (stopwatch.ElapsedMilliseconds >= timeToPause * 1000) {
-                    break;
-                }
+
+            while (stopwatch.ElapsedMilliseconds < timeToPause * 1000) {
                 yield return null;
             }
+            stopwatch.Stop();
             isPausedForLaunch = false;
         }
 
         float distanceToDestroy = 2000;
         float distanceCheckSpacing = 120;
         bool onFront = true;
+        bool hitEnemy = false;
         public override void Update(GameTime gameTime) {
             if (!isAttached) {
                 GravitateBack();
                 if (!isPausedForLaunch) {
-                    Debug.WriteLine(Vector2.Distance(position, frontSpot) + " " + Vector2.Distance(position, backSpot));
                     if (Vector2.Distance(position, frontSpot) < distanceCheckSpacing) {
                         Attach(true);
                     }
@@ -126,12 +121,12 @@ namespace PaddleBall {
         }
 
         void CheckForCollision() {
-            CircleCollider enemyCollider = myCollider.IsOverlapping();
+            CircleCollider enemyCollider = myCollider.GetOverlappingCollider();
             if (enemyCollider != null) {
                 if (enemyCollider.layer == Layer.Enemy) {
                     Debug.WriteLine("Hit an Enemy!");
-                    Vector2 bounceDirection = -Vector2.Reflect(velocity, myCollider.normal);
-                    Collide(bounceDirection);
+                    ((Enemy)(enemyCollider.gameObject)).TakeDamage();                    
+                    Collide();
                 }
             }
         }
@@ -140,13 +135,19 @@ namespace PaddleBall {
             onFront = isOnFront;
             isAttached = true;
             position = (onFront ? frontSpot : backSpot);
+            if (hitEnemy) {
+                ScoreBoard.Instance.ReportMiss();
+            }
             AudioManager.Instance.PlaySound(SoundFX.ReAttach);
         }
 
         Random random = new Random();
-        float collisionVelocity = 20f;
-        public void Collide(Vector2 newDirection) {
-            linearVelocity = Vector2.Normalize(newDirection)* collisionVelocity;
+        float collisionSpeedMultiplier = 1f;
+        public void Collide() {
+            bool movingAway = Math.Sign(velocity.X) == Math.Sign(position.X - screenCenter.X);
+            float bounceSpeed = (movingAway ? 1 : -1) * Vector2.Distance(Vector2.Zero, velocity) * collisionSpeedMultiplier;
+            hitEnemy = true;
+            linearVelocity = Vector2.Normalize(screenCenter - position) * bounceSpeed;
         }
         
 

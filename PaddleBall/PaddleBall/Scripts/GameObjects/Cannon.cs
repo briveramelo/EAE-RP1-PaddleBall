@@ -44,7 +44,7 @@ namespace PaddleBall {
             radPerSec = degPerSec * (float)Math.PI / 180f;
             SetLayerDepth(0f);
             position = screenCenter;
-            myCollider = new CircleCollider(Layer.Cannon, this, 10);
+            myCollider = new CircleCollider(Layer.Cannon, this, 120);
             base.LoadContent(Content);
         }
 
@@ -74,10 +74,12 @@ namespace PaddleBall {
                 Fire();
             }
 
-            CircleCollider enemyCollider = myCollider.IsOverlapping();
-            if (enemyCollider != null) {
-                if (enemyCollider.layer == Layer.Enemy) {
-                    Debug.WriteLine("Got Hit!");
+            CircleCollider overlappingCollider = myCollider.GetOverlappingCollider();
+            if (overlappingCollider != null) {
+                if (overlappingCollider.layer == Layer.Enemy) {
+                    Debug.WriteLine("CANNONT Got Hit!");
+                    overlappingCollider.gameObject.Destroy();
+                    overlappingCollider.Destroy();
                     //TODO DIE
                     //EndGame();
                 }

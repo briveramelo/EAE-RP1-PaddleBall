@@ -8,14 +8,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
 namespace PaddleBall {
-    class ScoreBoard {
+    class ScoreBoard : GameObject {
 
         static int score=0;
         static int hitStreak;
         SpriteFont spriteFont;
-        Vector2 position = new Vector2(ScreenManager.Instance.Dimensions.X/2, 100);
-        ContentManager content;
-        Vector2 scale = Vector2.One * 10;
 
         private static ScoreBoard instance;
         public static ScoreBoard Instance {
@@ -36,11 +33,16 @@ namespace PaddleBall {
             hitStreak = 0;
         }
 
-        public void LoadContent(ContentManager Content) {
+        public override void LoadContent(ContentManager Content) {
             content = Content;
             spriteFont = content.Load<SpriteFont>("scoreboard");
+            position = new Vector2(ScreenManager.Instance.Dimensions.X / 2, 100);
+            scale = Vector2.One * 10;
+
         }
-        public void Draw(SpriteBatch spriteBatch) {
+
+        public override void PostLoad() {}
+        public override void Draw(SpriteBatch spriteBatch) {
             spriteBatch.DrawString(spriteFont, score.ToString(), position, Color.White,0,Vector2.Zero,scale, SpriteEffects.None, 0f);
         }
 

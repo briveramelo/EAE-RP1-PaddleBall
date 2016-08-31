@@ -47,12 +47,14 @@ namespace PaddleBall {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
             GameObject.allGameObjects.Add(Cannon.Instance);
-            GameObject.allGameObjects.Add(Enemy.Instance);
+            GameObject.allGameObjects.Add(Shield.Instance);
+            GameObject.allGameObjects.Add(ScoreBoard.Instance);
 
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScreenManager.Instance.LoadContent(Content);
             AudioManager.Instance.LoadContent(Content);
             ScoreBoard.Instance.LoadContent(Content);
+            EnemySpawner.Instance.LoadContent(Content);
 
             //Post Load
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
@@ -71,7 +73,7 @@ namespace PaddleBall {
                 Exit();
             }
 
-            ScreenManager.Instance.Update(gameTime);
+            EnemySpawner.Instance.Update();
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].Update(gameTime);
             }
@@ -89,7 +91,6 @@ namespace PaddleBall {
 
             spriteBatch.Begin();
             ScreenManager.Instance.Draw(spriteBatch);
-            ScoreBoard.Instance.Draw(spriteBatch);
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].Draw(spriteBatch);
                     

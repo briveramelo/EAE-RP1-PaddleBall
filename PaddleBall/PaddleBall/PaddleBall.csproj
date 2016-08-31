@@ -60,12 +60,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Components\Colliders.cs" />
     <Compile Include="Scripts\GameManagement\AudioManager.cs" />
+    <Compile Include="Scripts\GameManagement\Coroutiner.cs" />
     <Compile Include="Scripts\GameManagement\ScoreBoard.cs" />
     <Compile Include="Scripts\GameObjects\Cannon.cs" />
     <Compile Include="Scripts\GameManagement\PaddleBall.cs" />
     <Compile Include="Scripts\GameManagement\Program.cs" />
     <Compile Include="Scripts\GameManagement\ScreenManager.cs" />
     <Compile Include="Scripts\GameObjects\CannonBall.cs" />
+    <Compile Include="Scripts\GameObjects\Shield.cs" />
     <Compile Include="Scripts\GameObjects\Enemy.cs" />
     <Compile Include="Scripts\GameObjects\GameObject.cs" />
     <Compile Include="Scripts\GameObjects\EnemySpawner.cs" />

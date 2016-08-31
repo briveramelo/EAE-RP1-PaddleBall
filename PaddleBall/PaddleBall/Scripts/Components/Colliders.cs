@@ -23,6 +23,13 @@ namespace PaddleBall {
             {Layer.Shield, new List<CircleCollider>()},
             {Layer.Obstacle, new List<CircleCollider>()}
         };
+        public static bool[][] layersWillCollide = new bool[][] {
+            new bool[] { false, false, true, false, false},  //Cannon
+            new bool[] { false, false, true, false, true},  //CannonBall
+            new bool[] { true, true, false, true, false},  //Enemy
+            new bool[] { false, false, true, false, false},  //Shield
+            new bool[] { false, true, true, false, false}  //Obstacle  
+        }; 
         public Layer layer;
         public GameObject gameObject;
         public Vector2 offset = Vector2.Zero;
@@ -49,13 +56,18 @@ namespace PaddleBall {
             this.offset = offset;
             allColliders[layer].Add(this);
         }
+        public void Destroy() {
+            allColliders[layer].Remove(this);
+        }
 
-        public virtual CircleCollider IsOverlapping() {
+        public virtual CircleCollider GetOverlappingCollider() {
             foreach (KeyValuePair <Layer, List<CircleCollider>> dictItem in allColliders) {
-                foreach (CircleCollider col in dictItem.Value) {
-                    if (Vector2.Distance(col.position, position)<(col.radius + radius)) {
-                        normal = Vector2.Normalize(position - col.position);
-                        return col;
+                if (layersWillCollide[(int)dictItem.Key][(int)layer]) {
+                    foreach (CircleCollider col in dictItem.Value) {
+                        if (Vector2.Distance(col.position, position)<(col.radius + radius)) {
+                            normal = Vector2.Normalize(position - col.position);
+                            return col;
+                        }
                     }
                 }
             }
