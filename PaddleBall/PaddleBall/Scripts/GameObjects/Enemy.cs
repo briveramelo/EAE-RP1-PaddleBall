@@ -36,20 +36,13 @@ namespace PaddleBall
         public override void Update(GameTime gameTime)
         {
             position += velocity;
-
-            //CircleCollider overlappingCollider = myCollider.GetOverlappingCollider();
-            //if (overlappingCollider != null) {
-            //    if (overlappingCollider.layer == Layer.Shield || overlappingCollider.layer == Layer.Cannon) {
-            //        Debug.WriteLine("ENEMY got hit");
-            //        Destroy();
-            //    }
-            //}
         }
 
         public void TakeDamage() {
             ScoreBoard.Instance.AddPoints();
             health--;
             if (health <= 0) {
+                AudioManager.Instance.PlaySound(SoundFX.Explode);
                 myCollider.Destroy();
                 Destroy();
             }

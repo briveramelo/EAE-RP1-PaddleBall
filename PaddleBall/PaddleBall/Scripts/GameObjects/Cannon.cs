@@ -16,7 +16,7 @@ namespace PaddleBall {
 
         CircleCollider myCollider;
         float forwardOffsetRotation = (float)Math.PI / 2f;
-        List<CannonBall> cannonBalls = new List<CannonBall>();
+        CannonBall cannonBall;
 
         public override Vector2 forward {
             get {
@@ -49,66 +49,67 @@ namespace PaddleBall {
         }
 
         public override void PostLoad() {
-            CannonBall newBall = new CannonBall();
-            newBall.LoadContent(content);
-            newBall.PostLoad();
-            GameObject.allGameObjects.Add(newBall);
-            cannonBalls.Add(newBall);
+            cannonBall = new CannonBall();
+            cannonBall.LoadContent(content);
+            cannonBall.PostLoad();
+            GameObject.allGameObjects.Add(cannonBall);
             base.PostLoad();
         }
 
-        KeyboardState lastState;
+        KeyboardState lastKeyboardState;
+        MouseState lastMouseState;
         public override void Update(GameTime gameTime)
         {
-            KeyboardState state = Keyboard.GetState();
+            KeyboardState keyboardState = Keyboard.GetState();
+            MouseState mouseState = Mouse.GetState();
 
             //rotate clockwise by default
-            if ((state.IsKeyDown(Keys.Right) && isClockWise) || (state.IsKeyDown(Keys.Left) && !isClockWise))
-            {
+            if ((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.Left) ||
+                keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.D)) && lastKeyboardState != keyboardState) {
                 SwitchDirection();
             }
             rotation += radPerSec;
             SetRotation(rotation);
-            if (state.IsKeyDown(Keys.Space) && lastState != state)
-            {
+            if ((keyboardState.IsKeyDown(Keys.Space) && lastKeyboardState != keyboardState) ||
+                (mouseState.LeftButton == ButtonState.Pressed && lastMouseState!=mouseState)){
+
                 Fire();
             }
 
-            CircleCollider overlappingCollider = myCollider.GetOverlappingCollider();
-            if (overlappingCollider != null) {
-                if (overlappingCollider.layer == Layer.Enemy) {
-                    Debug.WriteLine("CANNONT Got Hit!");
-                    overlappingCollider.gameObject.Destroy();
-                    overlappingCollider.Destroy();
-                    //TODO DIE
-                    //EndGame();
-                }
-            }
+            CheckForCollision();
 
-            lastState = state;
+            lastKeyboardState = keyboardState;
+            lastMouseState = mouseState;
             base.Update(gameTime);
         }
 
-        void SwitchDirection()
-        {
+        void CheckForCollision() {
+            CircleCollider overlappingCollider = myCollider.GetOverlappingCollider();
+            if (overlappingCollider != null) {
+                if (overlappingCollider.layer == Layer.Enemy) {
+                    AudioManager.Instance.PlaySound(SoundFX.Hit);
+                    overlappingCollider.gameObject.Destroy();
+                    overlappingCollider.Destroy();
+                    Lose();
+                }
+            }
+        }
+        void Lose() {
+            //TODO set lose state
+        }
+
+        void SwitchDirection(){
             isClockWise = !isClockWise;
             radPerSec = -radPerSec;
         }
        
         float fireSpeed = 65f;
         void Fire() {
-            for (int i = cannonBalls.Count-1; i >=0; i--) {
-                if (cannonBalls[i].isAttached) {
-                    AudioManager.Instance.PlaySound(SoundFX.Launch);
-                    cannonBalls[i].Launch(forward * fireSpeed, isClockWise);
-                    return;
-                }
+            if (cannonBall.isAttached) {
+                AudioManager.Instance.PlaySound(SoundFX.Launch);
+                cannonBall.Launch(forward * fireSpeed, isClockWise);
             }
-
         }
-
-
-
 
     }
 }

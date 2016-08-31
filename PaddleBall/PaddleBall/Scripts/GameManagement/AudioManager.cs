@@ -1,12 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PaddleBall{
 
@@ -17,6 +13,7 @@ namespace PaddleBall{
         Hit=2,
         Explode=3
     }
+    //Handles all sound effects and background music
     public class AudioManager {
 
         private static AudioManager instance;
@@ -29,6 +26,9 @@ namespace PaddleBall{
             }
         }
 
+        /// <summary>
+        /// the soundFX dictionary provides access to lists of SoundEffects by type of SoundFX for simple shuffling
+        /// </summary>
         Dictionary<SoundFX, List<SoundEffect>> soundFX;
         ContentManager content;
         public void LoadContent(ContentManager Content) {
@@ -64,8 +64,12 @@ namespace PaddleBall{
             MediaPlayer.IsRepeating = true;
         }
 
+        /// <summary>
+        /// Plays the next in line of the soundFX of your choice
+        /// increments the soundFX in the given list for predictable variety
+        /// </summary>
+        /// <param name="soundToPlay"></param>
         public void PlaySound(SoundFX soundToPlay) {
-            Debug.WriteLine(soundToPlay + " at index: " + soundFXCount[soundToPlay]);
             int soundFXIndex = soundFXCount[soundToPlay];
             soundFX[soundToPlay].ElementAt<SoundEffect>(soundFXIndex).Play();
             soundFXCount[soundToPlay]++;
@@ -73,6 +77,9 @@ namespace PaddleBall{
                 soundFXCount[soundToPlay] = 0;
             }
         }
+        /// <summary>
+        /// soundFXCount keeps track of the current index of the soundFX list that the PlaySound cycles through
+        /// </summary>
         Dictionary<SoundFX, int> soundFXCount = new Dictionary<SoundFX, int>() {
             { SoundFX.Launch, 0},
             { SoundFX.ReAttach, 0},

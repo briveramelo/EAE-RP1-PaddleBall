@@ -44,7 +44,7 @@ namespace PaddleBall {
         }
 
         void TakeDamage() {
-            Debug.WriteLine("SHIELD Got Hit!");
+            AudioManager.Instance.PlaySound(SoundFX.Hit);
             health--;
             if (health == 0) {
                 Destroy();

@@ -4,9 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PaddleBall
 {
@@ -38,7 +35,7 @@ namespace PaddleBall
         Coroutiner myCoroutiner = new Coroutiner();
         ContentManager content;
         List<Round> rounds = new List<Round>() {
-            new Round(1,5,1,1),
+            new Round(1,1,1,1),
             new Round(2,2,1,1),
             new Round(3,2,1,1),
             new Round(4,3,1,1),
@@ -78,6 +75,7 @@ namespace PaddleBall
                 //TODO WIN SCREEN? generate more levels??
             }
         }
+
         Vector2 screenCenter = new Vector2(ScreenManager.Instance.Dimensions.X, ScreenManager.Instance.Dimensions.Y) / 2f;
         List<Vector2> GetProperlySpacedEnemySpawnAngles(int enemyCount) {
             List<int> spawnAngles = new List<int>();
@@ -96,7 +94,7 @@ namespace PaddleBall
                 }
                 spawnAngles.Add(randomAngle);
                 float angleRadian = (float)randomAngle * ((float)Math.PI/180f);
-                Vector2 spawnSpot = new Vector2((float)Math.Cos(angleRadian), (float)Math.Sin(angleRadian)) * 1111 + screenCenter;
+                Vector2 spawnSpot = new Vector2((float)Math.Cos(angleRadian), (float)Math.Sin(angleRadian)) * 1200 + screenCenter;
                 spawnPoints.Add(spawnSpot);
             }
             return spawnPoints;          
