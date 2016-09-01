@@ -15,22 +15,26 @@ namespace PaddleBall
     {
         int health = 1;
         Vector2 velocity = Vector2.Zero;
-        float moveSpeed = 1f;
         CircleCollider myCollider;
 
         public Enemy() : base() { }
-        
+
+        float scaleSize = 0.5f;
         public override void LoadContent(ContentManager Content)
         {
             texturePath = "Images/bugEnemy1";
-            myCollider = new CircleCollider(Layer.Enemy,this, 75);
+            scale = Vector2.One * scaleSize;
+            myCollider = new CircleCollider(Layer.Enemy,this, 75 * scaleSize);
             base.LoadContent(Content);
         }
 
 
-        public void SetVelocity(Vector2 moveDir)
+        public void SetVelocity(Vector2 moveDir, float moveSpeed)
         {
-            this.velocity = Vector2.Normalize(moveDir) * moveSpeed;
+            Vector2 normalizedMoveDir = Vector2.Normalize(moveDir);
+            this.velocity = normalizedMoveDir *moveSpeed;
+            float degToRad = (float)Math.PI / 180f;
+            rotation = (float)Math.Atan2(normalizedMoveDir.Y, normalizedMoveDir.X) - 90f* degToRad;
         }
        
         public override void Update(GameTime gameTime)

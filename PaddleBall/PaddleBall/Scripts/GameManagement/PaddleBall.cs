@@ -17,12 +17,24 @@ namespace PaddleBall {
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
+        private static PaddleBall instance;
+        public static PaddleBall Instance {
+            get {
+                if (instance == null) {
+                    instance = new PaddleBall();
+                }
+                return instance;
+            }
+        }
+        public void Lose() {
+            Exit();
+        }
+
         //Vector2 testEnemyLoc = new Vector2(8, 8);
         public PaddleBall() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-           
         }
 
         /// <summary>
@@ -35,8 +47,14 @@ namespace PaddleBall {
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
-           
+            InitializeGameObjectSingletons();
             base.Initialize();
+        }
+
+        void InitializeGameObjectSingletons() {
+            GameObject.allGameObjects.Add(Cannon.Instance);
+            GameObject.allGameObjects.Add(Shield.Instance);
+            GameObject.allGameObjects.Add(ScoreBoard.Instance);
         }
 
         /// <summary>
@@ -44,11 +62,7 @@ namespace PaddleBall {
         /// all of your content.
         /// </summary>
         protected override void LoadContent() {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-            GameObject.allGameObjects.Add(Cannon.Instance);
-            GameObject.allGameObjects.Add(Shield.Instance);
-            GameObject.allGameObjects.Add(ScoreBoard.Instance);
+            spriteBatch = new SpriteBatch(GraphicsDevice);            
 
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScreenManager.Instance.LoadContent(Content);
@@ -62,6 +76,7 @@ namespace PaddleBall {
             }
 
         }
+
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -78,7 +93,6 @@ namespace PaddleBall {
                 GameObject.allGameObjects[i].Update(gameTime);
             }
 
-
             base.Update(gameTime);
         }
 
@@ -92,10 +106,8 @@ namespace PaddleBall {
             spriteBatch.Begin();
             ScreenManager.Instance.Draw(spriteBatch);
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
-                GameObject.allGameObjects[i].Draw(spriteBatch);
-                    
+                GameObject.allGameObjects[i].Draw(spriteBatch);                   
             }
-
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -108,7 +120,6 @@ namespace PaddleBall {
         protected override void UnloadContent() {
             ScreenManager.Instance.UnloadContent();
         }
-
        
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
     class ScoreBoard : GameObject {
@@ -36,9 +31,8 @@ namespace PaddleBall {
         public override void LoadContent(ContentManager Content) {
             content = Content;
             spriteFont = content.Load<SpriteFont>("scoreboard");
-            position = new Vector2(ScreenManager.Instance.Dimensions.X / 2, 100);
+            position = new Vector2(100, 70);
             scale = Vector2.One * 10;
-
         }
 
         public override void PostLoad() {}

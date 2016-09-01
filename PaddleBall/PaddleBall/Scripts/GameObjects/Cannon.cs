@@ -11,7 +11,7 @@ namespace PaddleBall {
     {
 
         bool isClockWise = true;
-        float degPerSec = 1f;
+        float degPerSec = 2f;
         float radPerSec;
 
         CircleCollider myCollider;
@@ -38,13 +38,15 @@ namespace PaddleBall {
             }
         }
 
+        float scaleSize = 0.5f;
         public override void LoadContent(ContentManager Content)
         {
             texturePath = "Images/Paddle";
             radPerSec = degPerSec * (float)Math.PI / 180f;
             SetLayerDepth(0f);
             position = screenCenter;
-            myCollider = new CircleCollider(Layer.Cannon, this, 120);
+            scale = Vector2.One * scaleSize;
+            myCollider = new CircleCollider(Layer.Cannon, this, 120 * scaleSize);
             base.LoadContent(Content);
         }
 
@@ -95,7 +97,7 @@ namespace PaddleBall {
             }
         }
         void Lose() {
-            //TODO set lose state
+            PaddleBall.Instance.Lose();
         }
 
         void SwitchDirection(){

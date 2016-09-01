@@ -14,7 +14,7 @@ namespace PaddleBall {
         [STAThread]
         static void Main()
         {
-            using (var game = new PaddleBall()) {
+            using (var game = PaddleBall.Instance) {
                 game.Run();
             }
         }

@@ -25,19 +25,19 @@ namespace PaddleBall {
         Vector2 backSpot { get { return backOffset + screenCenter; } }
 
         float gravConst=0.000005f;
-        float distanceOffset = 100;
+        float distanceOffset = 75;
         public bool isAttached = true;
         bool isPausedForLaunch = false;
-        Rectangle ballRec = new Rectangle(0, 0, 300, 300);
 
         public CannonBall() : base() { }
 
 
-
+        float scaleSize = 1f;
         public override void LoadContent(ContentManager Content) {
             texturePath = "Images/TempBall";
             SetLayerDepth(0f);
-            myCollider = new CircleCollider(Layer.CannonBall, this, 50);
+            scale = Vector2.One * scaleSize;
+            myCollider = new CircleCollider(Layer.CannonBall, this, 50 * scaleSize);
             base.LoadContent(Content);
         }
 

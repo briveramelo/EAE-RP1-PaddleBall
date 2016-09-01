@@ -23,10 +23,12 @@ namespace PaddleBall {
             }
         }
 
+        float scaleSize = 0.5f;
         public override void LoadContent(ContentManager Content) {
             texturePath = "Images/Barrier";
             SetLayerDepth(0f);
-            myCollider = new CircleCollider(Layer.Shield, this, 350);
+            scale = Vector2.One * scaleSize;
+            myCollider = new CircleCollider(Layer.Shield, this, 350 * scaleSize);
             position = screenCenter;
             base.LoadContent(Content);
         }

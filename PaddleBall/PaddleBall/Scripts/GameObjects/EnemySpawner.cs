@@ -10,13 +10,13 @@ namespace PaddleBall
     public class Round {
         public int round;
         public int enemyCount;
-        public int speed;
+        public float enemySpeed;
         public float timeBetweenSpawns;
-        public Round(int round, int enemyCount, int speed, float timeBetweenSpawn)
+        public Round(int round, int enemyCount, float speed, float timeBetweenSpawn)
         {
             this.round = round;
             this.enemyCount = enemyCount;
-            this.speed = speed;
+            this.enemySpeed = speed;
             this.timeBetweenSpawns = timeBetweenSpawn;
         }
     }
@@ -35,14 +35,16 @@ namespace PaddleBall
         Coroutiner myCoroutiner = new Coroutiner();
         ContentManager content;
         List<Round> rounds = new List<Round>() {
-            new Round(1,1,1,1),
-            new Round(2,2,1,1),
-            new Round(3,2,1,1),
-            new Round(4,3,1,1),
-            new Round(5,3,1,1),
-            new Round(6,3,1,1),
-            new Round(7,4,1,1),
-            new Round(8,4,1,1)
+            //round, enCount, enSpeed, tbwtSpawn 
+            new Round(1, 2, 1f, 1),
+            new Round(2, 3, 1.2f, 1f),
+            new Round(3, 4, 1.4f, 1f),
+            new Round(4, 4, 1.6f, .9f),
+            new Round(5, 5, 1.8f, .9f),
+            new Round(6, 5, 2f, .9f),
+            new Round(7, 7, 2.3f, .85f),
+            new Round(8, 10, 2.6f, .8f),
+            new Round(9, 10, 3f, .7f)
         };
         int currentRound = -1;
         int currentEnemyCount = 0;
@@ -54,6 +56,9 @@ namespace PaddleBall
 
         IEnumerator StartNewRound() {
             currentRound++;
+            if (currentRound >= rounds.Count) {
+                currentRound = rounds.Count-1;
+            }
             if (currentRound < rounds.Count) {
                 int numEnemiesToSpawn = rounds[currentRound].enemyCount;
                 List<Vector2> spawnSpots = GetProperlySpacedEnemySpawnAngles(numEnemiesToSpawn);
@@ -87,7 +92,7 @@ namespace PaddleBall
                 for (int j = 0; j < spawnAngles.Count; j++) {
                     int attemptNum = 0;
                     while ((Math.Abs(spawnAngles[j] - randomAngle) < closestAngle ||
-                        Math.Abs(spawnAngles[j] - randomAngle) > 360 - closestAngle) && attemptNum<30) {
+                        Math.Abs(spawnAngles[j] - randomAngle) > 360 - closestAngle) && attemptNum<20) {
                         randomAngle = random.Next(0, 360);
                         attemptNum++;
                     }
@@ -109,7 +114,7 @@ namespace PaddleBall
             newEnemy.LoadContent(content);
             newEnemy.PostLoad();
             newEnemy.position = spawnPoint;
-            newEnemy.SetVelocity(screenCenter - newEnemy.position);
+            newEnemy.SetVelocity(screenCenter - newEnemy.position, rounds[currentRound].enemySpeed);
             GameObject.allGameObjects.Add(newEnemy);
             currentEnemyCount++;
         }
