@@ -32,7 +32,7 @@ namespace PaddleBall {
             content = Content;
             spriteFont = content.Load<SpriteFont>("scoreboard");
             position = new Vector2(100, 70);
-            scale = Vector2.One * 6;
+            scale = Vector2.One * (6f/10f);
         }
 
         public override void PostLoad() {}
