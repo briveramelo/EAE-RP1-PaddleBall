@@ -31,7 +31,7 @@ namespace PaddleBall {
 
         public void LoadContent(ContentManager Content) {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
-            currentScreen.LoadContent("Images/Background");
+            currentScreen.LoadContent("Images/BACKGROUND2");
         }
 
         public void UnloadContent() {
