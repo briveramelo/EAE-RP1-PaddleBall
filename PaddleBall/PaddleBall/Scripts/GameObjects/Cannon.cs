@@ -36,6 +36,7 @@ namespace PaddleBall {
                 }
                 return instance;
             }
+            set { instance = value; }
         }
 
         float scaleSize = 0.5f;
@@ -66,8 +67,8 @@ namespace PaddleBall {
             MouseState mouseState = Mouse.GetState();
 
             //rotate clockwise by default
-            if ((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.Left) ||
-                keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.D)) && lastKeyboardState != keyboardState) {
+            if ( (((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) && isClockWise) ||
+                (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) && !isClockWise) && lastKeyboardState != keyboardState) {
                 SwitchDirection();
             }
             rotation += radPerSec;
@@ -89,7 +90,6 @@ namespace PaddleBall {
             CircleCollider overlappingCollider = myCollider.GetOverlappingCollider();
             if (overlappingCollider != null) {
                 if (overlappingCollider.layer == Layer.Enemy) {
-                    AudioManager.Instance.PlaySound(SoundFX.Hit);
                     overlappingCollider.gameObject.Destroy();
                     overlappingCollider.Destroy();
                     Lose();
@@ -97,7 +97,11 @@ namespace PaddleBall {
             }
         }
         void Lose() {
+            AudioManager.Instance.PlaySound(SoundFX.PaddleDeath);
+            AudioManager.Instance.StopMusic();
+            TextInputManager.Instance.AcceptText();
             PaddleBall.Instance.Lose();
+            Destroy();
         }
 
         void SwitchDirection(){

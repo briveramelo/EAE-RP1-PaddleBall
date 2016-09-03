@@ -19,120 +19,6 @@
 /processorParam:TextureFormat=Compressed
 /build:scoreboard.spritefont
 
-#begin SoundFX/Explosions/Explosion_00.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Explosions/Explosion_00.wav
-
-#begin SoundFX/Explosions/Explosion_01.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Explosions/Explosion_01.wav
-
-#begin SoundFX/Explosions/Explosion_02.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Explosions/Explosion_02.wav
-
-#begin SoundFX/Explosions/Explosion_03.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Explosions/Explosion_03.wav
-
-#begin SoundFX/Explosions/Explosion_04.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Explosions/Explosion_04.wav
-
-#begin SoundFX/Hits/Hit_00.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Hits/Hit_00.wav
-
-#begin SoundFX/Hits/Hit_01.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Hits/Hit_01.wav
-
-#begin SoundFX/Hits/Hit_02.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Hits/Hit_02.wav
-
-#begin SoundFX/Hits/Hit_03.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Hits/Hit_03.wav
-
-#begin SoundFX/Shoots/Shoot_00.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Shoots/Shoot_00.wav
-
-#begin SoundFX/Shoots/Shoot_01.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Shoots/Shoot_01.wav
-
-#begin SoundFX/Shoots/Shoot_02.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Shoots/Shoot_02.wav
-
-#begin SoundFX/Shoots/Shoot_03.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Shoots/Shoot_03.wav
-
-#begin SoundFX/Tunes/LevelMusic_1.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Tunes/LevelMusic_1.mp3
-
-#begin SoundFX/Tunes/LevelMusic_2.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Tunes/LevelMusic_2.mp3
-
-#begin SoundFX/Tunes/LevelMusic_3.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Tunes/LevelMusic_3.mp3
-
-#begin SoundFX/Launch.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Launch.wav
-
-#begin SoundFX/ReAttach.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundFX/ReAttach.wav
-
-#begin SoundFX/SpectreLead_JForceEdit_01.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:SoundFX/SpectreLead_JForceEdit_01.mp3
-
 #begin Images/Background.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -324,4 +210,136 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/BACKGROUND2.png
+
+#begin SoundFX/Bounces/Bounce1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Bounces/Bounce1.wav
+
+#begin SoundFX/Bounces/Bounce2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Bounces/Bounce2.wav
+
+#begin SoundFX/Bounces/Bounce3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Bounces/Bounce3.wav
+
+#begin SoundFX/Bounces/Bounce4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Bounces/Bounce4.wav
+
+#begin SoundFX/DestroyEnemy/Destroyenemy1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/DestroyEnemy/Destroyenemy1.wav
+
+#begin SoundFX/DestroyEnemy/Destroyenemy3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/DestroyEnemy/Destroyenemy3.wav
+
+#begin SoundFX/DestroyEnemy/Destroyenemy4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/DestroyEnemy/Destroyenemy4.wav
+
+#begin SoundFX/DestroyEnemy/Destroyenemy5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/DestroyEnemy/Destroyenemy5.wav
+
+#begin SoundFX/Launches/Launch1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Launches/Launch1.wav
+
+#begin SoundFX/Launches/Launch2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Launches/Launch2.wav
+
+#begin SoundFX/Launches/Launch3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Launches/Launch3.wav
+
+#begin SoundFX/Launches/Launch4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Launches/Launch4.wav
+
+#begin SoundFX/Tunes/LevelMusic_1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Tunes/LevelMusic_1.mp3
+
+#begin SoundFX/Tunes/LevelMusic_2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Tunes/LevelMusic_2.mp3
+
+#begin SoundFX/Tunes/LevelMusic_3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Tunes/LevelMusic_3.mp3
+
+#begin SoundFX/Tunes/Long.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Tunes/Long.mp3
+
+#begin SoundFX/Tunes/Short.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Tunes/Short.mp3
+
+#begin SoundFX/PaddleDeath.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/PaddleDeath.wav
+
+#begin SoundFX/Playerloss.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Playerloss.wav
+
+#begin SoundFX/Shieldhit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Shieldhit.wav
+
+#begin Images/blackground.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/blackground.jpg
 

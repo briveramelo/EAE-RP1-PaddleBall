@@ -23,6 +23,7 @@ namespace PaddleBall {
                 }
                 return instance;
             }
+            set { instance = value; }
         }
 
         float scaleSize = 0.5f;
@@ -55,7 +56,7 @@ namespace PaddleBall {
         }
 
         void TakeDamage() {
-            AudioManager.Instance.PlaySound(SoundFX.Hit);
+            AudioManager.Instance.PlaySound(SoundFX.ShieldHit);
             health--;
             if (health == 0) {
                 Destroy();

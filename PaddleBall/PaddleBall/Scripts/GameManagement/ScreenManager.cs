@@ -8,12 +8,29 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
+
+    public enum Screen {
+        Title=0,
+        Scores=1,
+        Game =2
+    }
     public class ScreenManager {
 
-        public Vector2 Dimensions { private set; get; }
-        public ContentManager Content { private set; get; }
+        public Vector2 Dimensions = new Vector2(1920, 1080);
+        public ContentManager Content;
 
-        GameScreen currentScreen = new GameScreen();
+        Screen currentScreen = Screen.Scores;
+        public void SetCurrentScreen(Screen newScreen) {
+            currentScreen = newScreen;
+        }
+        public Screen GetCurrentScreen() {
+            return currentScreen;
+        }
+        Dictionary<Screen, GameScreen> gameScreens = new Dictionary<Screen, GameScreen>() {
+            {  Screen.Title, new GameScreen("Images/RP1-1") },
+            {  Screen.Scores, new GameScreen("Images/blackground") },
+            {  Screen.Game, new GameScreen("Images/BACKGROUND2") }
+        };
 
         private static ScreenManager instance;
         public static ScreenManager Instance {
@@ -25,21 +42,19 @@ namespace PaddleBall {
             }
         }
 
-        public ScreenManager() {
-            Dimensions = new Vector2(1920, 1080);
-        }
-
         public void LoadContent(ContentManager Content) {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
-            currentScreen.LoadContent("Images/BACKGROUND2");
+            for (int i = 0; i < 3; i++){
+                gameScreens[(Screen)i].LoadContent(Content);
+            }
         }
 
         public void UnloadContent() {
-            currentScreen.UnloadContent();
+            gameScreens[currentScreen].UnloadContent();
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            currentScreen.Draw(spriteBatch);
+            gameScreens[currentScreen].Draw(spriteBatch);
         }
     }
 }

@@ -46,11 +46,14 @@ namespace PaddleBall
             new Round(8, 10, 2.6f, .8f),
             new Round(9, 10, 3f, .7f)
         };
-        int currentRound = -1;
-        int currentEnemyCount = 0;
+        int currentRound;
+        int currentEnemyCount;
 
         public void LoadContent(ContentManager Content) {
             content = Content;
+            myCoroutiner.StopAllCoroutines();
+            currentRound = -1;
+            currentEnemyCount = 0;
             myCoroutiner.StartCoroutine(StartNewRound());
         }
 
@@ -75,9 +78,6 @@ namespace PaddleBall
                     stopwatch.Stop();
 
                 }
-            }
-            else {
-                //TODO WIN SCREEN? generate more levels??
             }
         }
 

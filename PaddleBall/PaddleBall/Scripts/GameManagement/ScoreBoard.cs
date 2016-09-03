@@ -5,9 +5,12 @@ using Microsoft.Xna.Framework.Graphics;
 namespace PaddleBall {
     class ScoreBoard : GameObject {
 
-        static int score=0;
+        static int score;
         static int hitStreak;
         SpriteFont spriteFont;
+        public int GetScore() {
+            return score;
+        }
 
         private static ScoreBoard instance;
         public static ScoreBoard Instance {
@@ -33,6 +36,8 @@ namespace PaddleBall {
             spriteFont = content.Load<SpriteFont>("scoreboard");
             position = new Vector2(100, 70);
             scale = Vector2.One * (6f/10f);
+            score = 0;
+            hitStreak = 0;
         }
 
         public override void PostLoad() {}

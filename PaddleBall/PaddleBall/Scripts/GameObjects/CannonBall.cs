@@ -111,7 +111,7 @@ namespace PaddleBall {
             if (!hitEnemy) {
                 ScoreBoard.Instance.ReportMiss();
             }
-            AudioManager.Instance.PlaySound(SoundFX.ReAttach);
+            AudioManager.Instance.PlaySound(SoundFX.Hit);
         }
 
         Random random = new Random();

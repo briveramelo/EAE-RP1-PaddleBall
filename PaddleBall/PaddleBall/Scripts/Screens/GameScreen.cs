@@ -11,10 +11,15 @@ namespace PaddleBall {
 
         Texture2D image;
         protected ContentManager content;
+        string backgroundImagePath;
 
-        public virtual void LoadContent(string imagePath) {
-            content = new ContentManager(ScreenManager.Instance.Content.ServiceProvider, "Content");
-            image = content.Load<Texture2D>(imagePath);
+        public GameScreen(string backgroundImagePath) {
+            this.backgroundImagePath = backgroundImagePath;
+        }
+
+        public void LoadContent(ContentManager Content) {
+            content = Content;
+            image = content.Load<Texture2D>(backgroundImagePath);
         }
 
         public virtual void UnloadContent() {

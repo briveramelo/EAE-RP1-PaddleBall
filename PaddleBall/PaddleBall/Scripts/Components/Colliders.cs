@@ -29,7 +29,17 @@ namespace PaddleBall {
             new bool[] { true, true, false, true, false},  //Enemy
             new bool[] { false, false, true, false, false},  //Shield
             new bool[] { false, true, true, false, false}  //Obstacle  
-        }; 
+        };
+
+        public static void ClearColliders() {
+            allColliders = new Dictionary<Layer, List<CircleCollider>>() {
+                {Layer.Cannon, new List<CircleCollider>()},
+                {Layer.CannonBall, new List<CircleCollider>()},
+                {Layer.Enemy, new List<CircleCollider>()},
+                {Layer.Shield, new List<CircleCollider>()},
+                {Layer.Obstacle, new List<CircleCollider>()}
+            };
+        }
         public Layer layer;
         public GameObject gameObject;
         public Vector2 offset = Vector2.Zero;

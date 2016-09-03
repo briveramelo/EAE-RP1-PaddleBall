@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,9 +11,11 @@ namespace PaddleBall{
     
     public enum SoundFX {
         Launch=0,
-        ReAttach=1,
-        Hit=2,
-        Explode=3
+        Hit=1,
+        DestroyEnemy=2,
+        PaddleDeath=3,
+        PlayerLoss=4,
+        ShieldHit=5
     }
     //Handles all sound effects and background music
     public class AudioManager {
@@ -27,47 +31,99 @@ namespace PaddleBall{
         }
 
         /// <summary>
+        /// soundFXCount keeps track of the current index of the soundFX list that the PlaySound cycles through
+        /// </summary>
+        Dictionary<SoundFX, int> soundFXCount = new Dictionary<SoundFX, int>() {
+            { SoundFX.Launch, 0},
+            { SoundFX.Hit, 0},
+            { SoundFX.DestroyEnemy, 0},
+            { SoundFX.PaddleDeath, 0},
+            { SoundFX.PlayerLoss, 0},
+            { SoundFX.ShieldHit, 0}
+        };
+
+        /// <summary>
         /// the soundFX dictionary provides access to lists of SoundEffects by type of SoundFX for simple shuffling
         /// </summary>
         Dictionary<SoundFX, List<SoundEffect>> soundFX;
+        List<Song> backgroundMusics;
         ContentManager content;
         public void LoadContent(ContentManager Content) {
             content = Content;
             soundFX = new Dictionary<SoundFX, List<SoundEffect>>() {
                 {SoundFX.Launch, new List<SoundEffect>() {
-                    content.Load<SoundEffect>("SoundFX/Shoots/Shoot_00"),
-                    content.Load<SoundEffect>("SoundFX/Shoots/Shoot_01"),
-                    content.Load<SoundEffect>("SoundFX/Shoots/Shoot_02"),
-                    content.Load<SoundEffect>("SoundFX/Shoots/Shoot_03")
-                } },
-                {SoundFX.ReAttach, new List<SoundEffect>() {
-                    content.Load<SoundEffect>("SoundFX/Hits/Hit_00"),
-                    content.Load<SoundEffect>("SoundFX/Hits/Hit_01"),
-                    content.Load<SoundEffect>("SoundFX/Hits/Hit_02"),
-                    content.Load<SoundEffect>("SoundFX/Hits/Hit_03")
+                    content.Load<SoundEffect>("SoundFX/Launches/Launch1"),
+                    content.Load<SoundEffect>("SoundFX/Launches/Launch2"),
+                    content.Load<SoundEffect>("SoundFX/Launches/Launch3"),
+                    content.Load<SoundEffect>("SoundFX/Launches/Launch4")
                 } },
                 {SoundFX.Hit, new List<SoundEffect>() {
-                    content.Load<SoundEffect>("SoundFX/Hits/Hit_00"),
-                    content.Load<SoundEffect>("SoundFX/Hits/Hit_01"),
-                    content.Load<SoundEffect>("SoundFX/Hits/Hit_02"),
-                    content.Load<SoundEffect>("SoundFX/Hits/Hit_03")
+                    content.Load<SoundEffect>("SoundFX/Bounces/Bounce1"),
+                    content.Load<SoundEffect>("SoundFX/Bounces/Bounce2"),
+                    content.Load<SoundEffect>("SoundFX/Bounces/Bounce3"),
+                    content.Load<SoundEffect>("SoundFX/Bounces/Bounce4")
                 } },
-                {SoundFX.Explode, new List<SoundEffect>() {
-                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion_00"),
-                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion_01"),
-                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion_02"),
-                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion_03"),
-                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion_04")
+                {SoundFX.DestroyEnemy, new List<SoundEffect>() {
+                    content.Load<SoundEffect>("SoundFX/DestroyEnemy/Destroyenemy1"),
+                    content.Load<SoundEffect>("SoundFX/DestroyEnemy/Destroyenemy3"),
+                    content.Load<SoundEffect>("SoundFX/DestroyEnemy/Destroyenemy4"),
+                    content.Load<SoundEffect>("SoundFX/DestroyEnemy/Destroyenemy5"),
+                } },
+                {SoundFX.PaddleDeath, new List<SoundEffect>() {
+                    content.Load<SoundEffect>("SoundFX/PaddleDeath")
+                } },
+                {SoundFX.PlayerLoss, new List<SoundEffect>() {
+                    content.Load<SoundEffect>("SoundFX/Playerloss")
+                } },
+                {SoundFX.ShieldHit, new List<SoundEffect>() {
+                    content.Load<SoundEffect>("SoundFX/Shieldhit")
                 } }
             };
-            List<Song> backgroundMusics = new List<Song>() {
+            backgroundMusics = new List<Song>() {
                 content.Load<Song>("SoundFX/Tunes/LevelMusic_1"),
                 content.Load<Song>("SoundFX/Tunes/LevelMusic_2"),
                 content.Load<Song>("SoundFX/Tunes/LevelMusic_3"),
             };
 
+            //BeginGameMusic();
+            LoopGameMusic();
+        }
+
+        public void PlayBackgroundMusic(Screen screen) {
+            //MediaPlayer.Play(backgroundMusics[0]);
+            //looping = false;
+            switch (screen) {
+                case Screen.Title:
+                    MediaPlayer.Play(backgroundMusics[1]);
+                    MediaPlayer.IsRepeating = true;
+                    looping = true;
+                    break;
+                case Screen.Scores:
+                    MediaPlayer.Play(backgroundMusics[1]);
+                    MediaPlayer.IsRepeating = true;
+                    looping = true;
+                    break;
+                case Screen.Game:
+                    LoopGameMusic();
+                    break;
+            }
+        }
+
+        public void StopMusic() {
+            MediaPlayer.Stop();
+        }
+       
+        public void Update() {
+            if (MediaPlayer.State == MediaState.Stopped && !looping) {
+                LoopGameMusic();
+            }
+        }
+
+        bool looping;
+        void LoopGameMusic() {
             MediaPlayer.Play(backgroundMusics[0]);
             MediaPlayer.IsRepeating = true;
+            looping = true;
         }
 
         /// <summary>
@@ -83,15 +139,7 @@ namespace PaddleBall{
                 soundFXCount[soundToPlay] = 0;
             }
         }
-        /// <summary>
-        /// soundFXCount keeps track of the current index of the soundFX list that the PlaySound cycles through
-        /// </summary>
-        Dictionary<SoundFX, int> soundFXCount = new Dictionary<SoundFX, int>() {
-            { SoundFX.Launch, 0},
-            { SoundFX.ReAttach, 0},
-            { SoundFX.Hit, 0},
-            { SoundFX.Explode, 0}
-        };
+        
 
 
     }

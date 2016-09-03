@@ -17,6 +17,7 @@ namespace PaddleBall {
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Coroutiner myCoroutiner = new Coroutiner();
 
         private static PaddleBall instance;
         public static PaddleBall Instance {
@@ -27,8 +28,8 @@ namespace PaddleBall {
                 return instance;
             }
         }
-        public void Lose() {
-            Exit();
+        public void Lose() {            
+            LoadNewScreen(Screen.Title);
         }
 
         //Vector2 testEnemyLoc = new Vector2(8, 8);
@@ -47,14 +48,8 @@ namespace PaddleBall {
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
-            InitializeGameObjectSingletons();
+            
             base.Initialize();
-        }
-
-        void InitializeGameObjectSingletons() {
-            GameObject.allGameObjects.Add(Cannon.Instance);
-            GameObject.allGameObjects.Add(Shield.Instance);
-            GameObject.allGameObjects.Add(ScoreBoard.Instance);
         }
 
         /// <summary>
@@ -62,39 +57,152 @@ namespace PaddleBall {
         /// all of your content.
         /// </summary>
         protected override void LoadContent() {
-            spriteBatch = new SpriteBatch(GraphicsDevice);            
-
-            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
+            spriteBatch = new SpriteBatch(GraphicsDevice);
             ScreenManager.Instance.LoadContent(Content);
             AudioManager.Instance.LoadContent(Content);
-            ScoreBoard.Instance.LoadContent(Content);
-            EnemySpawner.Instance.LoadContent(Content);
+
+            LoadGame();
 
             //Post Load
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].PostLoad();
             }
-
         }
 
 
+        #region Load Screens
+        public void LoadNewScreen(Screen newScreen) {
+            AudioManager.Instance.StopMusic();
+            switch (newScreen) {
+                case Screen.Title:
+                    myCoroutiner.StartCoroutine(PauseAndSwitchToTitleScreen());
+                    break;
+                case Screen.Scores:
+                    ClearScreen();
+                    LoadScores();
+                    break;
+                case Screen.Game:
+                    ClearScreen();
+                    LoadGame();
+                    break;
+            }
+        }
+        IEnumerator PauseAndSwitchToTitleScreen() {
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            float timeToPause = 3.8f;
+            while (stopwatch.ElapsedMilliseconds < 1.1f * 1000) {
+                yield return null;
+            }
+            AudioManager.Instance.PlaySound(SoundFX.PlayerLoss);
+            while (stopwatch.ElapsedMilliseconds < timeToPause * 1000) {
+                yield return null;
+            }
+            stopwatch.Stop();
+            ClearScreen();
+            LoadTitle();
+        }
+
+        void ClearScreen() {
+            GameObject.ClearGameObjects();
+            CircleCollider.ClearColliders();
+            Cannon.Instance = null;
+            Shield.Instance = null;
+        }
+
+        void LoadTitle() {
+            ScreenManager.Instance.SetCurrentScreen(Screen.Title);
+            AudioManager.Instance.PlayBackgroundMusic(Screen.Title);
+        }
+
+        void LoadScores() {
+            AudioManager.Instance.PlayBackgroundMusic(Screen.Scores);
+            ScoreBoardDisplay.Instance.LoadContent(Content);
+            ScreenManager.Instance.SetCurrentScreen(Screen.Scores);
+        }
+
+        void LoadGame() {
+            GameObject.allGameObjects.Add(Cannon.Instance);
+            GameObject.allGameObjects.Add(Shield.Instance);
+            GameObject.allGameObjects.Add(ScoreBoard.Instance);
+
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
+            
+            ScoreBoard.Instance.LoadContent(Content);
+            EnemySpawner.Instance.LoadContent(Content);
+            AudioManager.Instance.PlayBackgroundMusic(Screen.Game);
+
+            Cannon.Instance.PostLoad();
+            Shield.Instance.PostLoad();
+            ScoreBoard.Instance.PostLoad();
+
+            ScreenManager.Instance.SetCurrentScreen(Screen.Game);
+        }
+        #endregion
+
+
+        KeyboardState lastKeyState;
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) {
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Escape)) {
                 Exit();
             }
 
-            EnemySpawner.Instance.Update();
+            ///////////////////////////////////////////////
+            //placeholder logic for moving between screens
+            if (keyboardState.IsKeyDown(Keys.R) && !lastKeyState.IsKeyDown(Keys.R)) {
+                LoadNewScreen(Screen.Game);
+            }
+            if (keyboardState.IsKeyDown(Keys.T) && !lastKeyState.IsKeyDown(Keys.T)) {
+                LoadNewScreen(Screen.Scores);
+            }
+            //////////////////////////////////////////////
+
+            UpdateCurrentScreen(gameTime);
+            myCoroutiner.Update();
+
+            lastKeyState = Keyboard.GetState();
+            base.Update(gameTime);
+        }
+
+        #region Update Screens
+        void UpdateCurrentScreen(GameTime gameTime) {
+            
+            switch (ScreenManager.Instance.GetCurrentScreen()) {
+                case Screen.Title:
+                    RunTitle(gameTime);
+                    break;
+                case Screen.Scores:
+                    RunScores(gameTime);
+                    break;
+                case Screen.Game:
+                    RunGame(gameTime);
+                    break;
+            }
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].Update(gameTime);
             }
-
-            base.Update(gameTime);
         }
+
+        void RunTitle(GameTime gameTime) {
+
+        }
+
+        void RunScores(GameTime gameTime) {
+            
+        }
+
+        void RunGame(GameTime gameTime) {
+            EnemySpawner.Instance.Update();
+            //AudioManager.Instance.Update();        
+        }
+        #endregion
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -104,14 +212,45 @@ namespace PaddleBall {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            ScreenManager.Instance.Draw(spriteBatch);
-            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
-                GameObject.allGameObjects[i].Draw(spriteBatch);                   
-            }
+            DrawCurrentScreen();
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        #region Draw Screens
+        void DrawCurrentScreen() {
+            ScreenManager.Instance.Draw(spriteBatch);
+
+            switch (ScreenManager.Instance.GetCurrentScreen()) {
+                case Screen.Title:
+                    DrawTitle();
+                    break;
+                case Screen.Scores:
+                    DrawScores();
+                    break;
+                case Screen.Game:
+                    DrawGame();
+                    break;
+            }
+            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
+                GameObject.allGameObjects[i].Draw(spriteBatch);
+            }
+        }
+
+        void DrawTitle() {
+            
+        }
+
+        void DrawScores() {
+            ScoreBoardDisplay.Instance.Draw(spriteBatch);
+        }
+
+        void DrawGame() {
+
+        }
+        #endregion
+
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -120,6 +259,5 @@ namespace PaddleBall {
         protected override void UnloadContent() {
             ScreenManager.Instance.UnloadContent();
         }
-       
     }
 }

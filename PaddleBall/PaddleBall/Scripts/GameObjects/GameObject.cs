@@ -35,6 +35,9 @@ namespace PaddleBall {
 
         
         public static List<GameObject> allGameObjects = new List<GameObject>();
+        public static void ClearGameObjects() {
+            allGameObjects = new List<GameObject>();
+        }
 
         public Vector2 position;
         public Vector2 scale = new Vector2(1, 1);
