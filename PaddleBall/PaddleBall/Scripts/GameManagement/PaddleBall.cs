@@ -62,11 +62,6 @@ namespace PaddleBall {
             AudioManager.Instance.LoadContent(Content);
 
             LoadGame();
-
-            //Post Load
-            for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
-                GameObject.allGameObjects[i].PostLoad();
-            }
         }
 
 
