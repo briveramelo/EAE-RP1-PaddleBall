@@ -18,7 +18,7 @@ namespace PaddleBall {
         }
 
         public void AcceptText() {
-            ScoreBoardDisplay.Instance.AddHighScore(new Score(11, ScoreBoard.Instance.GetScore(), "NEW"));
+            HighScoreDisplay.Instance.AddHighScore(new ScoreDisplay(new Score(11, ScoreBoard.Instance.GetScore(), "NEW")));
         }
     }
 }

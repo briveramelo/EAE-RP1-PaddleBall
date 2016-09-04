@@ -15,6 +15,8 @@ namespace PaddleBall {
         List<Texture2D> textures = new List<Texture2D>();
         int health = 3;
 
+        public Shield() : base() { }
+
         private static Shield instance;
         public static Shield Instance {
             get {
@@ -28,11 +30,6 @@ namespace PaddleBall {
 
         float scaleSize = 0.5f;
         public override void LoadContent(ContentManager Content) {
-            
-            SetLayerDepth(0f);
-            scale = Vector2.One * scaleSize;
-            myCollider = new CircleCollider(Layer.Shield, this, 350 * scaleSize);
-            position = screenCenter;
             content = Content;
             textures.Add(content.Load<Texture2D>("Images/RED_BARRIER"));
             textures.Add(content.Load<Texture2D>("Images/ORANGE_BARRIER"));
@@ -40,6 +37,10 @@ namespace PaddleBall {
         }
 
         public override void PostLoad() {
+            SetLayerDepth(0f);
+            scale = Vector2.One * scaleSize;
+            myCollider = new CircleCollider(Layer.Shield, this, 350 * scaleSize);
+            position = screenCenter;
             SetOriginInPixels(textures[health-1].Width / 2, textures[health - 1].Height / 2);
         }
 
@@ -65,6 +66,11 @@ namespace PaddleBall {
 
         public override void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(textures[health-1], position, null, color, rotation, originInPixels, scale, flip, layerDepth);
+        }
+
+        public override void Destroy() {
+            Instance = null;
+            base.Destroy();
         }
 
     }

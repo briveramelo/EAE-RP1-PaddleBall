@@ -36,7 +36,7 @@ namespace PaddleBall
         ContentManager content;
         List<Round> rounds = new List<Round>() {
             //round, enCount, enSpeed, tbwtSpawn 
-            new Round(1, 2, 1f, 1),
+            new Round(1, 2, 1f, 1f),
             new Round(2, 3, 1.2f, 1f),
             new Round(3, 4, 1.4f, 1f),
             new Round(4, 4, 1.6f, .9f),
@@ -115,7 +115,6 @@ namespace PaddleBall
             newEnemy.PostLoad();
             newEnemy.position = spawnPoint;
             newEnemy.SetVelocity(screenCenter - newEnemy.position, rounds[currentRound].enemySpeed);
-            GameObject.allGameObjects.Add(newEnemy);
             currentEnemyCount++;
         }
 

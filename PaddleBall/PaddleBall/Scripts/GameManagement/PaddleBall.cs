@@ -60,6 +60,8 @@ namespace PaddleBall {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ScreenManager.Instance.LoadContent(Content);
             AudioManager.Instance.LoadContent(Content);
+            SaveDataManager.LoadContent(Content);
+            LoadScores();
 
             LoadGame();
         }
@@ -94,6 +96,7 @@ namespace PaddleBall {
             while (stopwatch.ElapsedMilliseconds < timeToPause * 1000) {
                 yield return null;
             }
+            TextInputManager.Instance.AcceptText();
             stopwatch.Stop();
             ClearScreen();
             LoadTitle();
@@ -102,8 +105,6 @@ namespace PaddleBall {
         void ClearScreen() {
             GameObject.ClearGameObjects();
             CircleCollider.ClearColliders();
-            Cannon.Instance = null;
-            Shield.Instance = null;
         }
 
         void LoadTitle() {
@@ -112,26 +113,26 @@ namespace PaddleBall {
         }
 
         void LoadScores() {
-            AudioManager.Instance.PlayBackgroundMusic(Screen.Scores);
-            ScoreBoardDisplay.Instance.LoadContent(Content);
+            HighScoreDisplay.Instance.LoadContent(Content);
+            HighScoreDisplay.Instance.PostLoad();
             ScreenManager.Instance.SetCurrentScreen(Screen.Scores);
+            AudioManager.Instance.PlayBackgroundMusic(Screen.Scores);
         }
 
         void LoadGame() {
-            GameObject.allGameObjects.Add(Cannon.Instance);
-            GameObject.allGameObjects.Add(Shield.Instance);
-            GameObject.allGameObjects.Add(ScoreBoard.Instance);
+            Cannon.Instance = new Cannon();
+            Shield.Instance = new Shield();
+            ScoreBoard.Instance = new ScoreBoard();
 
-            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
-            
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));            
             ScoreBoard.Instance.LoadContent(Content);
             EnemySpawner.Instance.LoadContent(Content);
-            AudioManager.Instance.PlayBackgroundMusic(Screen.Game);
 
             Cannon.Instance.PostLoad();
             Shield.Instance.PostLoad();
             ScoreBoard.Instance.PostLoad();
 
+            AudioManager.Instance.PlayBackgroundMusic(Screen.Game);
             ScreenManager.Instance.SetCurrentScreen(Screen.Game);
         }
         #endregion
@@ -181,7 +182,9 @@ namespace PaddleBall {
                     break;
             }
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
-                GameObject.allGameObjects[i].Update(gameTime);
+                if (i< GameObject.allGameObjects.Count) {
+                    GameObject.allGameObjects[i].Update(gameTime);
+                }
             }
         }
 
@@ -238,7 +241,7 @@ namespace PaddleBall {
         }
 
         void DrawScores() {
-            ScoreBoardDisplay.Instance.Draw(spriteBatch);
+            HighScoreDisplay.Instance.Draw(spriteBatch);
         }
 
         void DrawGame() {

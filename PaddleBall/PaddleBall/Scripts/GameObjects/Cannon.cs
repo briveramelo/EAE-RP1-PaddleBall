@@ -18,6 +18,8 @@ namespace PaddleBall {
         float forwardOffsetRotation = (float)Math.PI / 2f;
         CannonBall cannonBall;
 
+        public Cannon() : base() { }
+
         public override Vector2 forward {
             get {
                 float endRotation = rotation + forwardOffsetRotation;
@@ -42,20 +44,17 @@ namespace PaddleBall {
         float scaleSize = 0.5f;
         public override void LoadContent(ContentManager Content)
         {
-            texturePath = "Images/Paddle";
+            texturePath = "Images/Paddle";            
+            base.LoadContent(Content);
+        }
+
+        public override void PostLoad() {
             radPerSec = degPerSec * (float)Math.PI / 180f;
             SetLayerDepth(0f);
             position = screenCenter;
             scale = Vector2.One * scaleSize;
             myCollider = new CircleCollider(Layer.Cannon, this, 120 * scaleSize);
-            base.LoadContent(Content);
-        }
 
-        public override void PostLoad() {
-            cannonBall = new CannonBall();
-            cannonBall.LoadContent(content);
-            cannonBall.PostLoad();
-            GameObject.allGameObjects.Add(cannonBall);
             base.PostLoad();
         }
 
@@ -98,8 +97,7 @@ namespace PaddleBall {
         }
         void Lose() {
             AudioManager.Instance.PlaySound(SoundFX.PaddleDeath);
-            AudioManager.Instance.StopMusic();
-            TextInputManager.Instance.AcceptText();
+            AudioManager.Instance.StopMusic();            
             PaddleBall.Instance.Lose();
             Destroy();
         }
@@ -111,10 +109,17 @@ namespace PaddleBall {
        
         float fireSpeed = 65f;
         void Fire() {
-            if (cannonBall.isAttached) {
-                AudioManager.Instance.PlaySound(SoundFX.Launch);
-                cannonBall.Launch(forward * fireSpeed, isClockWise);
-            }
+            cannonBall = new CannonBall(position + forward * 75);
+            cannonBall.LoadContent(content);
+            cannonBall.PostLoad();
+            cannonBall.Launch(forward * fireSpeed);
+
+            AudioManager.Instance.PlaySound(SoundFX.Launch);
+        }
+
+        public override void Destroy() {
+            Instance = null;
+            base.Destroy();
         }
 
     }

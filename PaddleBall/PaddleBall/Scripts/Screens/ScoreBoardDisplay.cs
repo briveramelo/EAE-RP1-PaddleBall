@@ -10,42 +10,53 @@ using System.Threading.Tasks;
 namespace PaddleBall{
 
     [Serializable]
-    public class Score : IComparable<Score> {
+    public class Score {
         public int score;
         public int rank;
         public string name;
-
-        ContentManager content;
-        Vector2 position { get { return new Vector2(720, 200 + rank * 70); } }
-        Vector2 scale;
-        SpriteFont spriteFont;
-
-        string displayText { get { return rank.ToString() + ". " + name + " " + score; } }
 
         public Score(int rank, int score, string name) {
             this.rank = rank;
             this.score = score;
             this.name = name;
         }
+    }
 
-        public int CompareTo(Score other) {
+
+    public class ScoreDisplay : IComparable<ScoreDisplay> {
+
+        public Score myScore;
+        ContentManager content;
+        public Vector2 position { get { return new Vector2(720, 200 + myScore.rank * 70); } }
+        Vector2 scale;
+        SpriteFont spriteFont;
+
+        string displayText { get { return myScore.rank.ToString() + ". " + myScore.name + " " + myScore.score; } }
+
+        public ScoreDisplay(Score score) {
+            myScore = score;
+        }
+
+        public int CompareTo(ScoreDisplay other) {
             if (other == null) {
                 return 1;
             }
-            int scoreDif = (int)other.score - (int)score;
+            int scoreDif = (int)other.myScore.score - (int)myScore.score;
 
             if (scoreDif != 0) {
                 return scoreDif;
             }
             else {
-                return other.score - score;
+                return other.myScore.score - myScore.score;
             }
         }        
 
         public void LoadContent(ContentManager Content) {
             content = Content;
-            spriteFont = content.Load<SpriteFont>("scoreboard");
+            spriteFont = content.Load<SpriteFont>("scoreboard");            
+        }
 
+        public void PostLoad() {
             scale = Vector2.One * (4f / 10f);
         }
 
@@ -54,27 +65,22 @@ namespace PaddleBall{
         }
     }
 
-    public class ScoreBoardDisplay {
+    public class HighScoreDisplay {
 
         int maxHighScores = 10;
-       
-        List<Score> highScores = new List<Score>() {
-            new Score(1, 1500, "CDE"),
-            new Score(2, 900, "KNZ"),
-            new Score(3, 800, "MNL"),
-            new Score(4, 700, "HDK"),
-            new Score(5, 600, "AKS"),
-            new Score(6, 500, "BRM"),
-            new Score(7, 400, "BOB"),
-            new Score(8, 300, "ASH"),
-            new Score(9, 200, "RYN"),
-            new Score(10, 100, "JSE")
-        };
-        private static ScoreBoardDisplay instance;
-        public static ScoreBoardDisplay Instance {
+
+        List<ScoreDisplay> highScores;
+        List<Score> GetAsScores() {
+            List<Score> scores = new List<Score>();
+            highScores.ForEach(score => scores.Add(score.myScore));
+            return scores;
+        }
+
+        private static HighScoreDisplay instance;
+        public static HighScoreDisplay Instance {
             get {
                 if (instance == null) {
-                    instance = new ScoreBoardDisplay();
+                    instance = new HighScoreDisplay();
                 }
                 return instance;
             }
@@ -86,24 +92,41 @@ namespace PaddleBall{
         SpriteFont spriteFont;
         public void LoadContent(ContentManager Content) {
             content = Content;
-            position = new Vector2(520, 100);
-            scale = Vector2.One * (7f/10f);
             spriteFont = content.Load<SpriteFont>("scoreboard");
+            LoadSavedScores();
             highScores.ForEach(score => score.LoadContent(Content));
         }
 
-        public void AddHighScore(Score newScore) {
-            highScores.Sort();
+        public void PostLoad() {
+            position = new Vector2(520, 100);
+            scale = Vector2.One * (7f/10f);
+            highScores.ForEach(score => score.PostLoad());
+        }
+
+        void LoadSavedScores() {
+            highScores = new List<ScoreDisplay>();
+            List<Score> scores = SaveDataManager.CopyCurrentDataSave().GetHighScores();
+            scores.ForEach(score => highScores.Add(new ScoreDisplay(score)));
+            SortScores();
+            Console.WriteLine("Loaded High scores");
+        }
+
+        public void AddHighScore(ScoreDisplay newScore) {
+            SortScores();
             bool isNewHighScore = highScores.LastOrDefault().CompareTo(newScore) > 0;
             if (isNewHighScore) {
                 highScores.RemoveAt(maxHighScores - 1);
                 highScores.Add(newScore);
-                highScores.Sort();
+                SortScores();
+                highScores.ForEach(score => Console.WriteLine(score.myScore.rank));
             }
-            for (int i = 0; i < maxHighScores; i++) {
-                highScores[i].rank = i + 1;
-            }
-            
+            SaveDataManager.Save(new DataSave(GetAsScores()));
+        }
+
+        void SortScores() {
+            highScores.Sort();
+            int i = 0;
+            highScores.ForEach(score => {score.myScore.rank = i + 1; i++;});
         }
 
         public void Draw(SpriteBatch spriteBatch) {

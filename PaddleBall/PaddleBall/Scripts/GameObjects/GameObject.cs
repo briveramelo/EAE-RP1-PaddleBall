@@ -31,6 +31,10 @@ namespace PaddleBall {
 
         }
 
+        public GameObject() {
+            allGameObjects.Add(this);
+        }
+
         protected Coroutiner myCoroutiner = new Coroutiner();
 
         

@@ -8,6 +8,9 @@ namespace PaddleBall {
         static int score;
         static int hitStreak;
         SpriteFont spriteFont;
+
+        public ScoreBoard() : base() { }
+
         public int GetScore() {
             return score;
         }
@@ -20,6 +23,7 @@ namespace PaddleBall {
                 }
                 return instance;
             }
+            set { instance = value; }
         }
 
         public void AddPoints() {
@@ -33,16 +37,22 @@ namespace PaddleBall {
 
         public override void LoadContent(ContentManager Content) {
             content = Content;
-            spriteFont = content.Load<SpriteFont>("scoreboard");
+            spriteFont = content.Load<SpriteFont>("scoreboard");            
+        }
+
+        public override void PostLoad() {
             position = new Vector2(100, 70);
-            scale = Vector2.One * (6f/10f);
+            scale = Vector2.One * (6f / 10f);
             score = 0;
             hitStreak = 0;
         }
-
-        public override void PostLoad() {}
         public override void Draw(SpriteBatch spriteBatch) {
             spriteBatch.DrawString(spriteFont, score.ToString(), position, Color.White,0,Vector2.Zero,scale, SpriteEffects.None, 0f);
+        }
+
+        public override void Destroy() {
+            Instance = null;
+            base.Destroy();
         }
 
 
