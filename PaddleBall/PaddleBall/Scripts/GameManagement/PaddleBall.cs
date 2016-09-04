@@ -28,7 +28,8 @@ namespace PaddleBall {
                 return instance;
             }
         }
-        public void Lose() {            
+
+        public void Lose() {
             LoadNewScreen(Screen.Title);
         }
 
@@ -62,6 +63,7 @@ namespace PaddleBall {
             AudioManager.Instance.LoadContent(Content);
             SaveDataManager.LoadContent(Content);
             LoadScores();
+            HighScoreDisplay.Instance.OnGameOpen();
 
             LoadGame();
         }
@@ -96,7 +98,14 @@ namespace PaddleBall {
             while (stopwatch.ElapsedMilliseconds < timeToPause * 1000) {
                 yield return null;
             }
-            TextInputManager.Instance.AcceptText();
+            if (HighScoreDisplay.Instance.IsNewHighScore(ScoreBoard.Instance.GetScore())) {
+                TextInputManager.Instance.LoadContent(Content);
+                TextInputManager.Instance.PostLoad();
+                while (TextInputManager.Instance.IsTyping()) {
+                    TextInputManager.Instance.Update();
+                    yield return null;
+                }
+            }
             stopwatch.Stop();
             ClearScreen();
             LoadTitle();
@@ -245,7 +254,9 @@ namespace PaddleBall {
         }
 
         void DrawGame() {
-
+            if (TextInputManager.Instance.IsTyping()) {
+                TextInputManager.Instance.Draw(spriteBatch);
+            }
         }
         #endregion
 

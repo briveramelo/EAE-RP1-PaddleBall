@@ -43,16 +43,16 @@ namespace PaddleBall{
     [Serializable]
     public class DataSave {
         List<Score> highScores = new List<Score>() {
-            new Score(1, 1500, "CDE"),
-            new Score(2, 900, "KNZ"),
-            new Score(3, 800, "MNL"),
-            new Score(4, 700, "HDK"),
-            new Score(5, 600, "AKS"),
-            new Score(6, 500, "BRM"),
-            new Score(7, 400, "BOB"),
-            new Score(8, 300, "ASH"),
-            new Score(9, 200, "RYN"),
-            new Score(10, 100, "JSE")
+            new Score(1, 1500, "CDE", false),
+            new Score(2, 900, "KNZ", false),
+            new Score(3, 800, "MNL", false),
+            new Score(4, 700, "HDK", false),
+            new Score(5, 600, "AKS", false),
+            new Score(6, 500, "BRM", false),
+            new Score(7, 400, "BOB", false),
+            new Score(8, 300, "ASH", false),
+            new Score(9, 200, "RYN", false),
+            new Score(10, 100, "JSE", false)
         };
 
         public List<Score> GetHighScores() {

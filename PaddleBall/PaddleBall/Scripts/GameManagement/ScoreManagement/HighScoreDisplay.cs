@@ -14,11 +14,13 @@ namespace PaddleBall{
         public int score;
         public int rank;
         public string name;
+        public bool isNewScore;
 
-        public Score(int rank, int score, string name) {
+        public Score(int rank, int score, string name, bool isNewScore) {
             this.rank = rank;
             this.score = score;
             this.name = name;
+            this.isNewScore = isNewScore;
         }
     }
 
@@ -30,11 +32,15 @@ namespace PaddleBall{
         public Vector2 position { get { return new Vector2(720, 200 + myScore.rank * 70); } }
         Vector2 scale;
         SpriteFont spriteFont;
+        Color displayColor { get { return myScore.isNewScore ? Color.Red : Color.White; } }
 
         string displayText { get { return myScore.rank.ToString() + ". " + myScore.name + " " + myScore.score; } }
 
         public ScoreDisplay(Score score) {
             myScore = score;
+        }
+        public void MarkAsNewScore() {
+            myScore.isNewScore = true;
         }
 
         public int CompareTo(ScoreDisplay other) {
@@ -46,10 +52,17 @@ namespace PaddleBall{
             if (scoreDif != 0) {
                 return scoreDif;
             }
-            else {
-                return other.myScore.score - myScore.score;
+            return other.myScore.score - myScore.score;
+        }
+
+        public int CompareToSimple(int otherScore) {            
+            int scoreDif = otherScore - myScore.score;
+
+            if (scoreDif != 0) {
+                return scoreDif;
             }
-        }        
+            return otherScore - myScore.score;
+        }
 
         public void LoadContent(ContentManager Content) {
             content = Content;
@@ -60,8 +73,16 @@ namespace PaddleBall{
             scale = Vector2.One * (4f / 10f);
         }
 
+        public void OnGameOpen() {
+            MarkAsNewScore();
+        }
+
+        public void MarkAsOldScore() {
+            myScore.isNewScore = false;
+        }
+
         public void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.DrawString(spriteFont, displayText, position, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(spriteFont, displayText, position, displayColor, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
     }
 
@@ -97,6 +118,10 @@ namespace PaddleBall{
             highScores.ForEach(score => score.LoadContent(Content));
         }
 
+        public void OnGameOpen() {
+            highScores.ForEach(score => score.OnGameOpen());
+        }
+
         public void PostLoad() {
             position = new Vector2(520, 100);
             scale = Vector2.One * (7f/10f);
@@ -108,18 +133,19 @@ namespace PaddleBall{
             List<Score> scores = SaveDataManager.CopyCurrentDataSave().GetHighScores();
             scores.ForEach(score => highScores.Add(new ScoreDisplay(score)));
             SortScores();
-            Console.WriteLine("Loaded High scores");
+        }
+
+        public bool IsNewHighScore(int newScore) {
+            return highScores.LastOrDefault().CompareToSimple(newScore) > 0;
         }
 
         public void AddHighScore(ScoreDisplay newScore) {
             SortScores();
-            bool isNewHighScore = highScores.LastOrDefault().CompareTo(newScore) > 0;
-            if (isNewHighScore) {
-                highScores.RemoveAt(maxHighScores - 1);
-                highScores.Add(newScore);
-                SortScores();
-                highScores.ForEach(score => Console.WriteLine(score.myScore.rank));
-            }
+            highScores.ForEach(score => score.MarkAsOldScore());
+            newScore.MarkAsNewScore();
+            highScores.RemoveAt(maxHighScores - 1);
+            highScores.Add(newScore);
+            SortScores();
             SaveDataManager.Save(new DataSave(GetAsScores()));
         }
 
