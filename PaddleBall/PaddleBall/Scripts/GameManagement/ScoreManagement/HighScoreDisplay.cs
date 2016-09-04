@@ -74,7 +74,7 @@ namespace PaddleBall{
         }
 
         public void OnGameOpen() {
-            MarkAsNewScore();
+            MarkAsOldScore();
         }
 
         public void MarkAsOldScore() {

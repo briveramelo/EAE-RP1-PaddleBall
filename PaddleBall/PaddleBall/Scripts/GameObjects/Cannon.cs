@@ -28,12 +28,9 @@ namespace PaddleBall {
         }
 
         private static Cannon instance;
-        public static Cannon Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
+        public static Cannon Instance{
+            get{
+                if (instance == null){
                     instance = new Cannon();
                 }
                 return instance;
@@ -42,8 +39,7 @@ namespace PaddleBall {
         }
 
         float scaleSize = 0.5f;
-        public override void LoadContent(ContentManager Content)
-        {
+        public override void LoadContent(ContentManager Content){
             texturePath = "Images/Paddle";            
             base.LoadContent(Content);
         }
@@ -60,8 +56,7 @@ namespace PaddleBall {
 
         KeyboardState lastKeyboardState;
         MouseState lastMouseState;
-        public override void Update(GameTime gameTime)
-        {
+        public override void Update(GameTime gameTime){
             KeyboardState keyboardState = Keyboard.GetState();
             MouseState mouseState = Mouse.GetState();
 

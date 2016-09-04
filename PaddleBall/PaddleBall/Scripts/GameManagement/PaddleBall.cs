@@ -65,7 +65,8 @@ namespace PaddleBall {
             LoadScores();
             HighScoreDisplay.Instance.OnGameOpen();
 
-            LoadGame();
+            //LoadGameScreen();
+            LoadTitleScreen();
         }
 
 
@@ -74,19 +75,25 @@ namespace PaddleBall {
             AudioManager.Instance.StopMusic();
             switch (newScreen) {
                 case Screen.Title:
-                    myCoroutiner.StartCoroutine(PauseAndSwitchToTitleScreen());
+                    if (ScreenManager.Instance.GetCurrentScreen() == Screen.Game) {
+                        myCoroutiner.StartCoroutine(TransitionFromGameToTitleScreen());
+                    }
+                    else {
+                        ClearScreen();
+                        LoadTitleScreen();
+                    }
                     break;
                 case Screen.Scores:
                     ClearScreen();
-                    LoadScores();
+                    LoadScoreScreen();
                     break;
                 case Screen.Game:
                     ClearScreen();
-                    LoadGame();
+                    LoadGameScreen();
                     break;
             }
         }
-        IEnumerator PauseAndSwitchToTitleScreen() {
+        IEnumerator TransitionFromGameToTitleScreen() {
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -108,7 +115,7 @@ namespace PaddleBall {
             }
             stopwatch.Stop();
             ClearScreen();
-            LoadTitle();
+            LoadTitleScreen();
         }
 
         void ClearScreen() {
@@ -116,9 +123,27 @@ namespace PaddleBall {
             CircleCollider.ClearColliders();
         }
 
-        void LoadTitle() {
+        void LoadTitleScreen() {
+            Vector2 scoreButtonPosition = new Vector2(760 - 100, 540+200);
+            Vector2 gameButtonPosition = new Vector2(1160 + 100, 540 + 200);
+
+            new MouseCursor();
+            new Button(Screen.Scores, scoreButtonPosition);
+            new Button(Screen.Game, gameButtonPosition);
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
+
             ScreenManager.Instance.SetCurrentScreen(Screen.Title);
             AudioManager.Instance.PlayBackgroundMusic(Screen.Title);
+        }
+
+        void LoadScoreScreen() {
+            new MouseCursor();
+            Vector2 buttonPos = new Vector2(400, ScreenManager.Instance.Dimensions.Y-300);
+            new Button(Screen.Title, buttonPos);
+            LoadScores();
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
         }
 
         void LoadScores() {
@@ -128,12 +153,12 @@ namespace PaddleBall {
             AudioManager.Instance.PlayBackgroundMusic(Screen.Scores);
         }
 
-        void LoadGame() {
+        void LoadGameScreen() {
             Cannon.Instance = new Cannon();
             Shield.Instance = new Shield();
             ScoreBoard.Instance = new ScoreBoard();
 
-            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));            
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScoreBoard.Instance.LoadContent(Content);
             EnemySpawner.Instance.LoadContent(Content);
 

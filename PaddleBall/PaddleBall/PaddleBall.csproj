@@ -58,6 +58,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\Components\RectangleD.cs" />
     <Compile Include="Scripts\Components\Colliders.cs" />
     <Compile Include="Scripts\GameManagement\AudioManager.cs" />
     <Compile Include="Scripts\GameManagement\ScoreManagement\SaveDataManager.cs" />
@@ -69,6 +70,8 @@
     <Compile Include="Scripts\GameManagement\Program.cs" />
     <Compile Include="Scripts\GameManagement\ScreenManagement\ScreenManager.cs" />
     <Compile Include="Scripts\GameObjects\CannonBall.cs" />
+    <Compile Include="Scripts\GameObjects\Buttons\Buttons.cs" />
+    <Compile Include="Scripts\GameObjects\MouseCursor.cs" />
     <Compile Include="Scripts\GameObjects\Shield.cs" />
     <Compile Include="Scripts\GameObjects\Enemy.cs" />
     <Compile Include="Scripts\GameObjects\GameObject.cs" />

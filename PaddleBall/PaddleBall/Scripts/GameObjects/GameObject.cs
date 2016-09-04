@@ -6,42 +6,14 @@ using System;
 using System.Collections;
 
 namespace PaddleBall {
-    public static class Globalvars
-    {
-        public static Texture2D test;
-        public static Rectangle testrec = new Rectangle(0, 0, 100, 100);
-        public static Vector2 testloc = new Vector2(235, 235);
-    }
+   
     public class GameObject {
-        public int Width
-        {
-            get { return texture.Width; }
-        }
-        public int Height
-        {
-            get { return texture.Height; }
-        }
-        public Rectangle BoundingBox
-        {
-            get
-            {
-                return new Rectangle((int)position.X, (int)position.Y, Width, Height);
-
-            }
-
-        }
-
         public GameObject() {
             allGameObjects.Add(this);
         }
 
-        protected Coroutiner myCoroutiner = new Coroutiner();
-
-        
+        protected Coroutiner myCoroutiner = new Coroutiner();        
         public static List<GameObject> allGameObjects = new List<GameObject>();
-        public static void ClearGameObjects() {
-            allGameObjects = new List<GameObject>();
-        }
 
         public Vector2 position;
         public Vector2 scale = new Vector2(1, 1);
@@ -57,6 +29,7 @@ namespace PaddleBall {
         protected Vector2 screenCenter = new Vector2(ScreenManager.Instance.Dimensions.X, ScreenManager.Instance.Dimensions.Y) / 2f;
         public SpriteEffects flip = SpriteEffects.None;
         public float rotation =0f;
+        
         public float layerDepth = 1f;
         public string texturePath;
 
@@ -122,6 +95,10 @@ namespace PaddleBall {
         public virtual void SetOriginInPixels(float x, float y) {
             originInPixels.X = x;
             originInPixels.Y = y;
+        }
+
+        public static void ClearGameObjects() {
+            allGameObjects = new List<GameObject>();
         }
 
         public virtual void Destroy() {
