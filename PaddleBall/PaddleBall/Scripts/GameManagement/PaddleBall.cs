@@ -121,6 +121,7 @@ namespace PaddleBall {
         void ClearScreen() {
             GameObject.ClearGameObjects();
             CircleCollider.ClearColliders();
+            CannonBall.numCannonBalls = 0;
         }
 
         void LoadTitleScreen() {

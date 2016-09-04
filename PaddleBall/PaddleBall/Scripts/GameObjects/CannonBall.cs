@@ -9,9 +9,10 @@ namespace PaddleBall {
 
         public CircleCollider myCollider;
         Vector2 velocity = Vector2.Zero;
-
+        public static int numCannonBalls;
         public CannonBall(Vector2 position) : base() {
             this.position = position;
+            numCannonBalls++;
         }
 
         float scaleSize = 1f;
@@ -41,6 +42,7 @@ namespace PaddleBall {
             CheckForCollision();
 
             if (Vector2.Distance(position, screenCenter) > distanceToDestroy) {
+                ScoreBoard.Instance.ReportMiss();
                 Destroy();
             }
             base.Update(gameTime);
@@ -58,6 +60,7 @@ namespace PaddleBall {
 
         public override void Destroy() {
             myCollider.Destroy();
+            numCannonBalls--;
             base.Destroy();
         }
     }

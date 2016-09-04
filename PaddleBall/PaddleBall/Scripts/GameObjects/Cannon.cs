@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System;
+using System.Collections;
+
 namespace PaddleBall {
 
     public class Cannon : GameObject
@@ -13,6 +15,7 @@ namespace PaddleBall {
         bool isClockWise = true;
         float degPerSec = 2f;
         float radPerSec;
+        int maxBalls;
 
         CircleCollider myCollider;
         float forwardOffsetRotation = (float)Math.PI / 2f;
@@ -50,6 +53,7 @@ namespace PaddleBall {
             position = screenCenter;
             scale = Vector2.One * scaleSize;
             myCollider = new CircleCollider(Layer.Cannon, this, 120 * scaleSize);
+            maxBalls = 2;
 
             base.PostLoad();
         }
@@ -70,7 +74,9 @@ namespace PaddleBall {
             if ((keyboardState.IsKeyDown(Keys.Space) && lastKeyboardState != keyboardState) ||
                 (mouseState.LeftButton == ButtonState.Pressed && lastMouseState!=mouseState)){
 
-                Fire();
+                if (CannonBall.numCannonBalls<maxBalls && !isPausedForDelay) {
+                    Fire();
+                }
             }
 
             CheckForCollision();
@@ -109,7 +115,21 @@ namespace PaddleBall {
             cannonBall.PostLoad();
             cannonBall.Launch(forward * fireSpeed);
 
+            myCoroutiner.StartCoroutine(PauseForFireDelay());
             AudioManager.Instance.PlaySound(SoundFX.Launch);
+        }
+
+        bool isPausedForDelay;
+        IEnumerator PauseForFireDelay() {
+            isPausedForDelay = true;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            float fireDelay = 0.1f;
+            while (stopwatch.ElapsedMilliseconds < fireDelay * 1000) {
+                yield return null;
+            }
+            stopwatch.Stop();
+            isPausedForDelay =false;
         }
 
         public override void Destroy() {
