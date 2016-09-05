@@ -55,7 +55,7 @@ namespace PaddleBall {
         }
 
         public void OnClick() {
-            PaddleBall.Instance.LoadNewScreen(screenToLoad);
+            GameManager.Instance.LoadNewScreen(screenToLoad);
         }
 
         public override void Draw(SpriteBatch spriteBatch) {

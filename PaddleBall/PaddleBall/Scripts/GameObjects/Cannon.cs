@@ -13,7 +13,7 @@ namespace PaddleBall {
     {
 
         bool isClockWise = true;
-        float degPerSec = 2f;
+        float degPerSec = 3.5f;
         float radPerSec;
         int maxBalls;
 
@@ -65,12 +65,17 @@ namespace PaddleBall {
             MouseState mouseState = Mouse.GetState();
 
             //rotate clockwise by default
-            if ( (((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) && isClockWise) ||
-                (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) && !isClockWise) && lastKeyboardState != keyboardState) {
-                SwitchDirection();
+            //if ( (((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) && isClockWise) ||
+            //    (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) && !isClockWise) && lastKeyboardState != keyboardState) {
+            //    SwitchDirection();
+            //}
+            if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) {
+                rotation += radPerSec;
             }
-            rotation += radPerSec;
-            SetRotation(rotation);
+            else if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)){
+                rotation -= radPerSec;
+            }
+
             if ((keyboardState.IsKeyDown(Keys.Space) && lastKeyboardState != keyboardState) ||
                 (mouseState.LeftButton == ButtonState.Pressed && lastMouseState!=mouseState)){
 
@@ -99,7 +104,7 @@ namespace PaddleBall {
         void Lose() {
             AudioManager.Instance.PlaySound(SoundFX.PaddleDeath);
             AudioManager.Instance.StopMusic();            
-            PaddleBall.Instance.Lose();
+            GameManager.Instance.Lose();
             Destroy();
         }
 

@@ -13,17 +13,17 @@ namespace PaddleBall {
     /// </summary>
     /// 
 
-    public class PaddleBall : Game {
+    public class GameManager : Game {
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Coroutiner myCoroutiner = new Coroutiner();
 
-        private static PaddleBall instance;
-        public static PaddleBall Instance {
+        private static GameManager instance;
+        public static GameManager Instance {
             get {
                 if (instance == null) {
-                    instance = new PaddleBall();
+                    instance = new GameManager();
                 }
                 return instance;
             }
@@ -34,7 +34,7 @@ namespace PaddleBall {
         }
 
         //Vector2 testEnemyLoc = new Vector2(8, 8);
-        public PaddleBall() {
+        public GameManager() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -183,17 +183,7 @@ namespace PaddleBall {
             KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Escape)) {
                 Exit();
-            }
-
-            ///////////////////////////////////////////////
-            //placeholder logic for moving between screens
-            if (keyboardState.IsKeyDown(Keys.R) && !lastKeyState.IsKeyDown(Keys.R)) {
-                LoadNewScreen(Screen.Game);
-            }
-            if (keyboardState.IsKeyDown(Keys.T) && !lastKeyState.IsKeyDown(Keys.T)) {
-                LoadNewScreen(Screen.Scores);
-            }
-            //////////////////////////////////////////////
+            }            
 
             UpdateCurrentScreen(gameTime);
             myCoroutiner.Update();
