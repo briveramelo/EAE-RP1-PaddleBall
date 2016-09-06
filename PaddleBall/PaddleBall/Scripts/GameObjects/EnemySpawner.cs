@@ -7,17 +7,26 @@ using System.Diagnostics;
 
 namespace PaddleBall
 {
+
+    public struct Range {
+        public float min, max;
+        public float diff { get { return Math.Abs(max - min); } }
+        public Range(float min, float max) {
+            this.min = min;
+            this.max = max;
+        }
+    }
     public class Round {
         public int round;
         public int enemyCount;
         public float enemySpeed;
-        public float timeBetweenSpawns;
-        public Round(int round, int enemyCount, float speed, float timeBetweenSpawn)
+        public Range timeRangeBetweenSpawns;
+        public Round(int round, int enemyCount, float speed, Range timeRangeBetweenSpawns)
         {
             this.round = round;
             this.enemyCount = enemyCount;
             this.enemySpeed = speed;
-            this.timeBetweenSpawns = timeBetweenSpawn;
+            this.timeRangeBetweenSpawns = timeRangeBetweenSpawns;
         }
     }
 
@@ -34,60 +43,65 @@ namespace PaddleBall
         }
         Coroutiner myCoroutiner = new Coroutiner();
         ContentManager content;
+        Random random = new Random();
+
         List<Round> rounds = new List<Round>() {
             //round, enCount, enSpeed, tbwtSpawn 
-            new Round(1, 2, 1f, 1f),
-            new Round(2, 3, 1.2f, 1f),
-            new Round(3, 4, 1.4f, 1f),
-            new Round(4, 4, 1.6f, .9f),
-            new Round(5, 5, 1.8f, .9f),
-            new Round(6, 5, 2f, .9f),
-            new Round(7, 7, 2.3f, .85f),
-            new Round(8, 10, 2.6f, .8f),
-            new Round(9, 10, 3f, .7f)
+            new Round(1, 3, 1.8f,   new Range(0.8f,     1f)),
+            new Round(2, 6, 2f,   new Range(1f,       1.2f)),
+            new Round(3, 9, 2.2f,     new Range(.95f,     1.05f)),
+            new Round(4, 12, 2.4f,   new Range(0.75f,    .95f)),
+            new Round(5, 12, 2.4f,   new Range(0.8f,     1f)),
+            new Round(6, 15, 2.6f,    new Range(0.6f,     .8f)),
+            new Round(7, 17, 2.8f,   new Range(0.6f,     .8f)),
+            new Round(8, 20, 3.0f,  new Range(0.6f,     .8f)),
+            new Round(9, 25, 3.2f,    new Range(0.5f,     .7f)),
+            new Round(10, 30, 3.4f,    new Range(0.45f,     .6f))
         };
-        int currentRound;
+        public int currentRound;
+        int currentRoundIndex;
         int currentEnemyCount;
 
         public void LoadContent(ContentManager Content) {
             content = Content;
             myCoroutiner.StopAllCoroutines();
-            currentRound = -1;
+            currentRoundIndex = -1;
+            currentRound = 0;
             currentEnemyCount = 0;
             myCoroutiner.StartCoroutine(StartNewRound());
         }
 
         IEnumerator StartNewRound() {
+            currentRoundIndex++;
             currentRound++;
-            if (currentRound >= rounds.Count) {
-                currentRound = rounds.Count-1;
+            if (currentRoundIndex >= rounds.Count) {
+                currentRoundIndex = rounds.Count-1;
             }
-            if (currentRound < rounds.Count) {
-                int numEnemiesToSpawn = rounds[currentRound].enemyCount;
-                List<Vector2> spawnSpots = GetProperlySpacedEnemySpawnAngles(numEnemiesToSpawn);
+            int numEnemiesToSpawn = rounds[currentRoundIndex].enemyCount;
+            List<Vector2> spawnSpots = GetProperlySpacedEnemySpawnAngles(numEnemiesToSpawn);
 
-                for (int i = 0; i < numEnemiesToSpawn; i++) {
-                    SpawnEnemy(spawnSpots[i]);
-
-                    Stopwatch stopwatch = new Stopwatch();
-                    stopwatch.Start();
-
-                    while (stopwatch.ElapsedMilliseconds < rounds[currentRound].timeBetweenSpawns * 1000) {
-                        yield return null;
-                    }
-                    stopwatch.Stop();
-
+            for (int i = 0; i < numEnemiesToSpawn; i++) {
+                SpawnEnemy(spawnSpots[i]);
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+                float timeToWait = random.Next(0, 100) * 0.01f * (rounds[currentRoundIndex].timeRangeBetweenSpawns.diff) + rounds[currentRoundIndex].timeRangeBetweenSpawns.min;
+                while (stopwatch.ElapsedMilliseconds < timeToWait * 1000) {
+                    yield return null;
                 }
+                stopwatch.Stop();
+
             }
         }
 
         Vector2 screenCenter = new Vector2(ScreenManager.Instance.Dimensions.X, ScreenManager.Instance.Dimensions.Y) / 2f;
-        List<Vector2> GetProperlySpacedEnemySpawnAngles(int enemyCount) {
+        List<Vector2> GetProperlySpacedEnemySpawnAngles(int numEnemiesToSpawn) {
             List<int> spawnAngles = new List<int>();
             List<Vector2> spawnPoints = new List<Vector2>();
-            List<Vector2> spawnPointsZero = new List<Vector2>();
             int closestAngle = 30;
-            for (int i = 0; i < enemyCount; i++) {
+            for (int i = 0; i < numEnemiesToSpawn; i++) {
+                if (i%6==0) {
+                    spawnAngles = new List<int>();
+                }
                 int randomAngle = random.Next(0, 360);
                 for (int j = 0; j < spawnAngles.Count; j++) {
                     int attemptNum = 0;
@@ -114,7 +128,7 @@ namespace PaddleBall
             newEnemy.LoadContent(content);
             newEnemy.PostLoad();
             newEnemy.position = spawnPoint;
-            newEnemy.SetVelocity(screenCenter - newEnemy.position, rounds[currentRound].enemySpeed);
+            newEnemy.SetVelocity(screenCenter - newEnemy.position, rounds[currentRoundIndex].enemySpeed);
             currentEnemyCount++;
         }
 
@@ -124,7 +138,5 @@ namespace PaddleBall
                 myCoroutiner.StartCoroutine(StartNewRound());
             }
         }
-        
-        Random random = new Random();
     }
 }

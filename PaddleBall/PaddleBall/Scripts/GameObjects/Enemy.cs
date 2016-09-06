@@ -58,7 +58,7 @@ namespace PaddleBall
         }
 
         public void TakeDamage() {
-            ScoreBoard.Instance.AddPoints();
+            ScoreBoard.Instance.AddPoints(Vector2.Distance(position, screenCenter));
             AudioManager.Instance.PlaySound(SoundFX.DestroyEnemy);
             health--;
             if (health <= 0) {

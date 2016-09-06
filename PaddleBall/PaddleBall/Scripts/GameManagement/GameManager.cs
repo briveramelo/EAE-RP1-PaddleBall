@@ -125,8 +125,8 @@ namespace PaddleBall {
         }
 
         void LoadTitleScreen() {
-            Vector2 scoreButtonPosition = new Vector2(760 - 100, 540+200);
-            Vector2 gameButtonPosition = new Vector2(1160 + 100, 540 + 200);
+            Vector2 scoreButtonPosition = new Vector2(760 - 100, 840);
+            Vector2 gameButtonPosition = new Vector2(1160 + 100, 840);
 
             new MouseCursor();
             new Button(Screen.Scores, scoreButtonPosition);
@@ -140,7 +140,7 @@ namespace PaddleBall {
 
         void LoadScoreScreen() {
             new MouseCursor();
-            Vector2 buttonPos = new Vector2(400, ScreenManager.Instance.Dimensions.Y-300);
+            Vector2 buttonPos = new Vector2(200, ScreenManager.Instance.Dimensions.Y-100);
             new Button(Screen.Title, buttonPos);
             LoadScores();
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
@@ -158,6 +158,9 @@ namespace PaddleBall {
             Cannon.Instance = new Cannon();
             Shield.Instance = new Shield();
             ScoreBoard.Instance = new ScoreBoard();
+            RoundDisplay roundDisplay = new RoundDisplay();
+            roundDisplay.LoadContent(Content);
+            roundDisplay.PostLoad();
 
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScoreBoard.Instance.LoadContent(Content);

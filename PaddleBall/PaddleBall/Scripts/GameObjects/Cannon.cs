@@ -9,11 +9,10 @@ using System.Collections;
 
 namespace PaddleBall {
 
-    public class Cannon : GameObject
-    {
+    public class Cannon : GameObject{
 
-        bool isClockWise = true;
-        float degPerSec = 3.5f;
+        float baseDegPerSec = 4f;
+        float slowDegPerSec = 2f;
         float radPerSec;
         int maxBalls;
 
@@ -41,15 +40,14 @@ namespace PaddleBall {
             set { instance = value; }
         }
 
-        float scaleSize = 0.5f;
         public override void LoadContent(ContentManager Content){
             texturePath = "Images/Paddle";            
             base.LoadContent(Content);
         }
 
         public override void PostLoad() {
-            radPerSec = degPerSec * (float)Math.PI / 180f;
-            SetLayerDepth(0f);
+            float scaleSize = 0.5f;
+            radPerSec = baseDegPerSec * (float)Math.PI / 180f;
             position = screenCenter;
             scale = Vector2.One * scaleSize;
             myCollider = new CircleCollider(Layer.Cannon, this, 120 * scaleSize);
@@ -64,21 +62,11 @@ namespace PaddleBall {
             KeyboardState keyboardState = Keyboard.GetState();
             MouseState mouseState = Mouse.GetState();
 
-            //rotate clockwise by default
-            //if ( (((keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) && isClockWise) ||
-            //    (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) && !isClockWise) && lastKeyboardState != keyboardState) {
-            //    SwitchDirection();
-            //}
-            if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) {
-                rotation += radPerSec;
-            }
-            else if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)){
-                rotation -= radPerSec;
-            }
+            HandleRotation(keyboardState);
+            
 
             if ((keyboardState.IsKeyDown(Keys.Space) && lastKeyboardState != keyboardState) ||
                 (mouseState.LeftButton == ButtonState.Pressed && lastMouseState!=mouseState)){
-
                 if (CannonBall.numCannonBalls<maxBalls && !isPausedForDelay) {
                     Fire();
                 }
@@ -91,6 +79,24 @@ namespace PaddleBall {
             base.Update(gameTime);
         }
 
+        void HandleRotation(KeyboardState keyboardState) {
+            if ((keyboardState.IsKeyDown(Keys.LeftControl) && lastKeyboardState.IsKeyUp(Keys.LeftControl)) ||
+                (keyboardState.IsKeyDown(Keys.LeftShift) && lastKeyboardState.IsKeyUp(Keys.LeftShift))) {
+                radPerSec = slowDegPerSec * (float)Math.PI / 180f;
+            }
+            else if ((keyboardState.IsKeyUp(Keys.LeftControl) && lastKeyboardState.IsKeyDown(Keys.LeftControl)) ||
+                (keyboardState.IsKeyUp(Keys.LeftShift) && lastKeyboardState.IsKeyDown(Keys.LeftShift))) {
+                radPerSec = baseDegPerSec * (float)Math.PI / 180f;
+            }
+
+            if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)) {
+                rotation += radPerSec;
+            }
+            else if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)) {
+                rotation -= radPerSec;
+            }
+        }
+
         void CheckForCollision() {
             CircleCollider overlappingCollider = myCollider.GetOverlappingCollider();
             if (overlappingCollider != null) {
@@ -101,18 +107,7 @@ namespace PaddleBall {
                 }
             }
         }
-        void Lose() {
-            AudioManager.Instance.PlaySound(SoundFX.PaddleDeath);
-            AudioManager.Instance.StopMusic();            
-            GameManager.Instance.Lose();
-            Destroy();
-        }
 
-        void SwitchDirection(){
-            isClockWise = !isClockWise;
-            radPerSec = -radPerSec;
-        }
-       
         float fireSpeed = 65f;
         void Fire() {
             cannonBall = new CannonBall(position + forward * 75);
@@ -123,6 +118,12 @@ namespace PaddleBall {
             myCoroutiner.StartCoroutine(PauseForFireDelay());
             AudioManager.Instance.PlaySound(SoundFX.Launch);
         }
+        void Lose() {
+            AudioManager.Instance.PlaySound(SoundFX.PaddleDeath);
+            AudioManager.Instance.StopMusic();            
+            GameManager.Instance.Lose();
+            Destroy();
+        }       
 
         bool isPausedForDelay;
         IEnumerator PauseForFireDelay() {
@@ -141,6 +142,5 @@ namespace PaddleBall {
             Instance = null;
             base.Destroy();
         }
-
     }
 }

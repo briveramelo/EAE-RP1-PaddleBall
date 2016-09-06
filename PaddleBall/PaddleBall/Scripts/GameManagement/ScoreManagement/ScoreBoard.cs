@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 namespace PaddleBall {
     class ScoreBoard : GameObject {
 
@@ -26,9 +26,15 @@ namespace PaddleBall {
             set { instance = value; }
         }
 
-        public void AddPoints() {
+        public void AddPoints(float distanceAway) {
             hitStreak += 1;
-            score += 10 * hitStreak;
+            //float minDistanceForFullPoints = 440;
+            //float distanceMultiplier = distanceAway / minDistanceForFullPoints;
+            //if (distanceMultiplier > 1) {
+            //    distanceMultiplier = 1;
+            //}
+            float distanceMultiplier = 1f;
+            score += (int)((10 * hitStreak) * distanceMultiplier);
         }
 
         public void ReportMiss() {
