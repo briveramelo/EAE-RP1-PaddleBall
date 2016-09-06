@@ -49,7 +49,7 @@ namespace PaddleBall {
         public override void PostLoad() {
             position = new Vector2(100, 70);
             scale = Vector2.One * (6f / 10f);
-            score = 0;
+            score = 8000;
             hitStreak = 0;
         }
         public override void Draw(SpriteBatch spriteBatch) {

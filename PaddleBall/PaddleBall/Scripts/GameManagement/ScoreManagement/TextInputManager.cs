@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,13 +33,13 @@ namespace PaddleBall {
         int currentNameLength;
         Keys[] validLetters;
         Vector2[] underScorePositions;
+        Vector2 timerPosition;
 
         public bool IsTyping() {
             return isTyping;
         }
         bool isTyping;
         bool underScoreIsShowing;
-
         private TextInputManager() {
             myCoroutiner = new Coroutiner();
             isTyping = false;
@@ -52,6 +53,7 @@ namespace PaddleBall {
                 namePosition + new Vector2(5 + spacing*1, 0),
                 namePosition + new Vector2(5 + spacing*2, 0),
             };
+            timerPosition = new Vector2(900,800);
             maxCharacters = 3;
             scale = Vector2.One * (6f / 10f);
             validLetters = new Keys[] {
@@ -92,9 +94,11 @@ namespace PaddleBall {
         public void PostLoad() {
             isTyping = true;
             underScoreIsShowing = true;
+            timeLeftToEnterName = 20;
             name = "";
             currentNameLength = 0;
             lastPressedKeys = new Keys[] { };
+            myCoroutiner.StopAllCoroutines();
             myCoroutiner.StartCoroutine(Flicker());
         }
         IEnumerator Flicker() {
@@ -109,6 +113,20 @@ namespace PaddleBall {
                 yield return null;
             }
             myCoroutiner.StartCoroutine(Flicker());
+            myCoroutiner.StartCoroutine(CountDown());
+        }
+
+        int timeLeftToEnterName;
+        IEnumerator CountDown() {
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            float timeToPause = timeLeftToEnterName;
+            while (stopwatch.ElapsedMilliseconds < timeToPause * 1000) {
+                timeLeftToEnterName = (int)Math.Floor((30-((float)stopwatch.ElapsedMilliseconds / 1000f)));
+                yield return null;
+            }
+            isTyping = false;
         }
 
         public void Update() {
@@ -168,6 +186,7 @@ namespace PaddleBall {
             if (underScoreIsShowing) {
                 spriteBatch.DrawString(spriteFont, "_", underScorePositions[currentNameLength], Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
             }
+            spriteBatch.DrawString(spriteFont, timeLeftToEnterName.ToString(), timerPosition, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
         }
 
     }

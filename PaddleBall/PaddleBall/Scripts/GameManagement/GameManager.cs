@@ -65,30 +65,27 @@ namespace PaddleBall {
             LoadScores();
             HighScoreDisplay.Instance.OnGameOpen();
 
-            //LoadGameScreen();
             LoadTitleScreen();
         }
 
 
         #region Load Screens
         public void LoadNewScreen(Screen newScreen) {
-            AudioManager.Instance.StopMusic();
+            
             switch (newScreen) {
                 case Screen.Title:
                     if (ScreenManager.Instance.GetCurrentScreen() == Screen.Game) {
+                        AudioManager.Instance.StopMusic();
                         myCoroutiner.StartCoroutine(TransitionFromGameToTitleScreen());
                     }
                     else {
-                        ClearScreen();
                         LoadTitleScreen();
                     }
                     break;
                 case Screen.Scores:
-                    ClearScreen();
                     LoadScoreScreen();
                     break;
                 case Screen.Game:
-                    ClearScreen();
                     LoadGameScreen();
                     break;
             }
@@ -107,14 +104,14 @@ namespace PaddleBall {
             }
             if (HighScoreDisplay.Instance.IsNewHighScore(ScoreBoard.Instance.GetScore())) {
                 TextInputManager.Instance.LoadContent(Content);
-                TextInputManager.Instance.PostLoad();
+                TextInputManager.Instance.PostLoad();                
+
                 while (TextInputManager.Instance.IsTyping()) {
                     TextInputManager.Instance.Update();
                     yield return null;
                 }
             }
             stopwatch.Stop();
-            ClearScreen();
             LoadTitleScreen();
         }
 
@@ -125,6 +122,7 @@ namespace PaddleBall {
         }
 
         void LoadTitleScreen() {
+            ClearScreen();
             Vector2 scoreButtonPosition = new Vector2(760 - 100, 840);
             Vector2 gameButtonPosition = new Vector2(1160 + 100, 840);
 
@@ -133,28 +131,30 @@ namespace PaddleBall {
             new Button(Screen.Game, gameButtonPosition);
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
-
+            if (ScreenManager.Instance.GetCurrentScreen() == Screen.Game) {
+                AudioManager.Instance.PlayBackgroundMusic(Screen.Title);
+            }
             ScreenManager.Instance.SetCurrentScreen(Screen.Title);
-            AudioManager.Instance.PlayBackgroundMusic(Screen.Title);
         }
 
         void LoadScoreScreen() {
+            ClearScreen();
             new MouseCursor();
             Vector2 buttonPos = new Vector2(200, ScreenManager.Instance.Dimensions.Y-100);
             new Button(Screen.Title, buttonPos);
             LoadScores();
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
+            ScreenManager.Instance.SetCurrentScreen(Screen.Scores);
         }
 
         void LoadScores() {
             HighScoreDisplay.Instance.LoadContent(Content);
-            HighScoreDisplay.Instance.PostLoad();
-            ScreenManager.Instance.SetCurrentScreen(Screen.Scores);
-            AudioManager.Instance.PlayBackgroundMusic(Screen.Scores);
+            HighScoreDisplay.Instance.PostLoad();            
         }
 
         void LoadGameScreen() {
+            ClearScreen();
             Cannon.Instance = new Cannon();
             Shield.Instance = new Shield();
             ScoreBoard.Instance = new ScoreBoard();
@@ -200,13 +200,13 @@ namespace PaddleBall {
             
             switch (ScreenManager.Instance.GetCurrentScreen()) {
                 case Screen.Title:
-                    RunTitle(gameTime);
+                    UpdateTitleScreen(gameTime);
                     break;
                 case Screen.Scores:
-                    RunScores(gameTime);
+                    UpdateScoreScreen(gameTime);
                     break;
                 case Screen.Game:
-                    RunGame(gameTime);
+                    UpdateGameScreen(gameTime);
                     break;
             }
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
@@ -216,15 +216,15 @@ namespace PaddleBall {
             }
         }
 
-        void RunTitle(GameTime gameTime) {
+        void UpdateTitleScreen(GameTime gameTime) {
 
         }
 
-        void RunScores(GameTime gameTime) {
+        void UpdateScoreScreen(GameTime gameTime) {
             
         }
 
-        void RunGame(GameTime gameTime) {
+        void UpdateGameScreen(GameTime gameTime) {
             EnemySpawner.Instance.Update();
             //AudioManager.Instance.Update();        
         }

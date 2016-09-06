@@ -82,11 +82,10 @@ namespace PaddleBall{
             backgroundMusics = new List<Song>() {
                 content.Load<Song>("SoundFX/Tunes/LevelMusic_1"),
                 content.Load<Song>("SoundFX/Tunes/LevelMusic_2"),
-                content.Load<Song>("SoundFX/Tunes/LevelMusic_3"),
+                content.Load<Song>("SoundFX/Tunes/LevelMusic_3")
             };
 
-            //BeginGameMusic();
-            LoopGameMusic();
+            PlayBackgroundMusic(ScreenManager.Instance.GetCurrentScreen());
         }
 
         public void PlayBackgroundMusic(Screen screen) {
@@ -107,6 +106,7 @@ namespace PaddleBall{
                     LoopGameMusic();
                     break;
             }
+            MediaPlayer.Volume = 0.8f;
         }
 
         public void StopMusic() {
@@ -122,6 +122,7 @@ namespace PaddleBall{
         bool looping;
         void LoopGameMusic() {
             MediaPlayer.Play(backgroundMusics[0]);
+            MediaPlayer.Volume = 0.8f;
             MediaPlayer.IsRepeating = true;
             looping = true;
         }
