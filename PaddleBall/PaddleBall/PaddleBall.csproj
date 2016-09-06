@@ -61,6 +61,7 @@
     <Compile Include="Scripts\Components\Animation.cs" />
     <Compile Include="Scripts\Components\RectangleD.cs" />
     <Compile Include="Scripts\Components\Colliders.cs" />
+    <Compile Include="Scripts\GameObjects\BackgroundPulse.cs" />
     <Compile Include="Scripts\GameObjects\RoundDisplay.cs" />
     <Compile Include="Scripts\GameManagement\AudioManager.cs" />
     <Compile Include="Scripts\GameManagement\ScoreManagement\SaveDataManager.cs" />

@@ -28,7 +28,7 @@ namespace PaddleBall {
     public class Animation {
         Texture2D spriteSheet;
         Rectangle[] sourceRectangles;
-        int currentSourceRectIndex;
+        public int currentSourceRectIndex;
         ContentManager content;
         string spriteSheetPath;
         SpriteSheetSpecs spriteSheetSpecs;
@@ -42,6 +42,7 @@ namespace PaddleBall {
 
         public void LoadContent(ContentManager Content) {
             content = Content;
+            Console.WriteLine(spriteSheetPath);
             spriteSheet = content.Load<Texture2D>(spriteSheetPath);
         }
 
@@ -52,7 +53,7 @@ namespace PaddleBall {
                 if (frame % spriteSheetSpecs.framesPerRow == 0 && frame!=0) {
                     row++;
                 }
-                sourceRectangles[frame] = new Rectangle(frame * (spriteSheetSpecs.width+spriteSheetSpecs.xGap), row * (spriteSheetSpecs.height+spriteSheetSpecs.yGap), spriteSheetSpecs.width, spriteSheetSpecs.height);
+                sourceRectangles[frame] = new Rectangle((frame% spriteSheetSpecs.framesPerRow) * (spriteSheetSpecs.width+spriteSheetSpecs.xGap), row * (spriteSheetSpecs.height+spriteSheetSpecs.yGap), spriteSheetSpecs.width, spriteSheetSpecs.height);
             }
         }
 
@@ -60,9 +61,11 @@ namespace PaddleBall {
         public void Draw(SpriteBatch spriteBatch) {
             if (gameFramesOnCurrentAnimFrame > spriteSheetSpecs.numGameFramesPerAnimFrame) {
                 currentSourceRectIndex++;
+                
                 if (currentSourceRectIndex >= spriteSheetSpecs.numFrames) {
                     currentSourceRectIndex = 0;
                 }
+                Console.WriteLine(sourceRectangles[currentSourceRectIndex]);
                 gameFramesOnCurrentAnimFrame = 0;
             }
             spriteBatch.Draw(spriteSheet, parentGameObject.position, sourceRectangles[currentSourceRectIndex], Color.White, parentGameObject.rotation, parentGameObject.originInPixels, parentGameObject.scale, parentGameObject.flip, parentGameObject.layerDepth);

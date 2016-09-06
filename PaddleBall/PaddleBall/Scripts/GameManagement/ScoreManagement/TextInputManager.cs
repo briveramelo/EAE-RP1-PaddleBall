@@ -123,7 +123,7 @@ namespace PaddleBall {
             stopwatch.Start();
             float timeToPause = timeLeftToEnterName;
             while (stopwatch.ElapsedMilliseconds < timeToPause * 1000) {
-                timeLeftToEnterName = (int)Math.Floor((30-((float)stopwatch.ElapsedMilliseconds / 1000f)));
+                timeLeftToEnterName = (int)Math.Floor((timeLeftToEnterName - ((float)stopwatch.ElapsedMilliseconds / 1000f)));
                 yield return null;
             }
             isTyping = false;

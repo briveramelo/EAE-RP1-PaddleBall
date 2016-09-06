@@ -18,6 +18,7 @@ namespace PaddleBall {
 
         public Vector2 Dimensions = new Vector2(1920, 1080);
         public ContentManager Content;
+        BackgroundPulse backgroundPulse;
 
         Screen currentScreen = Screen.Scores;
         public void SetCurrentScreen(Screen newScreen) {
@@ -26,12 +27,7 @@ namespace PaddleBall {
         public Screen GetCurrentScreen() {
             return currentScreen;
         }
-        Dictionary<Screen, GameScreen> gameScreens = new Dictionary<Screen, GameScreen>() {
-            {  Screen.Title, new GameScreen("Images/RP1-1") },
-            {  Screen.Scores, new GameScreen("Images/blackground") },
-            {  Screen.Game, new GameScreen("Images/BACKGROUND2") }
-        };
-
+        Dictionary<Screen, GameScreen> gameScreens;
         private static ScreenManager instance;
         public static ScreenManager Instance {
             get {
@@ -44,9 +40,17 @@ namespace PaddleBall {
 
         public void LoadContent(ContentManager Content) {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
+            gameScreens = new Dictionary<Screen, GameScreen>() {
+                {  Screen.Title, new GameScreen("Images/RP1-1") },
+                {  Screen.Scores, new GameScreen("Images/blackground") },
+                {  Screen.Game, new GameScreen("Images/darker_background") }
+            };
             for (int i = 0; i < 3; i++){
                 gameScreens[(Screen)i].LoadContent(Content);
             }
+            //backgroundPulse = new BackgroundPulse();
+            //backgroundPulse.LoadContent(Content);
+            //backgroundPulse.PostLoad();
         }
 
         public void UnloadContent() {
@@ -55,6 +59,9 @@ namespace PaddleBall {
 
         public void Draw(SpriteBatch spriteBatch) {
             gameScreens[currentScreen].Draw(spriteBatch);
+            if (currentScreen == Screen.Game) {
+                //backgroundPulse.Draw(spriteBatch);
+            }
         }
     }
 }
