@@ -94,7 +94,8 @@ namespace PaddleBall {
         public void PostLoad() {
             isTyping = true;
             underScoreIsShowing = true;
-            timeLeftToEnterName = 20;
+            timeToEnterName = 20;
+            timeLeftToEnterName = timeToEnterName;
             name = "";
             currentNameLength = 0;
             lastPressedKeys = new Keys[] { };
@@ -117,13 +118,15 @@ namespace PaddleBall {
         }
 
         int timeLeftToEnterName;
+        int timeToEnterName;
         IEnumerator CountDown() {
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            float timeToPause = timeLeftToEnterName;
+            float timeToPause = timeToEnterName;
+            timeLeftToEnterName = timeToEnterName;
             while (stopwatch.ElapsedMilliseconds < timeToPause * 1000) {
-                timeLeftToEnterName = (int)Math.Floor((timeLeftToEnterName - ((float)stopwatch.ElapsedMilliseconds / 1000f)));
+                timeLeftToEnterName = (int)Math.Floor((timeToEnterName - ((float)stopwatch.ElapsedMilliseconds / 1000f)));
                 yield return null;
             }
             isTyping = false;
