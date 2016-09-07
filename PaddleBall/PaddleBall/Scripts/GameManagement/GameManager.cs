@@ -36,6 +36,7 @@ namespace PaddleBall {
         //Vector2 testEnemyLoc = new Vector2(8, 8);
         public GameManager() {
             graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
