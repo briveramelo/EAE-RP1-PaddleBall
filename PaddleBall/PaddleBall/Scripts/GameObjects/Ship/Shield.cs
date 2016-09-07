@@ -12,7 +12,9 @@ namespace PaddleBall {
     public class Shield : GameObject {
 
         CircleCollider myCollider;
-        List<Texture2D> textures = new List<Texture2D>();
+        List<Animation> shieldAnimations;
+        SpriteSheetSpecs spriteSheetSpecs;
+
         int health = 3;
 
         public Shield() : base() { }
@@ -31,9 +33,13 @@ namespace PaddleBall {
         float scaleSize = 0.5f;
         public override void LoadContent(ContentManager Content) {
             content = Content;
-            textures.Add(content.Load<Texture2D>("Images/RED_BARRIER"));
-            textures.Add(content.Load<Texture2D>("Images/ORANGE_BARRIER"));
-            textures.Add(content.Load<Texture2D>("Images/Barrier"));
+            spriteSheetSpecs = new SpriteSheetSpecs(750, 750, 17, 5, 3, 0, 0);
+            shieldAnimations = new List<Animation>();
+            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/spritesheets/RedShieldPulseOne"));
+            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/spritesheets/OrangeShieldPulseOne"));
+            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/spritesheets/YellowShieldPulseOne"));
+            shieldAnimations.ForEach(anim => anim.LoadContent(Content));
+            shieldAnimations.ForEach(anim => anim.PostLoad());
         }
 
         public override void PostLoad() {
@@ -41,7 +47,7 @@ namespace PaddleBall {
             scale = Vector2.One * scaleSize;
             myCollider = new CircleCollider(Layer.Shield, this, 350 * scaleSize);
             position = screenCenter;
-            SetOriginInPixels(textures[health-1].Width / 2, textures[health - 1].Height / 2);
+            SetOriginInPixels(spriteSheetSpecs.width/ 2, spriteSheetSpecs.height / 2);
         }
 
         public override void Update(GameTime gameTime) {
@@ -66,7 +72,8 @@ namespace PaddleBall {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(textures[health-1], position, null, color, rotation, originInPixels, scale, flip, layerDepth);
+            shieldAnimations[health - 1].Draw(spriteBatch);
+            //spriteBatch.Draw(textures[health-1], position, null, color, rotation, originInPixels, scale, flip, layerDepth);
         }
 
         public override void Destroy() {
