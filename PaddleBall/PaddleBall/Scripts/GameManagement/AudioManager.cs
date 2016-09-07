@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace PaddleBall{
@@ -46,7 +47,7 @@ namespace PaddleBall{
         /// the soundFX dictionary provides access to lists of SoundEffects by type of SoundFX for simple shuffling
         /// </summary>
         Dictionary<SoundFX, List<SoundEffect>> soundFX;
-        List<Song> backgroundMusics;
+        Song title, game;
         ContentManager content;
         public void LoadContent(ContentManager Content) {
             content = Content;
@@ -79,52 +80,30 @@ namespace PaddleBall{
                     content.Load<SoundEffect>("SoundFX/Shieldhit")
                 } }
             };
-            backgroundMusics = new List<Song>() {
-                content.Load<Song>("SoundFX/Tunes/LevelMusic_1"),
-                content.Load<Song>("SoundFX/Tunes/LevelMusic_2"),
-                content.Load<Song>("SoundFX/Tunes/LevelMusic_3")
-            };
-
+            title = content.Load<Song>("SoundFX/Tunes/Title");
+            game = content.Load<Song>("SoundFX/Tunes/Game");
             PlayBackgroundMusic(ScreenManager.Instance.GetCurrentScreen());
         }
 
-        public void PlayBackgroundMusic(Screen screen) {
-            //MediaPlayer.Play(backgroundMusics[0]);
-            //looping = false;
-            switch (screen) {
-                case Screen.Title:
-                    MediaPlayer.Play(backgroundMusics[1]);
-                    MediaPlayer.IsRepeating = true;
-                    looping = true;
-                    break;
-                case Screen.Scores:
-                    MediaPlayer.Play(backgroundMusics[1]);
-                    MediaPlayer.IsRepeating = true;
-                    looping = true;
-                    break;
-                case Screen.Game:
-                    LoopGameMusic();
-                    break;
-            }
-            MediaPlayer.Volume = 0.8f;
-        }
 
         public void StopMusic() {
             MediaPlayer.Stop();
         }
-       
-        public void Update() {
-            if (MediaPlayer.State == MediaState.Stopped && !looping) {
-                LoopGameMusic();
-            }
-        }
 
-        bool looping;
-        void LoopGameMusic() {
-            MediaPlayer.Play(backgroundMusics[0]);
+        public void PlayBackgroundMusic(Screen screen) {
+            switch (screen) {
+                case Screen.Title:
+                    MediaPlayer.Play(title);
+                    break;
+                case Screen.Scores:
+                    MediaPlayer.Play(title);
+                    break;
+                case Screen.Game:
+                    MediaPlayer.Play(game);
+                    break;
+            }
             MediaPlayer.Volume = 0.8f;
             MediaPlayer.IsRepeating = true;
-            looping = true;
         }
 
         /// <summary>

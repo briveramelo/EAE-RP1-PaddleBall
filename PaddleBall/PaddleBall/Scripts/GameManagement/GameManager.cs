@@ -36,7 +36,7 @@ namespace PaddleBall {
         //Vector2 testEnemyLoc = new Vector2(8, 8);
         public GameManager() {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -65,7 +65,6 @@ namespace PaddleBall {
             SaveDataManager.LoadContent(Content);
             LoadScores();
             HighScoreDisplay.Instance.OnGameOpen();
-
             LoadTitleScreen();
         }
 
@@ -120,6 +119,7 @@ namespace PaddleBall {
             GameObject.ClearGameObjects();
             CircleCollider.ClearColliders();
             CannonBall.numCannonBalls = 0;
+            Debugger.Instance = null;
         }
 
         void LoadTitleScreen() {
@@ -132,7 +132,7 @@ namespace PaddleBall {
             new Button(Screen.Game, gameButtonPosition);
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
-            if (ScreenManager.Instance.GetCurrentScreen() == Screen.Game) {
+            if (ScreenManager.Instance.GetCurrentScreen() != Screen.Scores) {
                 AudioManager.Instance.PlayBackgroundMusic(Screen.Title);
             }
             ScreenManager.Instance.SetCurrentScreen(Screen.Title);
@@ -159,17 +159,17 @@ namespace PaddleBall {
             Cannon.Instance = new Cannon();
             Shield.Instance = new Shield();
             ScoreBoard.Instance = new ScoreBoard();
-            RoundDisplay roundDisplay = new RoundDisplay();
-            roundDisplay.LoadContent(Content);
-            roundDisplay.PostLoad();
+            new RoundDisplay();
 
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             ScoreBoard.Instance.LoadContent(Content);
             EnemySpawner.Instance.LoadContent(Content);
+            Debugger.Instance.LoadContent(Content);
 
             Cannon.Instance.PostLoad();
             Shield.Instance.PostLoad();
             ScoreBoard.Instance.PostLoad();
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
 
             AudioManager.Instance.PlayBackgroundMusic(Screen.Game);
             ScreenManager.Instance.SetCurrentScreen(Screen.Game);
@@ -187,8 +187,8 @@ namespace PaddleBall {
             KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Escape)) {
                 Exit();
-            }            
-
+            }
+            
             UpdateCurrentScreen(gameTime);
             myCoroutiner.Update();
 
@@ -198,7 +198,6 @@ namespace PaddleBall {
 
         #region Update Screens
         void UpdateCurrentScreen(GameTime gameTime) {
-            
             switch (ScreenManager.Instance.GetCurrentScreen()) {
                 case Screen.Title:
                     UpdateTitleScreen(gameTime);
@@ -227,7 +226,7 @@ namespace PaddleBall {
 
         void UpdateGameScreen(GameTime gameTime) {
             EnemySpawner.Instance.Update();
-            //AudioManager.Instance.Update();        
+            Debugger.Instance.Update();
         }
         #endregion
 
@@ -277,6 +276,7 @@ namespace PaddleBall {
             if (TextInputManager.Instance.IsTyping()) {
                 TextInputManager.Instance.Draw(spriteBatch);
             }
+            Debugger.Instance.Draw(spriteBatch);
         }
         #endregion
 

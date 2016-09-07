@@ -175,6 +175,30 @@
 /processorParam:TextureFormat=Color
 /build:Images/TempBall.png
 
+#begin Images/darker_background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/darker_background.png
+
+#begin Images/powersurgetest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/powersurgetest.png
+
 #begin SoundFX/Bounces/Bounce1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -247,23 +271,41 @@
 /processorParam:Quality=Best
 /build:SoundFX/Launches/Launch4.wav
 
-#begin SoundFX/Tunes/LevelMusic_1.mp3
+#begin SoundFX/Tunes/Game.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:SoundFX/Tunes/LevelMusic_1.mp3
+/build:SoundFX/Tunes/Game.mp3
 
-#begin SoundFX/Tunes/LevelMusic_2.mp3
+#begin SoundFX/Tunes/Game_Intro.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:SoundFX/Tunes/LevelMusic_2.mp3
+/build:SoundFX/Tunes/Game_Intro.mp3
 
-#begin SoundFX/Tunes/LevelMusic_3.mp3
+#begin SoundFX/Tunes/Game_Loop.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:SoundFX/Tunes/LevelMusic_3.mp3
+/build:SoundFX/Tunes/Game_Loop.mp3
+
+#begin SoundFX/Tunes/Title.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Tunes/Title.mp3
+
+#begin SoundFX/Tunes/Title_Intro.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Tunes/Title_Intro.mp3
+
+#begin SoundFX/Tunes/Title_Loop.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Tunes/Title_Loop.mp3
 
 #begin SoundFX/PaddleDeath.wav
 /importer:WavImporter
@@ -283,19 +325,13 @@
 /processorParam:Quality=Best
 /build:SoundFX/Shieldhit.wav
 
-#begin Images/darker_background.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/darker_background.png
+#begin SoundFX/Title_Loop_Adjusted.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:SoundFX/Title_Loop_Adjusted.mp3
 
-#begin Images/powersurgetest.png
+#begin Images/spritesheets/COMPUTER BUG BACK WALK TAKE ONE.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -305,5 +341,89 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/powersurgetest.png
+/build:Images/spritesheets/COMPUTER BUG BACK WALK TAKE ONE.png
+
+#begin Images/spritesheets/enemy back death take one.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/spritesheets/enemy back death take one.png
+
+#begin Images/spritesheets/enemy walk test two.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/spritesheets/enemy walk test two.png
+
+#begin Images/spritesheets/Front Death One.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/spritesheets/Front Death One.png
+
+#begin Images/spritesheets/Orange Barrier Pulse One.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/spritesheets/Orange Barrier Pulse One.png
+
+#begin Images/spritesheets/PowerSurgeTakeTwo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/spritesheets/PowerSurgeTakeTwo.png
+
+#begin Images/spritesheets/red barrier pulse one.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/spritesheets/red barrier pulse one.png
+
+#begin Images/spritesheets/yellow barrier pulse one.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/spritesheets/yellow barrier pulse one.png
 
