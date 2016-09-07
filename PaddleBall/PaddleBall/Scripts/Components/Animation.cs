@@ -33,6 +33,7 @@ namespace PaddleBall {
         string spriteSheetPath;
         SpriteSheetSpecs spriteSheetSpecs;
         GameObject parentGameObject;
+        public int loopNumber;
 
         public Animation(GameObject parentGameObject, SpriteSheetSpecs spriteSheetSpecs, string spriteSheetPath) {
             this.parentGameObject = parentGameObject;
@@ -42,11 +43,11 @@ namespace PaddleBall {
 
         public void LoadContent(ContentManager Content) {
             content = Content;
-            Console.WriteLine(spriteSheetPath);
             spriteSheet = content.Load<Texture2D>(spriteSheetPath);
         }
 
         public void PostLoad() {
+            loopNumber = 0;
             sourceRectangles = new Rectangle[spriteSheetSpecs.numFrames];
             int row = 0;
             for (int frame = 0; frame < spriteSheetSpecs.numFrames; frame++) {
@@ -57,6 +58,12 @@ namespace PaddleBall {
             }
         }
 
+        public void Reset() {
+            currentSourceRectIndex = 0;
+            loopNumber = 0;
+            gameFramesOnCurrentAnimFrame = 0;
+        }
+
         int gameFramesOnCurrentAnimFrame;
         public void Draw(SpriteBatch spriteBatch) {
             if (gameFramesOnCurrentAnimFrame > spriteSheetSpecs.numGameFramesPerAnimFrame) {
@@ -65,7 +72,9 @@ namespace PaddleBall {
                 if (currentSourceRectIndex >= spriteSheetSpecs.numFrames) {
                     currentSourceRectIndex = 0;
                 }
-                Console.WriteLine(sourceRectangles[currentSourceRectIndex]);
+                if (currentSourceRectIndex == spriteSheetSpecs.numFrames - 1) {
+                    loopNumber++;
+                }
                 gameFramesOnCurrentAnimFrame = 0;
             }
             spriteBatch.Draw(spriteSheet, parentGameObject.position, sourceRectangles[currentSourceRectIndex], Color.White, parentGameObject.rotation, parentGameObject.originInPixels, parentGameObject.scale, parentGameObject.flip, parentGameObject.layerDepth);

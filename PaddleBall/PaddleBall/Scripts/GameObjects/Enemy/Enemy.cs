@@ -42,7 +42,7 @@ namespace PaddleBall
         public void SetVelocity(Vector2 moveDir, float moveSpeed)
         {
             Vector2 normalizedMoveDir = Vector2.Normalize(moveDir);
-            this.velocity = normalizedMoveDir * moveSpeed;
+            this.velocity = normalizedMoveDir *moveSpeed;
             float degToRad = (float)Math.PI / 180f;
             rotation = (float)Math.Atan2(normalizedMoveDir.Y, normalizedMoveDir.X) - 90f* degToRad;
         }

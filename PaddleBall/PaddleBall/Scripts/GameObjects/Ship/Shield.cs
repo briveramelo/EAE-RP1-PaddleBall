@@ -59,6 +59,7 @@ namespace PaddleBall {
         void TakeDamage() {
             AudioManager.Instance.PlaySound(SoundFX.ShieldHit);
             health--;
+            PulseManager.Instance.Animate();
             if (health == 0) {
                 Destroy();
             }

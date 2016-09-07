@@ -63,6 +63,7 @@ namespace PaddleBall {
             ScreenManager.Instance.LoadContent(Content);
             AudioManager.Instance.LoadContent(Content);
             SaveDataManager.LoadContent(Content);
+            PulseManager.Instance.LoadContent(Content);
             LoadScores();
             HighScoreDisplay.Instance.OnGameOpen();
             LoadTitleScreen();
@@ -70,8 +71,7 @@ namespace PaddleBall {
 
 
         #region Load Screens
-        public void LoadNewScreen(Screen newScreen) {
-            
+        public void LoadNewScreen(Screen newScreen) {            
             switch (newScreen) {
                 case Screen.Title:
                     if (ScreenManager.Instance.GetCurrentScreen() == Screen.Game) {
@@ -130,6 +130,13 @@ namespace PaddleBall {
             new MouseCursor();
             new Button(Screen.Scores, scoreButtonPosition);
             new Button(Screen.Game, gameButtonPosition);
+
+            for (int i = 0; i < 4; i++) {
+                BackgroundPulse bg = new BackgroundPulse();
+                bg.myPulseIndex = i;
+            }
+
+
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
             if (ScreenManager.Instance.GetCurrentScreen() != Screen.Scores) {
@@ -156,6 +163,7 @@ namespace PaddleBall {
 
         void LoadGameScreen() {
             ClearScreen();
+            PulseManager.Instance.Reset();
             Cannon.Instance = new Cannon();
             Shield.Instance = new Shield();
             ScoreBoard.Instance = new ScoreBoard();
@@ -276,6 +284,7 @@ namespace PaddleBall {
             if (TextInputManager.Instance.IsTyping()) {
                 TextInputManager.Instance.Draw(spriteBatch);
             }
+            PulseManager.Instance.Draw(spriteBatch);
             Debugger.Instance.Draw(spriteBatch);
         }
         #endregion
