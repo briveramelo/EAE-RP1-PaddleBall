@@ -63,6 +63,8 @@
     <Compile Include="Scripts\Components\Colliders.cs" />
     <Compile Include="Scripts\GameObjects\Animations\BackgroundPulse.cs" />
     <Compile Include="Scripts\GameObjects\Animations\BugDeathAnimation.cs" />
+    <Compile Include="Scripts\GameObjects\Animations\MegaLaserAnimation.cs" />
+    <Compile Include="Scripts\GameObjects\Animations\ShipExplosion.cs" />
     <Compile Include="Scripts\GameObjects\Animations\PulseManager.cs" />
     <Compile Include="Scripts\GameObjects\Debugger.cs" />
     <Compile Include="Scripts\GameObjects\RoundDisplay.cs" />
@@ -78,7 +80,7 @@
     <Compile Include="Scripts\GameObjects\Ship\CannonBall.cs" />
     <Compile Include="Scripts\GameObjects\Buttons\Buttons.cs" />
     <Compile Include="Scripts\GameObjects\MouseCursor.cs" />
-    <Compile Include="Scripts\GameObjects\Ship\Laser.cs" />
+    <Compile Include="Scripts\GameObjects\Ship\MegaLaserCollider.cs" />
     <Compile Include="Scripts\GameObjects\Ship\Shield.cs" />
     <Compile Include="Scripts\GameObjects\Enemy\Enemy.cs" />
     <Compile Include="Scripts\GameObjects\GameObject.cs" />

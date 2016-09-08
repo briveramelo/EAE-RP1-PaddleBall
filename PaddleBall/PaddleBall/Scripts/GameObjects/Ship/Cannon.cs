@@ -17,10 +17,11 @@ namespace PaddleBall
         float slowDegPerSec = 2f;
         float radPerSec;
         int maxBalls;
-        public bool checkLaserState = false;
+        public bool isMegaLaserFirable = false;
         CircleCollider myCollider;
         float forwardOffsetRotation = (float)Math.PI / 2f;
         CannonBall cannonBall;
+        MegaLaserAnimation megaLaserAnimation;
 
         public Cannon() : base() { }
 
@@ -62,6 +63,13 @@ namespace PaddleBall
             myCollider = new CircleCollider(Layer.Cannon, this, 120 * scaleSize);
             maxBalls = 2;
 
+            SpriteSheetSpecs megaLaserSpriteSheetSpecs = new SpriteSheetSpecs(100,100,9,5,3,0,0);
+            megaLaserAnimation = new MegaLaserAnimation(this, megaLaserSpriteSheetSpecs, "Images/spritesheets/MegaLaser");
+            megaLaserAnimation.LoadContent(content);
+            megaLaserAnimation.PostLoad();
+            megaLaserAnimation.SetScale(new Vector2(1, 20));
+            megaLaserAnimation.SetOrigin();
+
             base.PostLoad();
         }
 
@@ -69,6 +77,7 @@ namespace PaddleBall
         MouseState lastMouseState;
         float timeUntilMegaLaser = 5000;
         double elaspedTime = 0;
+        bool isFiringLaser;
         public override void Update(GameTime gameTime)
         {
             elaspedTime = gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -76,13 +85,13 @@ namespace PaddleBall
             MouseState mouseState = Mouse.GetState();
 
 
-            if (checkLaserState==true && ( (keyboardState.IsKeyDown(Keys.LeftAlt)) || mouseState.RightButton == ButtonState.Pressed))
+            if (isMegaLaserFirable && ( (keyboardState.IsKeyDown(Keys.LeftAlt)) || mouseState.RightButton == ButtonState.Pressed))
             {
                 timeUntilMegaLaser -= (float)elaspedTime;
             }
 
             if (timeUntilMegaLaser <= 0)
-                checkLaserState = false;
+                isMegaLaserFirable = false;
        
             HandleRotation(keyboardState);
 
@@ -98,10 +107,17 @@ namespace PaddleBall
 
 
             if ((keyboardState.IsKeyDown(Keys.LeftAlt)) ||
-                (mouseState.RightButton == ButtonState.Pressed ))
-            {
-                if(!isPausedForDelay)
-                FireLaser();
+                (mouseState.RightButton == ButtonState.Pressed )){
+                if (isMegaLaserFirable) {
+                    isFiringLaser = true;
+                    FireLaser();
+                }
+                else {
+                    isFiringLaser = false;
+                }
+            }
+            else {
+                isFiringLaser = false;
             }
 
             CheckForCollision();
@@ -149,6 +165,7 @@ namespace PaddleBall
         }
 
         float fireSpeed = 65f;
+        float megaLaserSpeed = 100f;
         void Fire()
         {
             cannonBall = new CannonBall(position + forward * 75);
@@ -159,18 +176,20 @@ namespace PaddleBall
             myCoroutiner.StartCoroutine(PauseForFireDelay());
             AudioManager.Instance.PlaySound(SoundFX.Launch);
         }
+
+        public void ActivateMegaLaser() {
+            isMegaLaserFirable = true;
+        }
+
         void FireLaser()
-        {
-            if (checkLaserState == true)
+        {            
+            MegaLaserCollider[] laser = new MegaLaserCollider[21];
+            for (int i = 0; i < laser.Length; i++)
             {
-                Laser[] laser = new Laser[21];
-                for (int i = 0; i < 20; i++)
-                {
-                    laser[i] = new Laser(position + ForwardDist(i));
-                    laser[i].LoadContent(content);
-                    laser[i].PostLoad();
-                    laser[i].objToLaserNumber = i;
-                }
+                laser[i] = new MegaLaserCollider(position + ForwardDist(i));
+                laser[i].LoadContent(content);
+                laser[i].PostLoad();
+                laser[i].Launch(forward * megaLaserSpeed);
             }
             //myCoroutiner.StartCoroutine(PauseForFireDelay());
             AudioManager.Instance.PlaySound(SoundFX.Launch);
@@ -181,6 +200,13 @@ namespace PaddleBall
             AudioManager.Instance.PlaySound(SoundFX.PaddleDeath);
             AudioManager.Instance.StopMusic();
             GameManager.Instance.Lose();
+
+
+            //ShipExplosion shipExp = new ShipExplosion();
+            //shipExp.LoadContent(content);
+            //shipExp.PostLoad();
+            //shipExp.position = position;
+            
             Destroy();
         }
 
@@ -210,6 +236,15 @@ namespace PaddleBall
 
             float endRotation = rotation + forwardOffsetRotation;
             return new Vector2((float)(75 * i * Math.Cos(endRotation)), (75 * i * (float)Math.Sin(endRotation)));
+        }
+
+        public override void Draw(SpriteBatch spriteBatch) {
+
+            if (isFiringLaser) {
+                megaLaserAnimation.SetPosition(position + forward*20f);                
+                megaLaserAnimation.Draw(spriteBatch);
+            }
+            base.Draw(spriteBatch);
         }
 
     }

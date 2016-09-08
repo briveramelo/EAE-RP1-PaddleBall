@@ -197,7 +197,7 @@ namespace PaddleBall {
                 Exit();
             }
             
-            UpdateCurrentScreen(gameTime);
+            UpdateCurrentScreen(gameTime, keyboardState);
             myCoroutiner.Update();
 
             lastKeyState = Keyboard.GetState();
@@ -205,16 +205,16 @@ namespace PaddleBall {
         }
 
         #region Update Screens
-        void UpdateCurrentScreen(GameTime gameTime) {
+        void UpdateCurrentScreen(GameTime gameTime, KeyboardState keyboardState) {
             switch (ScreenManager.Instance.GetCurrentScreen()) {
                 case Screen.Title:
-                    UpdateTitleScreen(gameTime);
+                    UpdateTitleScreen(keyboardState);
                     break;
                 case Screen.Scores:
-                    UpdateScoreScreen(gameTime);
+                    UpdateScoreScreen(keyboardState);
                     break;
                 case Screen.Game:
-                    UpdateGameScreen(gameTime);
+                    UpdateGameScreen(keyboardState);
                     break;
             }
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
@@ -224,17 +224,24 @@ namespace PaddleBall {
             }
         }
 
-        void UpdateTitleScreen(GameTime gameTime) {
-
+        void UpdateTitleScreen(KeyboardState keyboardState) {
+            if (keyboardState.IsKeyDown(Keys.Enter)) {
+                LoadNewScreen(Screen.Game);
+            }
         }
 
-        void UpdateScoreScreen(GameTime gameTime) {
-            
+        void UpdateScoreScreen(KeyboardState keyboardState) {
+            if (keyboardState.IsKeyDown(Keys.Back)) {
+                LoadNewScreen(Screen.Title);
+            }
         }
 
-        void UpdateGameScreen(GameTime gameTime) {
+        void UpdateGameScreen(KeyboardState keyboardState) {
             EnemySpawner.Instance.Update();
             Debugger.Instance.Update();
+            if (keyboardState.IsKeyDown(Keys.Back)) {
+                LoadTitleScreen();
+            }
         }
         #endregion
 

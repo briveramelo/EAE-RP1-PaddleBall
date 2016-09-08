@@ -13,7 +13,7 @@ namespace PaddleBall {
 
         CircleCollider myCollider;
         List<Animation> shieldAnimations;
-        SpriteSheetSpecs spriteSheetSpecs;
+        List<SpriteSheetSpecs> spriteSheetSpecs;
 
         int health = 3;
 
@@ -33,11 +33,15 @@ namespace PaddleBall {
         float scaleSize = 0.5f;
         public override void LoadContent(ContentManager Content) {
             content = Content;
-            spriteSheetSpecs = new SpriteSheetSpecs(750, 750, 17, 5, 3, 0, 0);
+            spriteSheetSpecs = new List<SpriteSheetSpecs>() {
+                new SpriteSheetSpecs(750, 750, 17, 5, 2, 0, 0),
+                new SpriteSheetSpecs(750, 750, 17, 5, 4, 0, 0),
+                new SpriteSheetSpecs(750, 750, 17, 5, 6, 0, 0)
+            };
             shieldAnimations = new List<Animation>();
-            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/Spritesheets/RedShieldPulseOne"));
-            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/Spritesheets/OrangeShieldPulseOne"));
-            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/Spritesheets/YellowShieldPulseOne"));
+            shieldAnimations.Add(new Animation(this, spriteSheetSpecs[0], "Images/Spritesheets/Shield/Red"));
+            shieldAnimations.Add(new Animation(this, spriteSheetSpecs[1], "Images/Spritesheets/Shield/Orange"));
+            shieldAnimations.Add(new Animation(this, spriteSheetSpecs[2], "Images/Spritesheets/Shield/Yellow"));
             shieldAnimations.ForEach(anim => anim.LoadContent(Content));
             shieldAnimations.ForEach(anim => anim.PostLoad());
         }
@@ -47,7 +51,7 @@ namespace PaddleBall {
             scale = Vector2.One * scaleSize;
             myCollider = new CircleCollider(Layer.Shield, this, 350 * scaleSize);
             position = screenCenter;
-            SetOriginInPixels(spriteSheetSpecs.width/ 2, spriteSheetSpecs.height / 2);
+            SetOriginInPixels(spriteSheetSpecs[0].width/ 2, spriteSheetSpecs[0].height / 2);
         }
 
         public override void Update(GameTime gameTime) {
@@ -67,7 +71,8 @@ namespace PaddleBall {
             health--;
             PulseManager.Instance.Animate();
             if (health == 0) {
-                Cannon.Instance.checkLaserState = true;
+                Cannon.Instance.ActivateMegaLaser();
+                
                 Destroy();
             }
         }

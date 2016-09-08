@@ -48,6 +48,7 @@ namespace PaddleBall {
         bool displayDebugMode;
         IEnumerator DisplayEnterDebugMode() {
             displayDebugMode = true;
+            Cannon.Instance.ActivateMegaLaser();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             float timeToDisplay = 4f;

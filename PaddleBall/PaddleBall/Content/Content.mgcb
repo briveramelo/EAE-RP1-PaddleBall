@@ -151,19 +151,15 @@
 /processorParam:Quality=Best
 /build:SoundFX/Title_Loop_Adjusted.mp3
 
-#begin Images/spritesheets/Bugs/GreenBug_BackDeath.png
+#begin DS-DIGIT.bmp
 /importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
+/processor:FontTextureProcessor
+/processorParam:FirstCharacter= 
 /processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/Bugs/GreenBug_BackDeath.png
+/build:DS-DIGIT.bmp
 
-#begin Images/spritesheets/Bugs/GreenBug_BackWalk.png
+#begin Images/Spritesheets/Bugs/GreenBug_BackDeath.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -173,9 +169,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/Bugs/GreenBug_BackWalk.png
+/build:Images/Spritesheets/Bugs/GreenBug_BackDeath.png
 
-#begin Images/spritesheets/Bugs/GreenBug_Death.png
+#begin Images/Spritesheets/Bugs/GreenBug_BackWalk.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -185,9 +181,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/Bugs/GreenBug_Death.png
+/build:Images/Spritesheets/Bugs/GreenBug_BackWalk.png
 
-#begin Images/spritesheets/Bugs/GreenBug_Walk.png
+#begin Images/Spritesheets/Bugs/GreenBug_Death.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -197,9 +193,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/Bugs/GreenBug_Walk.png
+/build:Images/Spritesheets/Bugs/GreenBug_Death.png
 
-#begin Images/spritesheets/Bugs/RedBug_BackDeath.png
+#begin Images/Spritesheets/Bugs/GreenBug_Walk.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -209,9 +205,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/Bugs/RedBug_BackDeath.png
+/build:Images/Spritesheets/Bugs/GreenBug_Walk.png
 
-#begin Images/spritesheets/Bugs/RedBug_BackWalk.png
+#begin Images/Spritesheets/Bugs/RedBug_BackDeath.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -221,9 +217,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/Bugs/RedBug_BackWalk.png
+/build:Images/Spritesheets/Bugs/RedBug_BackDeath.png
 
-#begin Images/spritesheets/Bugs/RedBug_Death.png
+#begin Images/Spritesheets/Bugs/RedBug_BackWalk.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -233,9 +229,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/Bugs/RedBug_Death.png
+/build:Images/Spritesheets/Bugs/RedBug_BackWalk.png
 
-#begin Images/spritesheets/Bugs/RedBug_Walk.png
+#begin Images/Spritesheets/Bugs/RedBug_Death.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -245,9 +241,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/Bugs/RedBug_Walk.png
+/build:Images/Spritesheets/Bugs/RedBug_Death.png
 
-#begin Images/spritesheets/Laser.png
+#begin Images/Spritesheets/Bugs/RedBug_Walk.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -257,9 +253,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/Laser.png
+/build:Images/Spritesheets/Bugs/RedBug_Walk.png
 
-#begin Images/spritesheets/OrangeShieldPulseOne.png
+#begin Images/Spritesheets/Shield/Orange.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -269,9 +265,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/OrangeShieldPulseOne.png
+/build:Images/Spritesheets/Shield/Orange.png
 
-#begin Images/spritesheets/PowerSurge.png
+#begin Images/Spritesheets/Shield/Red.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -281,9 +277,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/PowerSurge.png
+/build:Images/Spritesheets/Shield/Red.png
 
-#begin Images/spritesheets/RedShieldPulseOne.png
+#begin Images/Spritesheets/Shield/Yellow.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -293,9 +289,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/RedShieldPulseOne.png
+/build:Images/Spritesheets/Shield/Yellow.png
 
-#begin Images/spritesheets/YellowShieldPulseOne.png
+#begin Images/Spritesheets/Laser.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -305,7 +301,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/spritesheets/YellowShieldPulseOne.png
+/build:Images/Spritesheets/Laser.png
+
+#begin Images/Spritesheets/MegaLaser.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/Spritesheets/MegaLaser.png
+
+#begin Images/Spritesheets/PowerSurge.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/Spritesheets/PowerSurge.png
 
 #begin Images/arrow_cursor.png
 /importer:TextureImporter
@@ -390,6 +410,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/darker_background.png
+
+#begin Images/laser.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/laser.png
 
 #begin Images/normalEnemy1.png
 /importer:TextureImporter
@@ -487,7 +519,7 @@
 /processorParam:TextureFormat=Color
 /build:Images/TempBall.png
 
-#begin Images/laser.png
+#begin Images/Spritesheets/ShipExplosion.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -497,13 +529,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Images/laser.png
-
-#begin DS-DIGIT.bmp
-/importer:TextureImporter
-/processor:FontTextureProcessor
-/processorParam:FirstCharacter= 
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Color
-/build:DS-DIGIT.bmp
+/build:Images/Spritesheets/ShipExplosion.png
 

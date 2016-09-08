@@ -26,13 +26,13 @@ namespace PaddleBall {
     /// For uniform-size rectangular snapshots from a spritesheet
     /// </summary>
     public class Animation {
-        Texture2D spriteSheet;
-        Rectangle[] sourceRectangles;
+        protected Texture2D spriteSheet;
+        protected Rectangle[] sourceRectangles;
         public int currentSourceRectIndex;
-        ContentManager content;
-        string spriteSheetPath;
-        SpriteSheetSpecs spriteSheetSpecs;
-        GameObject parentGameObject;
+        protected ContentManager content;
+        protected string spriteSheetPath;
+        protected SpriteSheetSpecs spriteSheetSpecs;
+        protected GameObject parentGameObject;
         public int loopNumber;
 
         public Animation(GameObject parentGameObject, SpriteSheetSpecs spriteSheetSpecs, string spriteSheetPath) {
@@ -64,8 +64,8 @@ namespace PaddleBall {
             gameFramesOnCurrentAnimFrame = 0;
         }
 
-        int gameFramesOnCurrentAnimFrame;
-        public void Draw(SpriteBatch spriteBatch) {
+        protected int gameFramesOnCurrentAnimFrame;
+        public virtual void Draw(SpriteBatch spriteBatch) {
             if (gameFramesOnCurrentAnimFrame > spriteSheetSpecs.numGameFramesPerAnimFrame) {
                 currentSourceRectIndex++;
                 
