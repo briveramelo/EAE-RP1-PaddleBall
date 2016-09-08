@@ -10,57 +10,76 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
     public class Button : GameObject {
+
         public RectangleD myRec;
         public Screen screenToLoad;
-        string displayText;
-        SpriteFont spriteFont;
-        Vector2 textPosition;
-        Vector2 textScale;
+        List<Texture2D> buttonTextures;
+        string[] texturePaths;
 
-        public Button(Screen screenToLoad, Vector2 position) :base() {
+        public Button(Screen screenToLoad, Vector2 position, string[] texturePaths) :base() {
             this.screenToLoad = screenToLoad;
             this.position = position;
-            
-            displayText = screenToLoad.ToString();
+            this.texturePaths = texturePaths;
         }
 
-        MouseState lastMouseState;
+        protected MouseState lastMouseState;
+        protected bool isPressed;
+
+        public override void LoadContent(ContentManager Content) {
+            content = Content;
+            buttonTextures = new List<Texture2D>();
+            foreach (string texturePath in texturePaths) {
+                buttonTextures.Add(content.Load<Texture2D>(texturePath));
+            }
+        }
+
+        public override void PostLoad() {
+            Vector2 topLeft = position - new Vector2(buttonTextures[0].Width / 2, buttonTextures[0].Height / 2);
+            Vector2 bottomRight = position + new Vector2(buttonTextures[0].Width / 2, buttonTextures[0].Height / 2);
+            myRec = new RectangleD(topLeft, bottomRight);
+            SetOriginInPixels(buttonTextures[0].Width / 2, buttonTextures[0].Height/ 2);
+        }
+
+
         public override void Update(GameTime gameTime) {
             MouseState mouseState = Mouse.GetState();
-            
-            if (mouseState.LeftButton == ButtonState.Pressed && lastMouseState.LeftButton != ButtonState.Pressed) {
-                Vector2 mousePosition = mouseState.Position.ToVector2();
+            Vector2 mousePosition = mouseState.Position.ToVector2();
+                        
+            if (mouseState.LeftButton == ButtonState.Pressed) {
                 if (myRec.IsPointWithin(mousePosition)) {
-                    OnClick();
+                    OnPress();
                 }
+                else {
+                    isPressed = false;
+                }
+            }
+            if (mouseState.LeftButton == ButtonState.Released) {
+                if (lastMouseState.LeftButton == ButtonState.Pressed) {
+                    if (myRec.IsPointWithin(mousePosition)) {
+                        OnSelect();                        
+                    }
+                }
+                OnRelease();
             }
 
             lastMouseState = mouseState;
             base.Update(gameTime);
         }
-
-        public override void LoadContent(ContentManager Content) {
-            texturePath = "Images/Button";
-            base.LoadContent(Content);
-            spriteFont = content.Load<SpriteFont>("scoreboard");
-        }
-
-        public override void PostLoad() {
-            base.PostLoad();
-            Vector2 topLeft = position - new Vector2(texture.Width / 2, texture.Height / 2);
-            Vector2 bottomRight = position + new Vector2(texture.Width / 2, texture.Height / 2);
-            textScale = Vector2.One * (6f / 10f);
-            myRec = new RectangleD(topLeft, bottomRight);
-            textPosition = topLeft + new Vector2(0,25);
-        }
-
-        public void OnClick() {
+        public virtual void OnSelect() {
             GameManager.Instance.LoadNewScreen(screenToLoad);
         }
 
+        public void OnPress() {            
+            isPressed = true;
+        }
+
+        public void OnRelease() {
+            isPressed = false;
+        }
+
         public override void Draw(SpriteBatch spriteBatch) {
-            base.Draw(spriteBatch);
-            spriteBatch.DrawString(spriteFont, displayText, textPosition, Color.White, 0, Vector2.Zero, textScale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(buttonTextures[isPressed ? 0 : 1], position, null, color, rotation, originInPixels, scale, flip, layerDepth);
+            //base.Draw(spriteBatch);
         }
     }
 }

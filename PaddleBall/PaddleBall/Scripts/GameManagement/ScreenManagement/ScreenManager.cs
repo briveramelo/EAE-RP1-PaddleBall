@@ -41,7 +41,7 @@ namespace PaddleBall {
         public void LoadContent(ContentManager Content) {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
             gameScreens = new Dictionary<Screen, GameScreen>() {
-                {  Screen.Title, new GameScreen("Images/RP1-1") },
+                {  Screen.Title, new GameScreen("Images/TitleScreen") },
                 {  Screen.Scores, new GameScreen("Images/blackground") },
                 {  Screen.Game, new GameScreen("Images/darker_background") }
             };

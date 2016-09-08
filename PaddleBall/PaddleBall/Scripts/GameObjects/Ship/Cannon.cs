@@ -50,7 +50,7 @@ namespace PaddleBall
 
         public override void LoadContent(ContentManager Content)
         {
-            texturePath = "Images/Paddle";
+            texturePath = "Images/Ship/Ship";
             base.LoadContent(Content);
         }
 
@@ -67,7 +67,7 @@ namespace PaddleBall
             megaLaserAnimation = new MegaLaserAnimation(this, megaLaserSpriteSheetSpecs, "Images/spritesheets/MegaLaser");
             megaLaserAnimation.LoadContent(content);
             megaLaserAnimation.PostLoad();
-            megaLaserAnimation.SetScale(new Vector2(1, 20));
+            megaLaserAnimation.SetScale(new Vector2(1, 12));
             megaLaserAnimation.SetOrigin();
 
             base.PostLoad();
@@ -110,7 +110,7 @@ namespace PaddleBall
                 (mouseState.RightButton == ButtonState.Pressed )){
                 if (isMegaLaserFirable) {
                     isFiringLaser = true;
-                    FireLaser();
+                    FireMegaLaser();
                 }
                 else {
                     isFiringLaser = false;
@@ -181,7 +181,7 @@ namespace PaddleBall
             isMegaLaserFirable = true;
         }
 
-        void FireLaser()
+        void FireMegaLaser()
         {            
             MegaLaserCollider[] laser = new MegaLaserCollider[21];
             for (int i = 0; i < laser.Length; i++)
@@ -202,11 +202,11 @@ namespace PaddleBall
             GameManager.Instance.Lose();
 
 
-            //ShipExplosion shipExp = new ShipExplosion();
-            //shipExp.LoadContent(content);
-            //shipExp.PostLoad();
-            //shipExp.position = position;
-            
+            ShipExplosion shipExp = new ShipExplosion();
+            shipExp.LoadContent(content);
+            shipExp.PostLoad();
+            shipExp.position = position;
+
             Destroy();
         }
 

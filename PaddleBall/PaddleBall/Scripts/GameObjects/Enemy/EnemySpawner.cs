@@ -141,10 +141,7 @@ namespace PaddleBall
             newEnemy.LoadContent(content);
             newEnemy.PostLoad();
             newEnemy.position = spawnPoint;
-            newEnemy.SetVelocity(screenCenter - newEnemy.position, rounds[currentRoundIndex].enemySpeed);
-            //if (currentEnemyCount == 0) {
-            //    newEnemy.SetVelocity(screenCenter - newEnemy.position, 1f);
-            //}
+            newEnemy.SetVelocity(screenCenter - newEnemy.position, rounds[currentRoundIndex].enemySpeed);            
             currentEnemyCount++;
         }
 

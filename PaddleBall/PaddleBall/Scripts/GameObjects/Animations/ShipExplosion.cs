@@ -15,8 +15,8 @@ namespace PaddleBall {
         public ShipExplosion() : base() { }
 
         public override void LoadContent(ContentManager Content) {
-            spriteSheetSpecs = new SpriteSheetSpecs(330, 330, 14, 6, 2, 0, 0);
-            shipExplosionAnimation = new Animation(this, spriteSheetSpecs, "Images/Spritesheets/Bugs/RedBug_Death");
+            spriteSheetSpecs = new SpriteSheetSpecs(365, 341, 14, 5, 2, 0, 0);
+            shipExplosionAnimation = new Animation(this, spriteSheetSpecs, "Images/Spritesheets/ShipExplosion");
             shipExplosionAnimation.LoadContent(Content);
             shipExplosionAnimation.PostLoad();
         }

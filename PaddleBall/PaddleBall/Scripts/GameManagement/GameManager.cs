@@ -124,12 +124,13 @@ namespace PaddleBall {
 
         void LoadTitleScreen() {
             ClearScreen();
-            Vector2 scoreButtonPosition = new Vector2(760 - 100, 840);
-            Vector2 gameButtonPosition = new Vector2(1160 + 100, 840);
+            lastKeyBoardState = new KeyboardState(Keys.Enter);
+            Vector2 gameButtonPosition = new Vector2((1920f / 2f), 1080-430);
+            Vector2 scoreButtonPosition = new Vector2((1920f / 2f), 1080 - 190);
 
             new MouseCursor();
-            new Button(Screen.Scores, scoreButtonPosition);
-            new Button(Screen.Game, gameButtonPosition);
+            new Button(Screen.Game, gameButtonPosition, new string[] {"Images/Buttons/ClearButton", "Images/Buttons/ClearButton" });
+            new Button(Screen.Scores, scoreButtonPosition, new string[] { "Images/Buttons/ClearButton", "Images/Buttons/ClearButton" });
 
             for (int i = 0; i < 4; i++) {
                 BackgroundPulse bg = new BackgroundPulse();
@@ -149,7 +150,8 @@ namespace PaddleBall {
             ClearScreen();
             new MouseCursor();
             Vector2 buttonPos = new Vector2(200, ScreenManager.Instance.Dimensions.Y-100);
-            new Button(Screen.Title, buttonPos);
+            new Button(Screen.Title, buttonPos, new string[] {"Images/Buttons/MainMenu_NotDepressed", "Images/Buttons/MainMenu_Depressed" });            
+
             LoadScores();
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
@@ -185,7 +187,7 @@ namespace PaddleBall {
         #endregion
 
 
-        KeyboardState lastKeyState;
+        KeyboardState lastKeyBoardState;
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -200,7 +202,7 @@ namespace PaddleBall {
             UpdateCurrentScreen(gameTime, keyboardState);
             myCoroutiner.Update();
 
-            lastKeyState = Keyboard.GetState();
+            lastKeyBoardState = Keyboard.GetState();
             base.Update(gameTime);
         }
 
@@ -225,7 +227,7 @@ namespace PaddleBall {
         }
 
         void UpdateTitleScreen(KeyboardState keyboardState) {
-            if (keyboardState.IsKeyDown(Keys.Enter)) {
+            if (keyboardState.IsKeyDown(Keys.Enter) && lastKeyBoardState!=keyboardState) {
                 LoadNewScreen(Screen.Game);
             }
         }

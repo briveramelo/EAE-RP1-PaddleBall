@@ -16,7 +16,8 @@ namespace PaddleBall{
         DestroyEnemy=2,
         PaddleDeath=3,
         PlayerLoss=4,
-        ShieldHit=5
+        ShieldHit=5,
+        MegaLaser=6
     }
     //Handles all sound effects and background music
     public class AudioManager {
@@ -34,13 +35,14 @@ namespace PaddleBall{
         /// <summary>
         /// soundFXCount keeps track of the current index of the soundFX list that the PlaySound cycles through
         /// </summary>
-        Dictionary<SoundFX, int> soundFXCount = new Dictionary<SoundFX, int>() {
+        static Dictionary<SoundFX, int> soundFXCount = new Dictionary<SoundFX, int>() {
             { SoundFX.Launch, 0},
             { SoundFX.Hit, 0},
             { SoundFX.DestroyEnemy, 0},
             { SoundFX.PaddleDeath, 0},
             { SoundFX.PlayerLoss, 0},
-            { SoundFX.ShieldHit, 0}
+            { SoundFX.ShieldHit, 0},
+            { SoundFX.MegaLaser, 0}
         };
 
         /// <summary>
@@ -71,10 +73,26 @@ namespace PaddleBall{
                     content.Load<SoundEffect>("SoundFX/DestroyEnemy/Destroyenemy5"),
                 } },
                 {SoundFX.PaddleDeath, new List<SoundEffect>() {
-                    content.Load<SoundEffect>("SoundFX/PaddleDeath")
+                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion1"),
+                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion2"),
+                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion3"),
+                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion4"),
+                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion5"),
+                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion6"),
+                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion7"),
+                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion8"),
+                    content.Load<SoundEffect>("SoundFX/Explosions/Explosion9")
                 } },
                 {SoundFX.PlayerLoss, new List<SoundEffect>() {
                     content.Load<SoundEffect>("SoundFX/Playerloss")
+                } },
+                {SoundFX.MegaLaser, new List<SoundEffect>() {
+                    content.Load<SoundEffect>("SoundFX/MegaLasers/MegaLaser1"),
+                    content.Load<SoundEffect>("SoundFX/MegaLasers/MegaLaser2"),
+                    content.Load<SoundEffect>("SoundFX/MegaLasers/MegaLaser3"),
+                    content.Load<SoundEffect>("SoundFX/MegaLasers/MegaLaser4"),
+                    content.Load<SoundEffect>("SoundFX/MegaLasers/MegaLaser5"),
+                    content.Load<SoundEffect>("SoundFX/MegaLasers/MegaLaser6")
                 } },
                 {SoundFX.ShieldHit, new List<SoundEffect>() {
                     content.Load<SoundEffect>("SoundFX/Shieldhit")
@@ -102,7 +120,7 @@ namespace PaddleBall{
                     MediaPlayer.Play(game);
                     break;
             }
-            MediaPlayer.Volume = 0.8f;
+            MediaPlayer.Volume = 0.5f;
             MediaPlayer.IsRepeating = true;
         }
 
