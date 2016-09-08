@@ -43,12 +43,13 @@ namespace PaddleBall {
 
         public override void LoadContent(ContentManager Content) {
             content = Content;
-            spriteFont = content.Load<SpriteFont>("scoreboard");
+            spriteFont = content.Load<SpriteFont>("DS-DIGIT");
         }
 
         public override void PostLoad() {
             position = new Vector2(100, 70);
-            scale = Vector2.One * (6f / 10f);
+            //scale = Vector2.One * (6f / 10f);
+            scale = Vector2.One * 1f;
             score = 0;
             hitStreak = 0;
         }

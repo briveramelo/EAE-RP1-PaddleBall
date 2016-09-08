@@ -67,6 +67,7 @@ namespace PaddleBall {
             health--;
             PulseManager.Instance.Animate();
             if (health == 0) {
+                Cannon.Instance.checkLaserState = true;
                 Destroy();
             }
         }

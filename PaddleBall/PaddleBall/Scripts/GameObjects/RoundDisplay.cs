@@ -17,11 +17,12 @@ namespace PaddleBall {
 
         public override void LoadContent(ContentManager Content) {
             content = Content;
-            spriteFont = content.Load<SpriteFont>("scoreboard");
+            spriteFont = content.Load<SpriteFont>("DS-DIGIT");
         }
 
         public override void PostLoad() {
-            scale = Vector2.One * (4f / 10f);
+            //scale = Vector2.One * (4f / 10f);
+            scale = Vector2.One * 0.80f;
             position = new Vector2(1520, 100);
         }
 

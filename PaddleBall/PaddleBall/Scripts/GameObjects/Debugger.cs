@@ -78,9 +78,10 @@ namespace PaddleBall {
 
         public void LoadContent(ContentManager Content) {
             content = Content;
-            spriteFont = content.Load<SpriteFont>("scoreboard");
+            spriteFont = content.Load<SpriteFont>("DS-DIGIT");
             position = new Vector2(400,200);
-            scale = Vector2.One * (6f / 10f);
+            //scale = Vector2.One * (6f / 10f);
+            scale = Vector2.One * 1f;
         }
         SpriteFont spriteFont;
         ContentManager content;
