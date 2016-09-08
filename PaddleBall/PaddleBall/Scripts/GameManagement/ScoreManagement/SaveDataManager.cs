@@ -19,9 +19,9 @@ namespace PaddleBall{
 
         public static void LoadContent(ContentManager Content) {
             content = Content;
-            if (File.Exists(content.RootDirectory + "/SaveData/savefile.dat")) {
+            if (File.Exists(content.RootDirectory + "/savefile.dat")) {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream fileStream = File.Open(content.RootDirectory + "/SaveData/savefile.dat", FileMode.Open);
+                FileStream fileStream = File.Open(content.RootDirectory + "/savefile.dat", FileMode.Open);
                 currentDataSave = new DataSave((DataSave)bf.Deserialize(fileStream));
                 fileStream.Close();
             }
@@ -32,7 +32,7 @@ namespace PaddleBall{
 
         public static void Save(DataSave newSave) {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream fileStream = File.Create(content.RootDirectory + "/SaveData/savefile.dat");
+            FileStream fileStream = File.Create(content.RootDirectory + "/savefile.dat");
             currentDataSave = newSave;
             bf.Serialize(fileStream, newSave);
             fileStream.Close();
