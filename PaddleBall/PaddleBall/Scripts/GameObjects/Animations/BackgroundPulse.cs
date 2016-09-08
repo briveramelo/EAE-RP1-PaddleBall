@@ -18,7 +18,7 @@ namespace PaddleBall {
 
         public override void LoadContent(ContentManager Content) {
             SpriteSheetSpecs spriteSheet = new SpriteSheetSpecs(1920, 1080, 24, 4, 3, 0, 0);
-            screenPulseAnimation = new Animation(this, spriteSheet, "Images/spritesheets/PowerSurgeTakeTwo");
+            screenPulseAnimation = new Animation(this, spriteSheet, "Images/Spritesheets/PowerSurge");
             screenPulseAnimation.LoadContent(Content);
             screenPulseAnimation.PostLoad();
         }

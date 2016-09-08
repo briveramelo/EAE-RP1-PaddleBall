@@ -16,7 +16,7 @@ namespace PaddleBall
         int health = 1;
         Vector2 velocity = Vector2.Zero;
         CircleCollider myCollider;
-        Animation myAnimation;
+        Animation redBugAnimation, greenBugWalkAnimation;
         SpriteSheetSpecs mySpriteSheetSpecs;
 
         public Enemy() : base() { }
@@ -24,19 +24,23 @@ namespace PaddleBall
         float scaleSize = 0.5f;
         public override void LoadContent(ContentManager Content)
         {
-            //SpriteSheetSpecs mySpriteSheetSpecs = new SpriteSheetSpecs(8,8,17,17,10,0,0);
-            //myAnimation = new Animation(this, mySpriteSheetSpecs, "Images/Hero");
-            //myAnimation.LoadContent(Content);
-            //myAnimation.PostLoad();
-            texturePath = "Images/bugEnemy1";
+            content = Content;
+            mySpriteSheetSpecs = new SpriteSheetSpecs(264, 236, 12, 3, 3, 0, 0);
+            redBugAnimation = new Animation(this, mySpriteSheetSpecs, "Images/Spritesheets/Bugs/RedBug_Walk");
+            greenBugWalkAnimation = new Animation(this, mySpriteSheetSpecs, "Images/Spritesheets/Bugs/GreenBug_Walk");
+
+            redBugAnimation.LoadContent(Content); greenBugWalkAnimation.LoadContent(Content);
+            redBugAnimation.PostLoad(); greenBugWalkAnimation.PostLoad();
+
+            //texturePath = "Images/bugEnemy1";
             scale = Vector2.One * scaleSize;
             myCollider = new CircleCollider(Layer.Enemy,this, 75 * scaleSize);
-            base.LoadContent(Content);
+            //base.LoadContent(Content);
         }
 
         public override void PostLoad() {
-            //SetOriginInPixels(mySpriteSheetSpecs.width/2, mySpriteSheetSpecs.height/ 2); 
-            base.PostLoad();
+            SetOriginInPixels(mySpriteSheetSpecs.width/2, mySpriteSheetSpecs.height/ 2); 
+            //base.PostLoad();
         }
 
         public void SetVelocity(Vector2 moveDir, float moveSpeed)
@@ -53,8 +57,8 @@ namespace PaddleBall
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            //myAnimation.Draw(spriteBatch);
-            base.Draw(spriteBatch);
+            redBugAnimation.Draw(spriteBatch);
+            //base.Draw(spriteBatch);
         }
 
         public void TakeDamage() {
@@ -68,6 +72,13 @@ namespace PaddleBall
 
         public override void Destroy() {
             EnemySpawner.Instance.ReportEnemyDown();
+
+            BugDeathAnimation bugDeathAnim = new BugDeathAnimation();
+            bugDeathAnim.LoadContent(content);
+            bugDeathAnim.PostLoad();
+            bugDeathAnim.position = position;
+            bugDeathAnim.rotation = rotation;
+            bugDeathAnim.scale = scale;
 
             myCollider.Destroy();
             base.Destroy();

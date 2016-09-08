@@ -62,6 +62,7 @@
     <Compile Include="Scripts\Components\RectangleD.cs" />
     <Compile Include="Scripts\Components\Colliders.cs" />
     <Compile Include="Scripts\GameObjects\Animations\BackgroundPulse.cs" />
+    <Compile Include="Scripts\GameObjects\Animations\BugDeathAnimation.cs" />
     <Compile Include="Scripts\GameObjects\Animations\PulseManager.cs" />
     <Compile Include="Scripts\GameObjects\Debugger.cs" />
     <Compile Include="Scripts\GameObjects\RoundDisplay.cs" />

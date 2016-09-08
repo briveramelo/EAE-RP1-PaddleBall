@@ -109,6 +109,7 @@ namespace PaddleBall {
         }
 
         float fireSpeed = 65f;
+        //float fireSpeed = 2f;
         void Fire() {
             cannonBall = new CannonBall(position + forward * 75);
             cannonBall.LoadContent(content);

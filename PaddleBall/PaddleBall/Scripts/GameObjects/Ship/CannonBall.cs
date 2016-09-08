@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
 
@@ -10,22 +11,30 @@ namespace PaddleBall {
         public CircleCollider myCollider;
         Vector2 velocity = Vector2.Zero;
         public static int numCannonBalls;
+        Animation myAnimation;
+        SpriteSheetSpecs mySpriteSheetSpecs;
+
         public CannonBall(Vector2 position) : base() {
             this.position = position;
             numCannonBalls++;
         }
 
-        float scaleSize = 1f;
+        float scaleSize = 1.5f;
         public override void LoadContent(ContentManager Content) {
-            texturePath = "Images/TempBall";          
-            base.LoadContent(Content);
+            mySpriteSheetSpecs = new SpriteSheetSpecs(108,66,9,4,3,0,0);
+            myAnimation = new Animation(this, mySpriteSheetSpecs, "Images/Spritesheets/Laser");
+            myAnimation.LoadContent(Content);
+            myAnimation.PostLoad();
+            //texturePath = "Images/laser";          
+            //base.LoadContent(Content);
         }
 
         public override void PostLoad() {
             SetLayerDepth(0f);
             scale = Vector2.One * scaleSize;
-            myCollider = new CircleCollider(Layer.CannonBall, this, 50 * scaleSize);
-            base.PostLoad();
+            myCollider = new CircleCollider(Layer.CannonBall, this, 50);
+            SetOriginInPixels(mySpriteSheetSpecs.width / 2, mySpriteSheetSpecs.height / 2);
+            //base.PostLoad();
         }
 
         /// <summary>
@@ -34,6 +43,7 @@ namespace PaddleBall {
         /// <param name="velocity"></param>
         public void Launch(Vector2 velocity) {
             this.velocity = velocity;
+            rotation = (float)(Math.Atan2(velocity.Y, velocity.X));// * (Math.PI / 180f));
         }
 
         float distanceToDestroy = 2000;
@@ -56,6 +66,11 @@ namespace PaddleBall {
                     Destroy();
                 }
             }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch) {
+            myAnimation.Draw(spriteBatch);
+            //base.Draw(spriteBatch);
         }
 
         public override void Destroy() {

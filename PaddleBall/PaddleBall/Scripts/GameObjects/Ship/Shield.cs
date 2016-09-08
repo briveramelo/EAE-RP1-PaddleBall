@@ -35,9 +35,9 @@ namespace PaddleBall {
             content = Content;
             spriteSheetSpecs = new SpriteSheetSpecs(750, 750, 17, 5, 3, 0, 0);
             shieldAnimations = new List<Animation>();
-            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/spritesheets/RedShieldPulseOne"));
-            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/spritesheets/OrangeShieldPulseOne"));
-            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/spritesheets/YellowShieldPulseOne"));
+            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/Spritesheets/RedShieldPulseOne"));
+            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/Spritesheets/OrangeShieldPulseOne"));
+            shieldAnimations.Add(new Animation(this, spriteSheetSpecs, "Images/Spritesheets/YellowShieldPulseOne"));
             shieldAnimations.ForEach(anim => anim.LoadContent(Content));
             shieldAnimations.ForEach(anim => anim.PostLoad());
         }
