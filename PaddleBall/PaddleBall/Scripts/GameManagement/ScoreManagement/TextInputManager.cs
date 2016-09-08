@@ -45,18 +45,17 @@ namespace PaddleBall {
             isTyping = false;
             underScoreIsShowing = false;
 
-            newHighScorePosition = new Vector2(500, 250);
-            namePosition = new Vector2(850, 400);
-            float spacing = 70;
+            newHighScorePosition = new Vector2(400, 250);
+            namePosition = new Vector2(840, 400);
+            float spacing = 82;
             underScorePositions = new Vector2[] {
-                namePosition + new Vector2(5, 0),
-                namePosition + new Vector2(5 + spacing*1, 0),
-                namePosition + new Vector2(5 + spacing*2, 0),
+                namePosition + new Vector2(-9, 10),
+                namePosition + new Vector2(-9 + spacing*1, 10),
+                namePosition + new Vector2(-9 + spacing*2, 10),
             };
             timerPosition = new Vector2(900,800);
             maxCharacters = 3;
             scale = Vector2.One * 1f;
-            //scale = Vector2.One * (6f / 10f);
             validLetters = new Keys[] {
                 Keys.A,
                 Keys.B,

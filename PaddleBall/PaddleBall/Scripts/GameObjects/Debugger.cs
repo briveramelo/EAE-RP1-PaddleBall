@@ -49,6 +49,7 @@ namespace PaddleBall {
         IEnumerator DisplayEnterDebugMode() {
             displayDebugMode = true;
             Cannon.Instance.ActivateMegaLaser();
+            AudioManager.Instance.PlaySound(SoundFX.MegaLaser);
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             float timeToDisplay = 4f;
@@ -80,7 +81,7 @@ namespace PaddleBall {
         public void LoadContent(ContentManager Content) {
             content = Content;
             spriteFont = content.Load<SpriteFont>("DS-DIGIT");
-            position = new Vector2(400,200);
+            position = new Vector2(225,800);
             //scale = Vector2.One * (6f / 10f);
             scale = Vector2.One * 1f;
         }
@@ -90,7 +91,7 @@ namespace PaddleBall {
         Vector2 scale;
         public void Draw(SpriteBatch spriteBatch) {
             if (displayDebugMode) {
-                spriteBatch.DrawString(spriteFont, "INTENSITY ACTIVATED", position, Color.Red, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(spriteFont, "INTENSITY ACTIVATED !", position, Color.Red, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
             }
         }
     }

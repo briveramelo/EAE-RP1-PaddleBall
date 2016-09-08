@@ -33,7 +33,6 @@ namespace PaddleBall {
             LoadNewScreen(Screen.Title);
         }
 
-        //Vector2 testEnemyLoc = new Vector2(8, 8);
         public GameManager() {
             graphics = new GraphicsDeviceManager(this);
             //graphics.IsFullScreen = true;
@@ -241,7 +240,7 @@ namespace PaddleBall {
         void UpdateGameScreen(KeyboardState keyboardState) {
             EnemySpawner.Instance.Update();
             Debugger.Instance.Update();
-            if (keyboardState.IsKeyDown(Keys.Back)) {
+            if (keyboardState.IsKeyDown(Keys.Back) && !TextInputManager.Instance.IsTyping()) {
                 LoadTitleScreen();
             }
         }

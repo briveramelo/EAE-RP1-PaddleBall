@@ -27,14 +27,8 @@ namespace PaddleBall {
         }
 
         public void AddPoints(float distanceAway) {
-            hitStreak += 1;
-            //float minDistanceForFullPoints = 440;
-            //float distanceMultiplier = distanceAway / minDistanceForFullPoints;
-            //if (distanceMultiplier > 1) {
-            //    distanceMultiplier = 1;
-            //}
-            float distanceMultiplier = 1f;
-            score += (int)((10 * hitStreak) * distanceMultiplier);
+            hitStreak += 1;            
+            score += 10 * hitStreak;
         }
 
         public void ReportMiss() {
@@ -47,10 +41,9 @@ namespace PaddleBall {
         }
 
         public override void PostLoad() {
-            position = new Vector2(100, 70);
-            //scale = Vector2.One * (6f / 10f);
+            position = new Vector2(130, 70);
             scale = Vector2.One * 1f;
-            score = 0;
+            score = 1000;
             hitStreak = 0;
         }
         public override void Draw(SpriteBatch spriteBatch) {

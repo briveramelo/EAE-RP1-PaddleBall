@@ -79,7 +79,6 @@ namespace PaddleBall {
 
         public override void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(buttonTextures[isPressed ? 0 : 1], position, null, color, rotation, originInPixels, scale, flip, layerDepth);
-            //base.Draw(spriteBatch);
         }
     }
 }

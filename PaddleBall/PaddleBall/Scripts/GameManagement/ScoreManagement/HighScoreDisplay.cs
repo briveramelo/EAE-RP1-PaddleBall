@@ -29,7 +29,7 @@ namespace PaddleBall{
 
         public Score myScore;
         ContentManager content;
-        public Vector2 position { get { return new Vector2(720, 200 + myScore.rank * 70); } }
+        public Vector2 position { get { return new Vector2(760, 200 + myScore.rank * 70); } }
         Vector2 scale;
         SpriteFont spriteFont;
         Color displayColor { get { return myScore.isNewScore ? Color.Red : Color.White; } }

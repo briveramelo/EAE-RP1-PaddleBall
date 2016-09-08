@@ -78,8 +78,7 @@ namespace PaddleBall
             for (int i = CircleCollider.allColliders[Layer.Enemy].Count - 1; i >= 0; i--) {
                 CircleCollider.allColliders[Layer.Enemy][i].gameObject.Destroy();
             }
-
-            //AudioManager.Instance.PlaySound(SoundFX.SERIOUSMODE);
+            
             myCoroutiner.StopAllCoroutines();
             myCoroutiner.StartCoroutine(StartNewRound());
         }

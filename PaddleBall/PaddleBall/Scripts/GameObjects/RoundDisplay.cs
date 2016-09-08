@@ -13,7 +13,7 @@ namespace PaddleBall {
         SpriteFont spriteFont;
         public RoundDisplay() : base() { }
 
-        string displayText { get { return "Round " + (EnemySpawner.Instance.currentRound).ToString(); } }
+        string displayText { get { return "ROUND " + (EnemySpawner.Instance.currentRound).ToString(); } }
 
         public override void LoadContent(ContentManager Content) {
             content = Content;
@@ -22,8 +22,8 @@ namespace PaddleBall {
 
         public override void PostLoad() {
             //scale = Vector2.One * (4f / 10f);
-            scale = Vector2.One * 0.80f;
-            position = new Vector2(1520, 100);
+            scale = Vector2.One * 0.50f;
+            position = new Vector2(1520, 148);
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
