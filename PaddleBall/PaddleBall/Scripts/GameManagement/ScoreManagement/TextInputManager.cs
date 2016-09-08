@@ -55,7 +55,8 @@ namespace PaddleBall {
             };
             timerPosition = new Vector2(900,800);
             maxCharacters = 3;
-            scale = Vector2.One * (6f / 10f);
+            scale = Vector2.One * 1f;
+            //scale = Vector2.One * (6f / 10f);
             validLetters = new Keys[] {
                 Keys.A,
                 Keys.B,
@@ -88,7 +89,7 @@ namespace PaddleBall {
 
         public void LoadContent(ContentManager Content) {
             content = Content;
-            spriteFont = content.Load<SpriteFont>("scoreboard");
+            spriteFont = content.Load<SpriteFont>("DS-DIGIT");
         }
 
         public void PostLoad() {
@@ -184,7 +185,7 @@ namespace PaddleBall {
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.DrawString(spriteFont, "NEW HIGH SCORE!", newHighScorePosition, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(spriteFont, "NEW HIGH SCORE !", newHighScorePosition, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
             spriteBatch.DrawString(spriteFont, name, namePosition, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
             if (underScoreIsShowing) {
                 spriteBatch.DrawString(spriteFont, "_", underScorePositions[currentNameLength], Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);

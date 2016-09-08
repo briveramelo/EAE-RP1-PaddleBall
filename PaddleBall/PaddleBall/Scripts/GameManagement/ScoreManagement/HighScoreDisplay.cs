@@ -66,7 +66,7 @@ namespace PaddleBall{
 
         public void LoadContent(ContentManager Content) {
             content = Content;
-            spriteFont = content.Load<SpriteFont>("scoreboard");            
+            spriteFont = content.Load<SpriteFont>("DS-DIGIT");            
         }
 
         public void PostLoad() {
@@ -82,7 +82,7 @@ namespace PaddleBall{
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.DrawString(spriteFont, displayText, position, displayColor, 0, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(spriteFont, displayText, position, displayColor, 0, Vector2.Zero, 0.5f, SpriteEffects.None, 0f); //1f is placeholder for scale
         }
     }
 
@@ -113,7 +113,7 @@ namespace PaddleBall{
         SpriteFont spriteFont;
         public void LoadContent(ContentManager Content) {
             content = Content;
-            spriteFont = content.Load<SpriteFont>("scoreboard");
+            spriteFont = content.Load<SpriteFont>("DS-DIGIT");
             LoadSavedScores();
             highScores.ForEach(score => score.LoadContent(Content));
         }
@@ -124,7 +124,8 @@ namespace PaddleBall{
 
         public void PostLoad() {
             position = new Vector2(520, 100);
-            scale = Vector2.One * (7f/10f);
+            //scale = Vector2.One * (7f/10f);
+            scale = Vector2.One * 1f;
             highScores.ForEach(score => score.PostLoad());
         }
 
