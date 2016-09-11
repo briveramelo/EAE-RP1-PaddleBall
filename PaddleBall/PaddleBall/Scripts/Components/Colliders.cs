@@ -12,23 +12,24 @@ namespace PaddleBall {
         CannonBall=1,
         Enemy=2,
         Shield=3,
-        Obstacle=4
     }
 
+    /// <summary>
+    /// Checks for collision from the preset layer options. Feel free to add layers and
+    /// their respective dictionary key,value pair here if you want to extend this
+    /// </summary>
     public class CircleCollider {
         public static Dictionary<Layer, List<CircleCollider>> allColliders = new Dictionary<Layer, List<CircleCollider>>() {
             {Layer.Cannon, new List<CircleCollider>()},
             {Layer.CannonBall, new List<CircleCollider>()},
             {Layer.Enemy, new List<CircleCollider>()},
             {Layer.Shield, new List<CircleCollider>()},
-            {Layer.Obstacle, new List<CircleCollider>()}
         };
         public static bool[][] layersWillCollide = new bool[][] {
-            new bool[] { false, false, true, false, false},  //Cannon
-            new bool[] { false, false, true, false, true},  //CannonBall
-            new bool[] { true, true, false, true, false},  //Enemy
-            new bool[] { false, false, true, false, false},  //Shield
-            new bool[] { false, true, true, false, false}  //Obstacle  
+            new bool[] { false, false, true, false},  //Cannon
+            new bool[] { false, false, true, false},  //CannonBall
+            new bool[] { true, true, false, true},  //Enemy
+            new bool[] { false, false, true, false}  //Shield
         };
 
         public static void ClearColliders() {
@@ -36,8 +37,7 @@ namespace PaddleBall {
                 {Layer.Cannon, new List<CircleCollider>()},
                 {Layer.CannonBall, new List<CircleCollider>()},
                 {Layer.Enemy, new List<CircleCollider>()},
-                {Layer.Shield, new List<CircleCollider>()},
-                {Layer.Obstacle, new List<CircleCollider>()}
+                {Layer.Shield, new List<CircleCollider>()}
             };
         }
         public Layer layer;

@@ -65,7 +65,7 @@
     <Compile Include="Scripts\GameObjects\Animations\BugDeathAnimation.cs" />
     <Compile Include="Scripts\GameObjects\Animations\MegaLaserAnimation.cs" />
     <Compile Include="Scripts\GameObjects\Animations\ShipExplosion.cs" />
-    <Compile Include="Scripts\GameObjects\Animations\PulseManager.cs" />
+    <Compile Include="Scripts\GameObjects\Animations\BackGroundPulseManager.cs" />
     <Compile Include="Scripts\GameObjects\Debugger.cs" />
     <Compile Include="Scripts\GameObjects\RoundDisplay.cs" />
     <Compile Include="Scripts\GameManagement\AudioManager.cs" />
@@ -73,11 +73,11 @@
     <Compile Include="Scripts\GameManagement\ScoreManagement\TextInputManager.cs" />
     <Compile Include="Scripts\Components\Coroutiner.cs" />
     <Compile Include="Scripts\GameManagement\ScoreManagement\ScoreBoard.cs" />
-    <Compile Include="Scripts\GameObjects\Ship\Cannon.cs" />
+    <Compile Include="Scripts\GameObjects\Ship\Ship.cs" />
     <Compile Include="Scripts\GameManagement\GameManager.cs" />
     <Compile Include="Scripts\GameManagement\Program.cs" />
     <Compile Include="Scripts\GameManagement\ScreenManagement\ScreenManager.cs" />
-    <Compile Include="Scripts\GameObjects\Ship\CannonBall.cs" />
+    <Compile Include="Scripts\GameObjects\Ship\Laser.cs" />
     <Compile Include="Scripts\GameObjects\Buttons\Buttons.cs" />
     <Compile Include="Scripts\GameObjects\MouseCursor.cs" />
     <Compile Include="Scripts\GameObjects\Ship\MegaLaserCollider.cs" />

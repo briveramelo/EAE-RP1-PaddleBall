@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 
 namespace PaddleBall {
+
+    /// <summary>
+    /// For drawing the background of a gamescreen
+    /// </summary>
     public class GameScreen {
 
         Texture2D image;

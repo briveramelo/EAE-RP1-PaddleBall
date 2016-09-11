@@ -8,6 +8,11 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 namespace PaddleBall {
+
+    /// <summary>
+    /// Just to ensure there is a display of a mouse in the title and scoreboard screens
+    /// Looks a little funky though
+    /// </summary>
     public class MouseCursor : GameObject {
 
         public override void LoadContent(ContentManager Content) {

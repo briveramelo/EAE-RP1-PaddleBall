@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaddleBall {
+
+    /// <summary>
+    /// Displays the current round for the current game session
+    /// </summary>
     public class RoundDisplay : GameObject {
 
         SpriteFont spriteFont;

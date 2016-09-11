@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+/// <summary>
+/// Input for handling animations
+/// </summary>
 public struct SpriteSheetSpecs {
     public int width, height, numFrames, framesPerRow, numGameFramesPerAnimFrame, xGap, yGap;
 
@@ -24,6 +28,8 @@ public struct SpriteSheetSpecs {
 namespace PaddleBall {
     /// <summary>
     /// For uniform-size rectangular snapshots from a spritesheet
+    /// Must call this animation.Draw function in every draw frame if you expect to see it!
+    /// Extendable for custom animation classes that may destroy themselves on a single animation completion or otherwise
     /// </summary>
     public class Animation {
         protected Texture2D spriteSheet;

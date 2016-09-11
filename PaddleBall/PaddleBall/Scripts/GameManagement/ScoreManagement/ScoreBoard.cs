@@ -3,6 +3,11 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 namespace PaddleBall {
+
+    /// <summary>
+    /// In game display to show the player their current score
+    /// Gets input from bugs when they die to increment the score
+    /// </summary>
     class ScoreBoard : GameObject {
 
         static int score;

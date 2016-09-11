@@ -1,0 +1,475 @@
+commit feb87b63b6d3a78d9cd44d5afba979b56458124e
+Author:     Brandon Rivera-Melo <brm@alum.northwestern.edu>
+AuthorDate: Wed Aug 24 01:12:03 2016 -0600
+Commit:     Brandon Rivera-Melo <brm@alum.northwestern.edu>
+CommitDate: Wed Aug 24 01:12:03 2016 -0600
+
+    First commit
+
+commit 1f84fb8408c24ac78fcd7df84e937f5483898392
+Author:     Brandon Rivera-Melo <brm@alum.northwestern.edu>
+AuthorDate: Wed Aug 24 01:41:35 2016 -0600
+Commit:     Brandon Rivera-Melo <brm@alum.northwestern.edu>
+CommitDate: Wed Aug 24 01:41:35 2016 -0600
+
+    Just loading images onto the screen. No physics or anything yet. BUT this does have proof of inputs getting registered and printing out to the debug console (display by pressing ctrl+alt+o)
+
+commit 82d3e0a832af63669cd650d36cafd1cae8984e2f
+Author:     Brandon Rivera-Melo <brm@alum.northwestern.edu>
+AuthorDate: Wed Aug 24 20:24:41 2016 -0600
+Commit:     Brandon Rivera-Melo <brm@alum.northwestern.edu>
+CommitDate: Wed Aug 24 20:24:41 2016 -0600
+
+    Cannon automatically rotates with player input to switch direction
+
+commit 4d3561d510bf289040d0c849bba0fd57767b3867
+Author:     Brandon Rivera-Melo <brm@alum.northwestern.edu>
+AuthorDate: Thu Aug 25 00:12:16 2016 -0600
+Commit:     Brandon Rivera-Melo <brm@alum.northwestern.edu>
+CommitDate: Thu Aug 25 00:12:16 2016 -0600
+
+    Now you can fire balls! Destruction in the code is even handled :) Still need to introduce collisions with incoming threats and the magnetic attraction force.
+
+commit c8ddfa1c73846eaeb2e2d6679fee75b034f99ea4
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sat Aug 27 17:50:11 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sat Aug 27 17:50:11 2016 -0600
+
+    Launch and return functional!
+
+commit 289cfa6fe19abceebb7122de8423cc6664794c9d
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sat Aug 27 20:13:06 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sat Aug 27 20:13:06 2016 -0600
+
+    small comment added
+
+commit b8ca630e050690012e34c60ca9904f86d8b25e3f
+Author:     akshay-yewale <akyyewale@gmail.com>
+AuthorDate: Sun Aug 28 13:16:33 2016 -0600
+Commit:     akshay-yewale <akyyewale@gmail.com>
+CommitDate: Sun Aug 28 13:16:33 2016 -0600
+
+    Spawning Enemy Units
+    
+    Does: Spawn, approach screen center
+    
+    Doesnot: spawn beyond viewport, score based
+
+commit dda769cc5797b0055d4ed5a4dfc05af2425fd320
+Merge: b8ca630 289cfa6
+Author:     akshay-yewale <akyyewale@gmail.com>
+AuthorDate: Sun Aug 28 13:22:40 2016 -0600
+Commit:     akshay-yewale <akyyewale@gmail.com>
+CommitDate: Sun Aug 28 13:22:40 2016 -0600
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	PaddleBall/PaddleBall/Scripts/GameObjects/Cannon.cs
+
+commit b3f23f1e8481fc7261f89c9cd94c725dda15029b
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Mon Aug 29 18:53:58 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Mon Aug 29 18:53:58 2016 -0600
+
+    Looping background music and sample soundfx for launching and reattching in place!
+
+commit e2c1a2d3dac3ec6466fd6da1125431c825487ce4
+Author:     akshay-yewale <akyyewale@gmail.com>
+AuthorDate: Tue Aug 30 12:27:42 2016 -0600
+Commit:     akshay-yewale <akyyewale@gmail.com>
+CommitDate: Tue Aug 30 12:27:51 2016 -0600
+
+    Enemyclass and EnemySpawner Class
+
+commit 0350a69959a7a8dec56ba7ecb82539ae1e2c7be7
+Author:     hardikagarwal <agarwal_hardik@yahoo.com>
+AuthorDate: Tue Aug 30 12:30:47 2016 -0600
+Commit:     hardikagarwal <agarwal_hardik@yahoo.com>
+CommitDate: Tue Aug 30 12:30:47 2016 -0600
+
+    Collision
+    
+    Checks the distance between the two vectors.
+
+commit 38541c9daad56922472db58b0fa8ba62d178e2c1
+Merge: 0350a69 e2c1a2d
+Author:     hardikagarwal <agarwal_hardik@yahoo.com>
+AuthorDate: Tue Aug 30 12:48:02 2016 -0600
+Commit:     hardikagarwal <agarwal_hardik@yahoo.com>
+CommitDate: Tue Aug 30 12:48:02 2016 -0600
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	PaddleBall/PaddleBall/Content/Content.mgcb
+    #	PaddleBall/PaddleBall/Scripts/GameManagement/PaddleBall.cs
+    #	PaddleBall/PaddleBall/Scripts/GameObjects/CannonBall.cs
+    #	PaddleBall/PaddleBall/Scripts/GameObjects/Enemy.cs
+    #	PaddleBall/PaddleBall/Scripts/GameObjects/GameObject.cs
+
+commit 4ea15cfcf10974400a6d9817ff87deac1a9f094b
+Author:     hardikagarwal <agarwal_hardik@yahoo.com>
+AuthorDate: Tue Aug 30 12:50:32 2016 -0600
+Commit:     hardikagarwal <agarwal_hardik@yahoo.com>
+CommitDate: Tue Aug 30 12:50:32 2016 -0600
+
+    test
+
+commit 59280fcf2fd367b95c7b65bc4b92dec1f6ea395c
+Merge: 38541c9 4ea15cf
+Author:     hardikagarwal <agarwal_hardik@yahoo.com>
+AuthorDate: Tue Aug 30 12:52:10 2016 -0600
+Commit:     hardikagarwal <agarwal_hardik@yahoo.com>
+CommitDate: Tue Aug 30 12:52:10 2016 -0600
+
+    Merge remote-tracking branch 'refs/remotes/origin/Hardik's-Branch'
+
+commit eab76d60d610b37a204272ec260ddc40da33168b
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Tue Aug 30 17:57:12 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Tue Aug 30 17:57:12 2016 -0600
+
+    Sprites and sound effects added. Started a collision detection system
+
+commit 9f2216244df21eeff4b9a2824074d0d79a65feab
+Merge: eab76d6 59280fc
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Tue Aug 30 21:00:21 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Tue Aug 30 21:00:21 2016 -0600
+
+    Resolved conflict with Hardik's copy in the Cannonball file
+
+commit e441bd6ae0d7a717ac03c5455f94d534e4984ec3
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Wed Aug 31 00:50:44 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Wed Aug 31 00:50:44 2016 -0600
+
+    ...First playable demo! Music, soundFX, controls, waves, shield, health. Still need to add a loss state, fix the score multiplier, create endless number of enemies, high scores list, and ALL the other bonus things we want to add ;)
+
+commit dc8b5a325393667e0a09261672d7887107f4222b
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Wed Aug 31 01:24:29 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Wed Aug 31 01:24:29 2016 -0600
+
+    Now supporting 'a' and 'd' key inputs to switch direction, left and right arrow keys, AND mouse clicks! Sound effects added for when the cannon gets hit. Commenting for a good chunk of the code now present as well!
+
+commit de0d7e63cb05340f4b59432fac3954c0a3b2183d
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Wed Aug 31 01:27:32 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Wed Aug 31 01:27:32 2016 -0600
+
+    Removed a duplicate folder
+
+commit c958328e3c9bab5b11dc4a8eb5a2e788c102cf07
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Wed Aug 31 01:42:07 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Wed Aug 31 01:42:07 2016 -0600
+
+    Fixed the bug that causes the game to crash when a bug htis your shield! All is well in the world of paddilators once more
+
+commit 6c0530baf683f078590578ca970d90f7facbf6a1
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Thu Sep 1 01:13:21 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Thu Sep 1 01:13:21 2016 -0600
+
+    Smaller sprites, slightly tuned waves, unlimited waves, exits on loss
+
+commit cfdcbccf62c2e58f27b8b56dbabefcd1313e004b
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Thu Sep 1 09:41:49 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Thu Sep 1 09:41:49 2016 -0600
+
+    Shield now visually changes on collision
+
+commit 1c2b007215f5e869ef87cac9816cd114e6b62c82
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Thu Sep 1 10:37:24 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Thu Sep 1 10:37:24 2016 -0600
+
+    Updated Background Image
+
+commit 096faef1d2a54042653f10ac65cf1159f4e5d9ff
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Thu Sep 1 10:41:44 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Thu Sep 1 10:41:44 2016 -0600
+
+    Fixed a pixel in the background
+
+commit 19298de50e7a082d2ba95c40285b28a9d77708e0
+Author:     Minal Luxman Kalkute <u1059060@ad.utah.edu>
+AuthorDate: Thu Sep 1 11:16:20 2016 -0600
+Commit:     Minal Luxman Kalkute <u1059060@ad.utah.edu>
+CommitDate: Thu Sep 1 11:16:20 2016 -0600
+
+    Changed the font of score in scorboard code
+
+commit 81eaee87e79ff13f428dcddb92f9fba4cdb1601d
+Merge: 19298de 096faef
+Author:     Minal Luxman Kalkute <u1059060@ad.utah.edu>
+AuthorDate: Thu Sep 1 11:17:29 2016 -0600
+Commit:     Minal Luxman Kalkute <u1059060@ad.utah.edu>
+CommitDate: Thu Sep 1 11:17:29 2016 -0600
+
+    Merge branch 'master' of https://github.com/briveramelo/EAE-RP1-PaddleBall
+
+commit de56f19555be003de38e3bb1ca164429ada40714
+Author:     Minal Luxman Kalkute <u1059060@ad.utah.edu>
+AuthorDate: Thu Sep 1 11:37:45 2016 -0600
+Commit:     Minal Luxman Kalkute <u1059060@ad.utah.edu>
+CommitDate: Thu Sep 1 11:37:45 2016 -0600
+
+    Sharper score font
+
+commit 63d9bb222da02b4db9f5347775ac725f614b424d
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sat Sep 3 02:13:27 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sat Sep 3 02:13:27 2016 -0600
+
+    MOVE ACROSS SCREENS! Featuring: Title screen, high scores list, and game screen! *Caveat** currently you need to press 'r' to reset the game or to start the game screen, and you need to press 't' to enter the high scores view. Also, still need to serialize the high scores list and load it so that it persists across play sessions! Plus, everthing else on our to do list
+
+commit 1118bd70e34aaf046f578f8e14e62ccfa3ae3a4b
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sat Sep 3 02:14:40 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sat Sep 3 02:14:40 2016 -0600
+
+    slowed down the bug speed to normal...(it was super fast for quick debugging)
+
+commit 59d497e6d1da83e531e130a428ad37fbbd9b6cf4
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sat Sep 3 02:20:42 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sat Sep 3 02:20:42 2016 -0600
+
+    removed duplicate post loading bug. All is 'well' once more!
+
+commit 70e8d8fc0d2294e13dcbaf084479b8fb7439e828
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sat Sep 3 22:13:27 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sat Sep 3 22:13:27 2016 -0600
+
+    High Scores Persist across play sessionsgit add --a! Still need to add a 3-character name input ability so you can type in your name. Additionally, the paddle now shoots LASERS. Still need a new image for the laser because it's still a cannonball type thing and I need to limit the firing rate (currently just limited by how fast you can press.. lol.
+
+commit f13ddc3e031e420ec029a1a7ddc371dc1d1ca156
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sun Sep 4 01:39:28 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sun Sep 4 01:39:28 2016 -0600
+
+    ENTER YOUR NAME INTO A HIGH SCORES LISTgit add --a Success. Even highlights your most recent score so when you go to look at it you can immediately see YOUR score in the list! Pretty sweet... I know. Still need to make natural transitions between screens ie: using buttons and not the 'r' and 't' buttons
+
+commit 0f40ff2d813ddcab11c42b53aea3a0874e5ca315
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sun Sep 4 03:17:34 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sun Sep 4 03:17:34 2016 -0600
+
+    NAVIGATE BETWEEN SCREENS ON MOUSE CLICK WITH GUI BUTTONS! The art is placeholder, but the functionality is real. On the title screen you have the option of viewing the high scores screen or starting the game. From the scores screen you can navigate back to the title. From the game screen, you must play! If you earn a high score, you will be prompted to enter your name. Once you do, you will be returned to the title screen. If you do not earn a high score, you will not be prompted and returned to the title screen. FULL GAME LOOP BABY!
+
+commit c059e1f1731beda6dde6902929cf0bdf4a06d5fe
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sun Sep 4 03:18:06 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sun Sep 4 03:18:06 2016 -0600
+
+    Restored the starting score to 0...
+
+commit 7cf97c91cdc60b23c47573cfb19563a6f404711e
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Sun Sep 4 03:30:16 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Sun Sep 4 03:30:16 2016 -0600
+
+    Limited firing rate of the paddle. Now you can only have 2 lasers on screen at any time and with a small time delay between shots too (0.1sec)
+
+commit 407dd18fe103e42ce71fb75eea1961f9af4b01de
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Mon Sep 5 14:53:25 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Mon Sep 5 14:53:25 2016 -0600
+
+    Tuned turning rate! Now you need to hold direction to turn and its faster! Also, animation class ready for use in the game!
+
+commit 1e12eba56d35f5255455092545ad8b2c569530e5
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Mon Sep 5 22:21:51 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Mon Sep 5 22:21:51 2016 -0600
+
+    Balanced and tuned v1. Waves come with increasingly frequent and faster moving bugs. Also has an optional control where pressing and holding leftctrl or leftshift will slow down the rotation so you can fine tune your movement
+
+commit 66008faa89ef99e7f324fce10e4413b7519807a6
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Tue Sep 6 00:38:19 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Tue Sep 6 00:38:19 2016 -0600
+
+    Name entry countdown timer in place
+
+commit de24afaf074ea08a7d007df973676d514348c625
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Tue Sep 6 09:23:39 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Tue Sep 6 09:23:39 2016 -0600
+
+    got score back to 0 to start
+
+commit 34246213be6ad2af2ad3ddf2c2f9775509701481
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Tue Sep 6 15:24:30 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Tue Sep 6 15:24:30 2016 -0600
+
+    Fixed the countdown timer 10sec mismatch bug
+
+commit fc3f969af9b2fe51220bfb77320ba2e54a1eb888
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Tue Sep 6 20:48:02 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Tue Sep 6 20:48:02 2016 -0600
+
+    Made it fullscreen
+
+commit 3134aaac6b622a5e5a86d646bc55d5c255385ace
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Wed Sep 7 08:35:31 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Wed Sep 7 08:35:31 2016 -0600
+
+    INTENSE debug mode added for the demo. Press 'asdf + Enter' during game mode to jump ahead to round 8. Also, music PROPERLY LOOPS. Thanks to Cade for getting that music on the Unity Asset store- it's so tight :)
+
+commit 6deacc5031401404eb90b8ce9506b52fa6eadbc4
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Wed Sep 7 10:12:37 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Wed Sep 7 10:12:37 2016 -0600
+
+    Fixed the countdown timer
+
+commit 215cb43eefba424c20deb7ae09ce2a9bf804ee79
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Wed Sep 7 13:59:21 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Wed Sep 7 13:59:21 2016 -0600
+
+    Pulse Animations In!
+
+commit 3763d5fe5240c27f51cba35250378b8fc924d18d
+Author:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+AuthorDate: Wed Sep 7 16:12:52 2016 -0600
+Commit:     BRANDON RIVERA-MELO <u1089885@ad.utah.edu>
+CommitDate: Wed Sep 7 16:12:52 2016 -0600
+
+    Shield Animations in place!
+
+commit fa89af23d9c37f38f93f2a001188dd9d6d3055b7
+Author:     akshay-yewale <akyyewale@gmail.com>
+AuthorDate: Wed Sep 7 18:33:14 2016 -0600
+Commit:     akshay-yewale <akyyewale@gmail.com>
+CommitDate: Wed Sep 7 18:34:32 2016 -0600
+
+    Addition of Mega Laser
+    
+    Mega Laser is added  with 5seconds to use it
+
+commit 6db3cc1340b5fb23383dae14978d06562d57c64a
+Author:     akshay-yewale <akyyewale@gmail.com>
+AuthorDate: Wed Sep 7 18:33:57 2016 -0600
+Commit:     akshay-yewale <akyyewale@gmail.com>
+CommitDate: Wed Sep 7 18:34:32 2016 -0600
+
+    New Changes of Mega Laser
+    
+    Mega Laser Reload
+
+commit b4e557c9fc077745a8a26d3668b2ad6ab6d52911
+Author:     hardikagarwal <agarwal_hardik@yahoo.com>
+AuthorDate: Wed Sep 7 19:50:44 2016 -0600
+Commit:     hardikagarwal <agarwal_hardik@yahoo.com>
+CommitDate: Wed Sep 7 19:50:55 2016 -0600
+
+    Replaced Font File
+    
+    Replaced spritefont with bitmap font in content manager "DS-DIGIT.bmp"
+
+commit 8c6009521094fe27c752f0fad2680beea05ca9b9
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Wed Sep 7 20:05:53 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Wed Sep 7 20:05:53 2016 -0600
+
+    Animations are in place for: 1. Bug walking. 2. Bug dying. 3. Laser
+
+commit 304023a03e07082158894843fcba79039d49c6b4
+Merge: 8c60095 b4e557c
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Wed Sep 7 20:16:47 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Wed Sep 7 20:16:47 2016 -0600
+
+    merging cannon conflict
+
+commit cf1e84edffa7d1f5fb468604ba8adec77762ab75
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Wed Sep 7 20:20:40 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Wed Sep 7 20:20:40 2016 -0600
+
+    Normal spawning
+
+commit 078b3ca4627adf2eb3f86500f5432c4ccbd39d5f
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Wed Sep 7 20:24:48 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Wed Sep 7 20:24:48 2016 -0600
+
+    Save Data folder removed so you can now just load the game without any hassle
+
+commit 1b9d71db724ddb64d68695ed351be03fcfdc3963
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Wed Sep 7 22:58:18 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Wed Sep 7 22:58:18 2016 -0600
+
+    MEGA LASER IN THE HOUSE
+
+commit f43a351ce1019060b886e5e6ebcb0cf584ffc89a
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Thu Sep 8 02:05:48 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Thu Sep 8 02:05:48 2016 -0600
+
+    Buttons working!
+
+commit 43f4aec71a8f81e78d61ded69e09758fd7c76b9d
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Thu Sep 8 02:37:23 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Thu Sep 8 02:37:23 2016 -0600
+
+    Final build ready to go
+
+commit 42c09dec14863f1498ddda27205d2e0d85f1a1f8
+Author:     u1089885 <b.riveramelo@utah.edu>
+AuthorDate: Thu Sep 8 02:39:40 2016 -0600
+Commit:     u1089885 <b.riveramelo@utah.edu>
+CommitDate: Thu Sep 8 02:39:40 2016 -0600
+
+    Fixed the scoreboard. NOW it's final :)

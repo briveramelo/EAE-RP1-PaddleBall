@@ -7,13 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaddleBall {
-    public class PulseManager {
 
-        private static PulseManager instance;
-        public static PulseManager Instance {
+    /// <summary>
+    /// Preloads and pools several background pulse animations to prevent the hit in performance during a load for these massive file loads
+    /// The files are about 1.5MB for the pulse animation, so these need to be memory managed for performance
+    /// This class handles that
+    /// </summary>
+    public class BackGroundPulseManager {
+
+        private static BackGroundPulseManager instance;
+        public static BackGroundPulseManager Instance {
             get {
                 if (instance == null) {
-                    instance = new PulseManager();
+                    instance = new BackGroundPulseManager();
                 }
                 return instance;
             }

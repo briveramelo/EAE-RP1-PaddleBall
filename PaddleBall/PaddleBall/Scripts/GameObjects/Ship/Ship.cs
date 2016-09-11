@@ -9,8 +9,12 @@ using System.Collections;
 
 namespace PaddleBall
 {
-
-    public class Cannon : GameObject
+    /// <summary>
+    /// Your trusty ship!
+    /// Launches lasers and megalasercolliders
+    /// Also handles input for rotating and firing
+    /// </summary>
+    public class Ship : GameObject
     {
 
         float baseDegPerSec = 4f;
@@ -20,10 +24,10 @@ namespace PaddleBall
         public bool isMegaLaserFirable = false;
         CircleCollider myCollider;
         float forwardOffsetRotation = (float)Math.PI / 2f;
-        CannonBall cannonBall;
+        Laser cannonBall;
         MegaLaserAnimation megaLaserAnimation;
 
-        public Cannon() : base() { }
+        public Ship() : base() { }
 
         public override Vector2 forward
         {
@@ -34,14 +38,14 @@ namespace PaddleBall
             }
         }
 
-        private static Cannon instance;
-        public static Cannon Instance
+        private static Ship instance;
+        public static Ship Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new Cannon();
+                    instance = new Ship();
                 }
                 return instance;
             }
@@ -99,14 +103,14 @@ namespace PaddleBall
             if ((keyboardState.IsKeyDown(Keys.Space) && lastKeyboardState != keyboardState) ||
                 (mouseState.LeftButton == ButtonState.Pressed && lastMouseState != mouseState))
             {
-                if (CannonBall.numCannonBalls < maxBalls && !isPausedForDelay)
+                if (Laser.numCannonBalls < maxBalls && !isPausedForDelay)
                 {
                     Fire();
                 }
             }
 
 
-            if ((keyboardState.IsKeyDown(Keys.LeftAlt)) ||
+            if ((keyboardState.IsKeyDown(Keys.LeftControl)) ||
                 (mouseState.RightButton == ButtonState.Pressed )){
                 if (isMegaLaserFirable) {
                     isFiringLaser = true;
@@ -129,8 +133,7 @@ namespace PaddleBall
 
         void HandleRotation(KeyboardState keyboardState)
         {
-            if ((keyboardState.IsKeyDown(Keys.LeftControl) && lastKeyboardState.IsKeyUp(Keys.LeftControl)) ||
-                (keyboardState.IsKeyDown(Keys.LeftShift) && lastKeyboardState.IsKeyUp(Keys.LeftShift)))
+            if ((keyboardState.IsKeyDown(Keys.LeftShift) && lastKeyboardState.IsKeyUp(Keys.LeftShift)))
             {
                 radPerSec = slowDegPerSec * (float)Math.PI / 180f;
             }
@@ -168,7 +171,7 @@ namespace PaddleBall
         float megaLaserSpeed = 100f;
         void Fire()
         {
-            cannonBall = new CannonBall(position + forward * 75);
+            cannonBall = new Laser(position + forward * 75);
             cannonBall.LoadContent(content);
             cannonBall.PostLoad();
             cannonBall.Launch(forward * fireSpeed);

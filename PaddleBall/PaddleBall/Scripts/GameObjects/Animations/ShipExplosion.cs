@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaddleBall {
+
+    /// <summary>
+    /// Just creates an object to draw the explosion and then destroys itself
+    /// </summary>
     public class ShipExplosion : GameObject {
 
         Animation shipExplosionAnimation;
@@ -23,7 +27,6 @@ namespace PaddleBall {
 
         public override void PostLoad() {
             SetOriginInPixels(spriteSheetSpecs.width / 2, spriteSheetSpecs.height / 2);
-            //base.PostLoad();
         }
 
         public override void Draw(SpriteBatch spriteBatch) {

@@ -9,6 +9,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
+    
+    /// <summary>
+    /// Loads menu screens within the click of a rectangular area
+    /// Flips between two images
+    /// YOU MUST LOAD 2 IMAGES for the texture paths. Otherwise you will get errors.
+    /// This is error prone if used incorrectly. May require restructuring for future use
+    /// </summary>
     public class Button : GameObject {
 
         public RectangleD myRec;

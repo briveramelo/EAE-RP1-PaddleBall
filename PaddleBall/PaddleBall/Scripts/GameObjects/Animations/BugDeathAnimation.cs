@@ -7,6 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaddleBall {
+
+    /// <summary>
+    /// Play this animation when a bug dies
+    /// Gets created and destroyed on death for a single playback
+    /// </summary>
     class BugDeathAnimation : GameObject {
 
         Animation bugDeathAnimation;

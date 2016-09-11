@@ -7,6 +7,11 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
+
+
+    /// <summary>
+    /// Animates the electricity when hit with a bug
+    /// </summary>
     class BackgroundPulse : GameObject {
 
         Animation screenPulseAnimation;

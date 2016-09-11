@@ -11,6 +11,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
 namespace PaddleBall {
+
+    /// <summary>
+    /// Included for demo purposes to increase excitement in the short time available.
+    /// Fun easter egg
+    /// </summary>
     public class Debugger {
         private static Debugger instance;
         public static Debugger Instance {
@@ -48,7 +53,7 @@ namespace PaddleBall {
         bool displayDebugMode;
         IEnumerator DisplayEnterDebugMode() {
             displayDebugMode = true;
-            Cannon.Instance.ActivateMegaLaser();
+            Ship.Instance.ActivateMegaLaser();
             AudioManager.Instance.PlaySound(SoundFX.MegaLaser);
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -82,7 +87,6 @@ namespace PaddleBall {
             content = Content;
             spriteFont = content.Load<SpriteFont>("DS-DIGIT");
             position = new Vector2(225,800);
-            //scale = Vector2.One * (6f / 10f);
             scale = Vector2.One * 1f;
         }
         SpriteFont spriteFont;

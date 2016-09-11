@@ -7,6 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall
 {
+
+    /// <summary>
+    /// The mega laser isn't actually a beam
+    /// It's a lot of very fast, invisible balls shooting out
+    /// This is that ball is.
+    /// </summary>
     class MegaLaserCollider : GameObject
     {
         public CircleCollider myCollider;

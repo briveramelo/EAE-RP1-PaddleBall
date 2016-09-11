@@ -11,6 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaddleBall {
+
+    /// <summary>
+    /// Allows the player to enter their initials at the end of a play session if they hit a new high score
+    /// Includes a countdown timer to keep people playing and quickly entering their high score
+    /// </summary>
     public class TextInputManager {
 
         Coroutiner myCoroutiner;

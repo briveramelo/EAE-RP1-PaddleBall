@@ -6,7 +6,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
 
-    class CannonBall : GameObject {
+    /// <summary>
+    /// The laser the ship shoots 
+    /// </summary>
+    class Laser : GameObject {
 
         public CircleCollider myCollider;
         Vector2 velocity = Vector2.Zero;
@@ -14,7 +17,7 @@ namespace PaddleBall {
         Animation myAnimation;
         SpriteSheetSpecs mySpriteSheetSpecs;
 
-        public CannonBall(Vector2 position) : base() {
+        public Laser(Vector2 position) : base() {
             this.position = position;
             numCannonBalls++;
         }
@@ -43,7 +46,7 @@ namespace PaddleBall {
         /// <param name="velocity"></param>
         public void Launch(Vector2 velocity) {
             this.velocity = velocity;
-            rotation = (float)(Math.Atan2(velocity.Y, velocity.X));// * (Math.PI / 180f));
+            rotation = (float)(Math.Atan2(velocity.Y, velocity.X));
         }
 
         float distanceToDestroy = 2000;
@@ -70,7 +73,6 @@ namespace PaddleBall {
 
         public override void Draw(SpriteBatch spriteBatch) {
             myAnimation.Draw(spriteBatch);
-            //base.Draw(spriteBatch);
         }
 
         public override void Destroy() {

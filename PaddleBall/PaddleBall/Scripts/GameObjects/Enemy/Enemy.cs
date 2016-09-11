@@ -11,6 +11,9 @@ using System.Collections.Generic;
 
 namespace PaddleBall
 {
+    /// <summary>
+    /// The bug
+    /// </summary>
     class Enemy : GameObject
     {
         int health = 1;

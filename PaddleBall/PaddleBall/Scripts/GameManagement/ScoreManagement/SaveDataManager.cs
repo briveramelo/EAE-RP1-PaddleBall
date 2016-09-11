@@ -9,6 +9,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework.Content;
 
 namespace PaddleBall{
+
+    /// <summary>
+    /// Saves the data and writes it to file
+    /// Also loads the data on start
+    /// </summary>
     public static class SaveDataManager {
 
         public static DataSave CopyCurrentDataSave() {

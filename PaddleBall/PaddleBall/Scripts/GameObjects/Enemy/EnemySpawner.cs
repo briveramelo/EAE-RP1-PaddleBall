@@ -7,7 +7,9 @@ using System.Diagnostics;
 
 namespace PaddleBall
 {
-
+    /// <summary>
+    /// Time range for spawning purposes. Also for a bunch of other stuff
+    /// </summary>
     public struct Range {
         public float min, max;
         public float diff { get { return Math.Abs(max - min); } }
@@ -16,6 +18,9 @@ namespace PaddleBall
             this.max = max;
         }
     }
+    /// <summary>
+    /// Properties for a round
+    /// </summary>
     public class Round {
         public int round;
         public int enemyCount;
@@ -30,6 +35,9 @@ namespace PaddleBall
         }
     }
 
+    /// <summary>
+    /// Dope class that handles the intensity of wave spawning
+    /// </summary>
     public class EnemySpawner 
     {
         private static EnemySpawner instance;

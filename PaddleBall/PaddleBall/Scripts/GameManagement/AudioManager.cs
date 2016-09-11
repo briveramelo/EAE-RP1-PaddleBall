@@ -19,7 +19,9 @@ namespace PaddleBall{
         ShieldHit=5,
         MegaLaser=6
     }
-    //Handles all sound effects and background music
+    /// <summary>
+    /// Handles all sound effects and background music
+    /// </summary>
     public class AudioManager {
 
         private static AudioManager instance;

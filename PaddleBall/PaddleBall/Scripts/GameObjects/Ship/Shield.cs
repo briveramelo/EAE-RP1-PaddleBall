@@ -9,6 +9,11 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace PaddleBall {
+
+    /// <summary>
+    /// Trusty shield
+    /// if you change its health, beware. The health is used for indexing the current animation
+    /// </summary>
     public class Shield : GameObject {
 
         CircleCollider myCollider;
@@ -69,9 +74,9 @@ namespace PaddleBall {
         void TakeDamage() {
             AudioManager.Instance.PlaySound(SoundFX.ShieldHit);
             health--;
-            PulseManager.Instance.Animate();
+            BackGroundPulseManager.Instance.Animate();
             if (health == 0) {
-                Cannon.Instance.ActivateMegaLaser();
+                Ship.Instance.ActivateMegaLaser();
                 
                 Destroy();
             }

@@ -7,9 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaddleBall{
+
+
+    /// <summary>
+    /// Animates the megalaser
+    /// </summary>
     public class MegaLaserAnimation : Animation {
-
-
         public MegaLaserAnimation(GameObject parentGameObject, SpriteSheetSpecs spriteSheetSpecs, string spriteSheetPath) : base(parentGameObject, spriteSheetSpecs, spriteSheetPath) {
         }
 

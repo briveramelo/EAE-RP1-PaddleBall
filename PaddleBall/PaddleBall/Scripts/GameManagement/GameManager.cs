@@ -8,11 +8,11 @@ using System.Collections.Generic;
 using System.Collections;
 
 namespace PaddleBall {
+    
+    
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    /// 
-
     public class GameManager : Game {
 
         GraphicsDeviceManager graphics;
@@ -35,7 +35,7 @@ namespace PaddleBall {
 
         public GameManager() {
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -62,7 +62,7 @@ namespace PaddleBall {
             ScreenManager.Instance.LoadContent(Content);
             AudioManager.Instance.LoadContent(Content);
             SaveDataManager.LoadContent(Content);
-            PulseManager.Instance.LoadContent(Content);
+            BackGroundPulseManager.Instance.LoadContent(Content);
             LoadScores();
             HighScoreDisplay.Instance.OnGameOpen();
             LoadTitleScreen();
@@ -117,7 +117,7 @@ namespace PaddleBall {
         void ClearScreen() {
             GameObject.ClearGameObjects();
             CircleCollider.ClearColliders();
-            CannonBall.numCannonBalls = 0;
+            Laser.numCannonBalls = 0;
             Debugger.Instance = null;
         }
 
@@ -164,8 +164,8 @@ namespace PaddleBall {
 
         void LoadGameScreen() {
             ClearScreen();
-            PulseManager.Instance.Reset();
-            Cannon.Instance = new Cannon();
+            BackGroundPulseManager.Instance.Reset();
+            Ship.Instance = new Ship();
             Shield.Instance = new Shield();
             ScoreBoard.Instance = new ScoreBoard();
             new RoundDisplay();
@@ -175,7 +175,7 @@ namespace PaddleBall {
             EnemySpawner.Instance.LoadContent(Content);
             Debugger.Instance.LoadContent(Content);
 
-            Cannon.Instance.PostLoad();
+            Ship.Instance.PostLoad();
             Shield.Instance.PostLoad();
             ScoreBoard.Instance.PostLoad();
             GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
@@ -194,9 +194,7 @@ namespace PaddleBall {
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
             KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Escape)) {
-                Exit();
-            }
+            
             
             UpdateCurrentScreen(gameTime, keyboardState);
             myCoroutiner.Update();
@@ -229,18 +227,21 @@ namespace PaddleBall {
             if (keyboardState.IsKeyDown(Keys.Enter) && lastKeyBoardState!=keyboardState) {
                 LoadNewScreen(Screen.Game);
             }
+            if (keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoardState != keyboardState) {
+                Exit();
+            }
         }
 
         void UpdateScoreScreen(KeyboardState keyboardState) {
-            if (keyboardState.IsKeyDown(Keys.Back)) {
+            if ((keyboardState.IsKeyDown(Keys.Back) || keyboardState.IsKeyDown(Keys.Escape)) && lastKeyBoardState != keyboardState) {
                 LoadNewScreen(Screen.Title);
-            }
+            }           
         }
 
         void UpdateGameScreen(KeyboardState keyboardState) {
             EnemySpawner.Instance.Update();
             Debugger.Instance.Update();
-            if (keyboardState.IsKeyDown(Keys.Back) && !TextInputManager.Instance.IsTyping()) {
+            if ((keyboardState.IsKeyDown(Keys.Back) || keyboardState.IsKeyDown(Keys.Escape)) && !TextInputManager.Instance.IsTyping()) {
                 LoadTitleScreen();
             }
         }
@@ -292,7 +293,7 @@ namespace PaddleBall {
             if (TextInputManager.Instance.IsTyping()) {
                 TextInputManager.Instance.Draw(spriteBatch);
             }
-            PulseManager.Instance.Draw(spriteBatch);
+            BackGroundPulseManager.Instance.Draw(spriteBatch);
             Debugger.Instance.Draw(spriteBatch);
         }
         #endregion

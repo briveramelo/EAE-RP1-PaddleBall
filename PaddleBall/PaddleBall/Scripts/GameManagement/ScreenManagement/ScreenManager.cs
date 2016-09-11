@@ -14,6 +14,9 @@ namespace PaddleBall {
         Scores=1,
         Game =2
     }
+    /// <summary>
+    /// Manages which screen current is selected and which texture to load for each
+    /// </summary>
     public class ScreenManager {
 
         public Vector2 Dimensions = new Vector2(1920, 1080);
@@ -41,9 +44,9 @@ namespace PaddleBall {
         public void LoadContent(ContentManager Content) {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
             gameScreens = new Dictionary<Screen, GameScreen>() {
-                {  Screen.Title, new GameScreen("Images/TitleScreen") },
-                {  Screen.Scores, new GameScreen("Images/blackground") },
-                {  Screen.Game, new GameScreen("Images/darker_background") }
+                {  Screen.Title, new GameScreen("Images/Backgrounds/TitleScreen") },
+                {  Screen.Scores, new GameScreen("Images/Backgrounds/Blackground") },
+                {  Screen.Game, new GameScreen("Images/Backgrounds/GameScreen") }
             };
             for (int i = 0; i < 3; i++){
                 gameScreens[(Screen)i].LoadContent(Content);

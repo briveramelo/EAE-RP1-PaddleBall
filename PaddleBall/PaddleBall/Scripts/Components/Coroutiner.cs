@@ -7,6 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PaddleBall{
+
+    /// <summary>
+    /// Provides the scheduled timing of events like the IEnumerators and Coroutines in Unity.
+    /// The one difference you must remember is to call the Update function of this coroutiner 
+    /// for every frame in your gameobject or other class's update function as well
+    /// </summary>
     public class Coroutiner {
         public List<IEnumerator> coroutines = new List<IEnumerator>();
         public void StartCoroutine(IEnumerator coroutine) {

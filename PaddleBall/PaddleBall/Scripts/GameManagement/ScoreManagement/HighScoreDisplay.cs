@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace PaddleBall{
 
+    /// <summary>
+    /// format for storing a score!
+    /// must be serializable so it can be written to file/disk
+    /// </summary>
     [Serializable]
     public class Score {
         public int score;
@@ -24,7 +28,9 @@ namespace PaddleBall{
         }
     }
 
-
+    /// <summary>
+    /// On the high score screen, a list of these scoredisplays show a given score
+    /// </summary>
     public class ScoreDisplay : IComparable<ScoreDisplay> {
 
         public Score myScore;
@@ -86,6 +92,9 @@ namespace PaddleBall{
         }
     }
 
+    /// <summary>
+    /// Manages the display of all high scores
+    /// </summary>
     public class HighScoreDisplay {
 
         int maxHighScores = 10;

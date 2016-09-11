@@ -7,6 +7,10 @@ using System.Collections;
 
 namespace PaddleBall {
    
+    /// <summary>
+    /// Base class for all gameobjects in this game
+    /// very handy because of the public static list of all gameobjects which makes updating and drawing a breeze
+    /// </summary>
     public class GameObject {
         public GameObject() {
             allGameObjects.Add(this);
