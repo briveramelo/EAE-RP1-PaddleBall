@@ -12,7 +12,8 @@ namespace PaddleBall {
     public enum Screen {
         Title=0,
         Scores=1,
-        Game =2
+        Game =2,
+        Controls=3
     }
     /// <summary>
     /// Manages which screen current is selected and which texture to load for each
@@ -21,7 +22,6 @@ namespace PaddleBall {
 
         public Vector2 Dimensions = new Vector2(1920, 1080);
         public ContentManager Content;
-        BackgroundPulse backgroundPulse;
 
         Screen currentScreen = Screen.Scores;
         public void SetCurrentScreen(Screen newScreen) {
@@ -44,16 +44,14 @@ namespace PaddleBall {
         public void LoadContent(ContentManager Content) {
             this.Content = new ContentManager(Content.ServiceProvider, "Content");
             gameScreens = new Dictionary<Screen, GameScreen>() {
-                {  Screen.Title, new GameScreen("Images/Backgrounds/TitleScreen") },
-                {  Screen.Scores, new GameScreen("Images/Backgrounds/Blackground") },
-                {  Screen.Game, new GameScreen("Images/Backgrounds/GameScreen") }
+                {  Screen.Title, new GameScreen("Images/Backgrounds/Title") },
+                {  Screen.Scores, new GameScreen("Images/Backgrounds/HighScores") },
+                {  Screen.Game, new GameScreen("Images/Backgrounds/Game") },
+                {  Screen.Controls, new GameScreen("Images/Backgrounds/Controls") }
             };
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < 4; i++){
                 gameScreens[(Screen)i].LoadContent(Content);
-            }
-            //backgroundPulse = new BackgroundPulse();
-            //backgroundPulse.LoadContent(Content);
-            //backgroundPulse.PostLoad();
+            }            
         }
 
         public void UnloadContent() {
@@ -61,10 +59,7 @@ namespace PaddleBall {
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            gameScreens[currentScreen].Draw(spriteBatch);
-            if (currentScreen == Screen.Game) {
-                //backgroundPulse.Draw(spriteBatch);
-            }
+            gameScreens[currentScreen].Draw(spriteBatch);            
         }
     }
 }

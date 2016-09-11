@@ -19,6 +19,7 @@ namespace PaddleBall {
 
         public GameScreen(string backgroundImagePath) {
             this.backgroundImagePath = backgroundImagePath;
+            if (true) { }
         }
 
         public void LoadContent(ContentManager Content) {

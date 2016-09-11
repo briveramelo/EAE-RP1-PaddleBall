@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Collections;
 
 namespace PaddleBall {
-    
-    
+
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -35,7 +35,7 @@ namespace PaddleBall {
 
         public GameManager() {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -49,7 +49,7 @@ namespace PaddleBall {
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
-            
+
             base.Initialize();
         }
 
@@ -70,7 +70,7 @@ namespace PaddleBall {
 
 
         #region Load Screens
-        public void LoadNewScreen(Screen newScreen) {            
+        public void LoadNewScreen(Screen newScreen) {
             switch (newScreen) {
                 case Screen.Title:
                     if (ScreenManager.Instance.GetCurrentScreen() == Screen.Game) {
@@ -86,6 +86,9 @@ namespace PaddleBall {
                     break;
                 case Screen.Game:
                     LoadGameScreen();
+                    break;
+                case Screen.Controls:
+                    LoadControlsScreen();
                     break;
             }
         }
@@ -103,7 +106,7 @@ namespace PaddleBall {
             }
             if (HighScoreDisplay.Instance.IsNewHighScore(ScoreBoard.Instance.GetScore())) {
                 TextInputManager.Instance.LoadContent(Content);
-                TextInputManager.Instance.PostLoad();                
+                TextInputManager.Instance.PostLoad();
 
                 while (TextInputManager.Instance.IsTyping()) {
                     TextInputManager.Instance.Update();
@@ -124,12 +127,14 @@ namespace PaddleBall {
         void LoadTitleScreen() {
             ClearScreen();
             lastKeyBoardState = new KeyboardState(Keys.Enter);
-            Vector2 gameButtonPosition = new Vector2((1920f / 2f), 1080-430);
-            Vector2 scoreButtonPosition = new Vector2((1920f / 2f), 1080 - 190);
+            Vector2 startButtonPosition = new Vector2(960f, 600f);
+            Vector2 scoresButtonPosition = new Vector2(960f, 875f);
+            Vector2 controlsButtonPosition = new Vector2(960f, 980f);
 
             new MouseCursor();
-            new Button(Screen.Game, gameButtonPosition, new string[] {"Images/Buttons/ClearButton", "Images/Buttons/ClearButton" });
-            new Button(Screen.Scores, scoreButtonPosition, new string[] { "Images/Buttons/ClearButton", "Images/Buttons/ClearButton" });
+            new Button(Screen.Game, startButtonPosition, new string[] { "Images/Buttons/Start", "Images/Buttons/Start" });
+            new Button(Screen.Scores, scoresButtonPosition, new string[] { "Images/Buttons/Scores", "Images/Buttons/Scores" });
+            new Button(Screen.Controls, controlsButtonPosition, new string[] { "Images/Buttons/Controls", "Images/Buttons/Controls" });
 
             for (int i = 0; i < 4; i++) {
                 BackgroundPulse bg = new BackgroundPulse();
@@ -139,7 +144,7 @@ namespace PaddleBall {
 
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
             GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
-            if (ScreenManager.Instance.GetCurrentScreen() != Screen.Scores) {
+            if (!(ScreenManager.Instance.GetCurrentScreen() == Screen.Scores || ScreenManager.Instance.GetCurrentScreen() == Screen.Controls)) {
                 AudioManager.Instance.PlayBackgroundMusic(Screen.Title);
             }
             ScreenManager.Instance.SetCurrentScreen(Screen.Title);
@@ -148,8 +153,8 @@ namespace PaddleBall {
         void LoadScoreScreen() {
             ClearScreen();
             new MouseCursor();
-            Vector2 buttonPos = new Vector2(200, ScreenManager.Instance.Dimensions.Y-100);
-            new Button(Screen.Title, buttonPos, new string[] {"Images/Buttons/MainMenu_NotDepressed", "Images/Buttons/MainMenu_Depressed" });            
+            Vector2 buttonPos = new Vector2(200, ScreenManager.Instance.Dimensions.Y - 100);
+            new Button(Screen.Title, buttonPos, new string[] { "Images/Buttons/MainMenu_NotDepressed", "Images/Buttons/MainMenu_Depressed" });
 
             LoadScores();
             GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
@@ -159,7 +164,7 @@ namespace PaddleBall {
 
         void LoadScores() {
             HighScoreDisplay.Instance.LoadContent(Content);
-            HighScoreDisplay.Instance.PostLoad();            
+            HighScoreDisplay.Instance.PostLoad();
         }
 
         void LoadGameScreen() {
@@ -182,6 +187,17 @@ namespace PaddleBall {
 
             AudioManager.Instance.PlayBackgroundMusic(Screen.Game);
             ScreenManager.Instance.SetCurrentScreen(Screen.Game);
+        }
+
+        void LoadControlsScreen() {
+            ClearScreen();
+            new MouseCursor();
+            Vector2 buttonPos = new Vector2(200, ScreenManager.Instance.Dimensions.Y - 100);
+            new Button(Screen.Title, buttonPos, new string[] { "Images/Buttons/MainMenu_NotDepressed", "Images/Buttons/MainMenu_Depressed" });
+
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.LoadContent(Content));
+            GameObject.allGameObjects.ForEach(gameobject => gameobject.PostLoad());
+            ScreenManager.Instance.SetCurrentScreen(Screen.Controls);
         }
         #endregion
 
@@ -215,6 +231,9 @@ namespace PaddleBall {
                 case Screen.Game:
                     UpdateGameScreen(keyboardState);
                     break;
+                case Screen.Controls:
+                    UpdateControlsScreen(keyboardState);
+                    break;
             }
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 if (i< GameObject.allGameObjects.Count) {
@@ -230,6 +249,9 @@ namespace PaddleBall {
             if (keyboardState.IsKeyDown(Keys.Escape) && lastKeyBoardState != keyboardState) {
                 Exit();
             }
+            if (keyboardState.IsKeyDown(Keys.P) && lastKeyBoardState != keyboardState) {
+                LoadNewScreen(Screen.Controls);
+            }
         }
 
         void UpdateScoreScreen(KeyboardState keyboardState) {
@@ -243,6 +265,12 @@ namespace PaddleBall {
             Debugger.Instance.Update();
             if ((keyboardState.IsKeyDown(Keys.Back) || keyboardState.IsKeyDown(Keys.Escape)) && !TextInputManager.Instance.IsTyping()) {
                 LoadTitleScreen();
+            }
+        }
+
+        void UpdateControlsScreen(KeyboardState keyboardState) {
+            if ((keyboardState.IsKeyDown(Keys.Back) || keyboardState.IsKeyDown(Keys.Escape)) && lastKeyBoardState != keyboardState) {
+                LoadNewScreen(Screen.Title);
             }
         }
         #endregion
@@ -275,6 +303,9 @@ namespace PaddleBall {
                 case Screen.Game:
                     DrawGame();
                     break;
+                case Screen.Controls:
+                    DrawControls();
+                    break;
             }
             for (int i = GameObject.allGameObjects.Count - 1; i >= 0; i--) {
                 GameObject.allGameObjects[i].Draw(spriteBatch);
@@ -295,6 +326,10 @@ namespace PaddleBall {
             }
             BackGroundPulseManager.Instance.Draw(spriteBatch);
             Debugger.Instance.Draw(spriteBatch);
+        }
+
+        void DrawControls() {
+
         }
         #endregion
 
