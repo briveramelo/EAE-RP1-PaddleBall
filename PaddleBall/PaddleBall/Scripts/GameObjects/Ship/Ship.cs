@@ -14,8 +14,7 @@ namespace PaddleBall
     /// Launches lasers and megalasercolliders
     /// Also handles input for rotating and firing
     /// </summary>
-    public class Ship : GameObject
-    {
+    public class Ship : GameObject{
 
         float baseDegPerSec = 4f;
         float slowDegPerSec = 2f;
@@ -29,22 +28,17 @@ namespace PaddleBall
 
         public Ship() : base() { }
 
-        public override Vector2 forward
-        {
-            get
-            {
+        public override Vector2 forward{
+            get{
                 float endRotation = rotation + forwardOffsetRotation;
                 return new Vector2((float)Math.Cos(endRotation), (float)Math.Sin(endRotation));
             }
         }
 
         private static Ship instance;
-        public static Ship Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
+        public static Ship Instance{
+            get{
+                if (instance == null){
                     instance = new Ship();
                 }
                 return instance;
@@ -52,14 +46,12 @@ namespace PaddleBall
             set { instance = value; }
         }
 
-        public override void LoadContent(ContentManager Content)
-        {
+        public override void LoadContent(ContentManager Content){
             texturePath = "Images/Ship/Ship";
             base.LoadContent(Content);
         }
 
-        public override void PostLoad()
-        {
+        public override void PostLoad(){
             float scaleSize = 0.5f;
             radPerSec = baseDegPerSec * (float)Math.PI / 180f;
             position = screenCenter;
@@ -82,33 +74,27 @@ namespace PaddleBall
         float timeUntilMegaLaser = 5000;
         double elaspedTime = 0;
         bool isFiringLaser;
-        public override void Update(GameTime gameTime)
-        {
+        public override void Update(GameTime gameTime){
+
             elaspedTime = gameTime.ElapsedGameTime.TotalMilliseconds;
             KeyboardState keyboardState = Keyboard.GetState();
             MouseState mouseState = Mouse.GetState();
 
-
-            if (isMegaLaserFirable && ( (keyboardState.IsKeyDown(Keys.LeftAlt)) || mouseState.RightButton == ButtonState.Pressed))
-            {
+            if (isFiringLaser){
                 timeUntilMegaLaser -= (float)elaspedTime;
             }
-
-            if (timeUntilMegaLaser <= 0)
+            if (timeUntilMegaLaser <= 0) {
                 isMegaLaserFirable = false;
+            }
        
             HandleRotation(keyboardState);
 
-
             if ((keyboardState.IsKeyDown(Keys.Space) && lastKeyboardState != keyboardState) ||
-                (mouseState.LeftButton == ButtonState.Pressed && lastMouseState != mouseState))
-            {
-                if (Laser.numCannonBalls < maxBalls && !isPausedForDelay)
-                {
+                (mouseState.LeftButton == ButtonState.Pressed && lastMouseState != mouseState)){
+                if (Laser.numCannonBalls < maxBalls && !isPausedForDelay){
                     Fire();
                 }
             }
-
 
             if ((keyboardState.IsKeyDown(Keys.LeftControl)) ||
                 (mouseState.RightButton == ButtonState.Pressed )){
@@ -131,35 +117,26 @@ namespace PaddleBall
             base.Update(gameTime);
         }
 
-        void HandleRotation(KeyboardState keyboardState)
-        {
-            if ((keyboardState.IsKeyDown(Keys.LeftShift) && lastKeyboardState.IsKeyUp(Keys.LeftShift)))
-            {
+        void HandleRotation(KeyboardState keyboardState){
+            if (keyboardState.IsKeyDown(Keys.LeftShift) && lastKeyboardState.IsKeyUp(Keys.LeftShift)){
                 radPerSec = slowDegPerSec * (float)Math.PI / 180f;
             }
-            else if ((keyboardState.IsKeyUp(Keys.LeftControl) && lastKeyboardState.IsKeyDown(Keys.LeftControl)) ||
-                (keyboardState.IsKeyUp(Keys.LeftShift) && lastKeyboardState.IsKeyDown(Keys.LeftShift)))
-            {
+            else if (keyboardState.IsKeyUp(Keys.LeftShift) && lastKeyboardState.IsKeyDown(Keys.LeftShift)){
                 radPerSec = baseDegPerSec * (float)Math.PI / 180f;
             }
 
-            if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D))
-            {
+            if (keyboardState.IsKeyDown(Keys.Right) || keyboardState.IsKeyDown(Keys.D)){
                 rotation += radPerSec;
             }
-            else if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A))
-            {
+            else if (keyboardState.IsKeyDown(Keys.Left) || keyboardState.IsKeyDown(Keys.A)){
                 rotation -= radPerSec;
             }
         }
 
-        void CheckForCollision()
-        {
+        void CheckForCollision(){
             CircleCollider overlappingCollider = myCollider.GetOverlappingCollider();
-            if (overlappingCollider != null)
-            {
-                if (overlappingCollider.layer == Layer.Enemy)
-                {
+            if (overlappingCollider != null){
+                if (overlappingCollider.layer == Layer.Enemy){
                     overlappingCollider.gameObject.Destroy();
                     overlappingCollider.Destroy();
                     Lose();
@@ -169,8 +146,7 @@ namespace PaddleBall
 
         float fireSpeed = 65f;
         float megaLaserSpeed = 100f;
-        void Fire()
-        {
+        void Fire(){
             cannonBall = new Laser(position + forward * 75);
             cannonBall.LoadContent(content);
             cannonBall.PostLoad();
@@ -184,11 +160,9 @@ namespace PaddleBall
             isMegaLaserFirable = true;
         }
 
-        void FireMegaLaser()
-        {            
+        void FireMegaLaser(){            
             MegaLaserCollider[] laser = new MegaLaserCollider[21];
-            for (int i = 0; i < laser.Length; i++)
-            {
+            for (int i = 0; i < laser.Length; i++){
                 laser[i] = new MegaLaserCollider(position + ForwardDist(i));
                 laser[i].LoadContent(content);
                 laser[i].PostLoad();
@@ -198,8 +172,7 @@ namespace PaddleBall
             AudioManager.Instance.PlaySound(SoundFX.Launch);
         }
 
-        void Lose()
-        {
+        void Lose(){
             AudioManager.Instance.PlaySound(SoundFX.PaddleDeath);
             AudioManager.Instance.StopMusic();
             GameManager.Instance.Lose();
@@ -214,35 +187,29 @@ namespace PaddleBall
         }
 
         bool isPausedForDelay;
-        IEnumerator PauseForFireDelay()
-        {
+        IEnumerator PauseForFireDelay(){
             isPausedForDelay = true;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             float fireDelay = 0.1f;
-            while (stopwatch.ElapsedMilliseconds < fireDelay * 1000)
-            {
+            while (stopwatch.ElapsedMilliseconds < fireDelay * 1000){
                 yield return null;
             }
             stopwatch.Stop();
             isPausedForDelay = false;
         }
 
-        public override void Destroy()
-        {
+        public override void Destroy(){
             Instance = null;
             base.Destroy();
         }
 
-        public Vector2 ForwardDist(int i)
-        {
-
+        public Vector2 ForwardDist(int i){
             float endRotation = rotation + forwardOffsetRotation;
             return new Vector2((float)(75 * i * Math.Cos(endRotation)), (75 * i * (float)Math.Sin(endRotation)));
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-
             if (isFiringLaser) {
                 megaLaserAnimation.SetPosition(position + forward*20f);                
                 megaLaserAnimation.Draw(spriteBatch);

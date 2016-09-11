@@ -19,7 +19,7 @@ namespace PaddleBall
         int health = 1;
         Vector2 velocity = Vector2.Zero;
         CircleCollider myCollider;
-        Animation redBugAnimation, greenBugWalkAnimation;
+        Animation redBugAnimation;//, greenBugWalkAnimation;
         SpriteSheetSpecs mySpriteSheetSpecs;
 
         public Enemy() : base() { }
@@ -30,10 +30,10 @@ namespace PaddleBall
             content = Content;
             mySpriteSheetSpecs = new SpriteSheetSpecs(264, 236, 12, 3, 3, 0, 0);
             redBugAnimation = new Animation(this, mySpriteSheetSpecs, "Images/Spritesheets/Bugs/RedBug_Walk");
-            greenBugWalkAnimation = new Animation(this, mySpriteSheetSpecs, "Images/Spritesheets/Bugs/GreenBug_Walk");
+            //greenBugWalkAnimation = new Animation(this, mySpriteSheetSpecs, "Images/Spritesheets/Bugs/GreenBug_Walk");
 
-            redBugAnimation.LoadContent(Content); greenBugWalkAnimation.LoadContent(Content);
-            redBugAnimation.PostLoad(); greenBugWalkAnimation.PostLoad();
+            redBugAnimation.LoadContent(Content);// greenBugWalkAnimation.LoadContent(Content);
+            redBugAnimation.PostLoad();// greenBugWalkAnimation.PostLoad();
 
             //texturePath = "Images/bugEnemy1";
             scale = Vector2.One * scaleSize;

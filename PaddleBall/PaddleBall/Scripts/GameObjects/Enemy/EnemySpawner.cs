@@ -51,31 +51,29 @@ namespace PaddleBall
         }
         Coroutiner myCoroutiner = new Coroutiner();
         ContentManager content;
-        Random random = new Random();
-
-        List<Round> rounds = new List<Round>() {
-            //round, enCount, enSpeed, tbwtSpawn 
-            new Round(1, 3, 1.8f,   new Range(0.8f,     1f)),
-            new Round(2, 6, 2f,   new Range(1f,       1.2f)),
-            new Round(3, 9, 2.2f,     new Range(.95f,     1.05f)),
-            new Round(4, 12, 2.4f,   new Range(0.75f,    .95f)),
-            new Round(5, 12, 2.4f,   new Range(0.8f,     1f)),
-            new Round(6, 15, 2.6f,    new Range(0.6f,     .8f)),
-            new Round(7, 17, 2.8f,   new Range(0.6f,     .8f)),
-            new Round(8, 20, 3.0f,  new Range(0.6f,     .8f)),
-            new Round(9, 25, 3.2f,    new Range(0.5f,     .7f)),
-            new Round(10, 30, 3.4f,    new Range(0.45f,     .6f))
-        };
+        Random random = new Random();      
+        List<Round> rounds;
         public int currentRound;
         int currentRoundIndex;
-        int currentEnemyCount;
 
         public void LoadContent(ContentManager Content) {
             content = Content;
             myCoroutiner.StopAllCoroutines();
             currentRoundIndex = -1;
             currentRound = 0;
-            currentEnemyCount = 0;
+            rounds = new List<Round>() {
+                //round, enCount, enSpeed, tbwtSpawn 
+                new Round(1, 3, 1.8f,   new Range(0.8f,     1f)),
+                new Round(2, 6, 2f,   new Range(1f,       1.2f)),
+                new Round(3, 9, 2.2f,     new Range(.95f,     1.05f)),
+                new Round(4, 12, 2.4f,   new Range(0.75f,    .95f)),
+                new Round(5, 12, 2.4f,   new Range(0.8f,     1f)),
+                new Round(6, 15, 2.6f,    new Range(0.6f,     .8f)),
+                new Round(7, 17, 2.8f,   new Range(0.6f,     .8f)),
+                new Round(8, 20, 3.0f,  new Range(0.6f,     .8f)),
+                new Round(9, 25, 3.2f,    new Range(0.5f,     .7f)),
+                new Round(10, 30, 3.4f,    new Range(0.45f,     .6f))
+            };
             myCoroutiner.StartCoroutine(StartNewRound());
         }
 
@@ -96,6 +94,7 @@ namespace PaddleBall
             currentRound++;
             if (currentRoundIndex >= rounds.Count) {
                 currentRoundIndex = rounds.Count-1;
+                rounds[currentRoundIndex].enemyCount = 30;
             }
             int numEnemiesToSpawn = rounds[currentRoundIndex].enemyCount;
             List<Vector2> spawnSpots = GetProperlySpacedEnemySpawnAngles(numEnemiesToSpawn);
@@ -149,12 +148,11 @@ namespace PaddleBall
             newEnemy.PostLoad();
             newEnemy.position = spawnPoint;
             newEnemy.SetVelocity(screenCenter - newEnemy.position, rounds[currentRoundIndex].enemySpeed);            
-            currentEnemyCount++;
         }
 
         public void ReportEnemyDown() {
-            currentEnemyCount--;
-            if (currentEnemyCount == 0) {
+            rounds[currentRoundIndex].enemyCount--;
+            if (rounds[currentRoundIndex].enemyCount == 0) {
                 myCoroutiner.StartCoroutine(StartNewRound());
             }
         }

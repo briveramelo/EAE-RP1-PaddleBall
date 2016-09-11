@@ -35,7 +35,7 @@ namespace PaddleBall {
 
         public GameManager() {
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 

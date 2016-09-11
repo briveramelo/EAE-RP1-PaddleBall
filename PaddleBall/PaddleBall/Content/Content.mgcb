@@ -195,35 +195,11 @@
 /processorParam:Quality=Best
 /build:SoundFX/Tunes/Game.mp3
 
-#begin SoundFX/Tunes/Game_Intro.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Tunes/Game_Intro.mp3
-
-#begin SoundFX/Tunes/Game_Loop.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Tunes/Game_Loop.mp3
-
 #begin SoundFX/Tunes/Title.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:SoundFX/Tunes/Title.mp3
-
-#begin SoundFX/Tunes/Title_Intro.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Tunes/Title_Intro.mp3
-
-#begin SoundFX/Tunes/Title_Loop.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:SoundFX/Tunes/Title_Loop.mp3
 
 #begin SoundFX/Playerloss.wav
 /importer:WavImporter
@@ -272,78 +248,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/Ship/Ship.png
-
-#begin Images/Spritesheets/Bugs/GreenBug_BackDeath.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Spritesheets/Bugs/GreenBug_BackDeath.png
-
-#begin Images/Spritesheets/Bugs/GreenBug_BackWalk.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Spritesheets/Bugs/GreenBug_BackWalk.png
-
-#begin Images/Spritesheets/Bugs/GreenBug_Death.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Spritesheets/Bugs/GreenBug_Death.png
-
-#begin Images/Spritesheets/Bugs/GreenBug_Walk.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Spritesheets/Bugs/GreenBug_Walk.png
-
-#begin Images/Spritesheets/Bugs/RedBug_BackDeath.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Spritesheets/Bugs/RedBug_BackDeath.png
-
-#begin Images/Spritesheets/Bugs/RedBug_BackWalk.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Spritesheets/Bugs/RedBug_BackWalk.png
 
 #begin Images/Spritesheets/Bugs/RedBug_Death.png
 /importer:TextureImporter
@@ -464,18 +368,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Images/arrow_cursor.png
-
-#begin Images/Button.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Images/Button.jpg
 
 #begin Images/Backgrounds/Game.png
 /importer:TextureImporter
